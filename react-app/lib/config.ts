@@ -1,6 +1,6 @@
 export const sanityConfig = {
   dataset: "production",
-  projectId: "2d4uv9h7",
+  projectId: "uv20u4vv",
   useCdn: true,
   apiVersion: "2021-03-25",
 };
