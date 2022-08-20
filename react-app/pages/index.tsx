@@ -1,13 +1,13 @@
+import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
-import { groq } from "next-sanity";
 import React from "react";
-import { getClient } from "../lib/sanity.server";
+import { GetAdsDocument } from "../components/apollo-components";
+import { initializeApollo } from "../lib/graphql.server";
 
 const Home = ({ ads }: any) => {
   console.log(ads);
   return (
     <div>
-      {/* {JSON.stringify(ads)} */}
       {ads.map((ad: any) => (
         <div key={ad._id}>
           <h1 className="text-cyan-500">{ad.title}</h1>
@@ -26,16 +26,13 @@ const Home = ({ ads }: any) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-  const ads = await getClient(preview).fetch(groq`*[_type == "ad"]{
-      _id,
-    title,
-    description,
-    image {
-      asset-> {
-        _id,
-        url
-      }}
-  }`);
+  const client = initializeApollo();
+
+  const { data } = await client.query({
+    query: GetAdsDocument,
+  });
+  const ads = data.allAd;
+
   return {
     props: { ads },
   };

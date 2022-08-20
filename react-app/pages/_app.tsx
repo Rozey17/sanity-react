@@ -1,19 +1,16 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { apolloClient } from "../lib/graphql";
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
+import { useApollo } from "../lib/graphql.server";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  if (pageProps.initialQuery) {
-    apolloClient.cache.restore(pageProps.initialQuery);
-  }
+  const client = useApollo(pageProps);
 
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <Component {...pageProps} />
-      {/* <ExitPreviewBar preview={pageProps.preview} /> */}
     </ApolloProvider>
   );
 }
 
-export default MyApp
+export default MyApp;

@@ -1,0 +1,17 @@
+ query GetAds{
+      allAd {
+        _id
+        contact
+        description
+        _type
+        title
+        subcategories {
+          _id
+        }
+        image {
+          asset {
+            url
+          }
+        }
+      }
+    }
