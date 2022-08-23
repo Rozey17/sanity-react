@@ -1,0 +1,3 @@
+query ListCategories{allAdCategory{_id, name,slug{current},subcategories{_id,name,ads{
+    _id,title
+}}}}

@@ -1,4 +1,4 @@
- query GetAds{
+ query ListAds{
       allAd {
         _id
         contact

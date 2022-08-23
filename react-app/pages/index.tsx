@@ -1,13 +1,14 @@
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import React from "react";
-import { GetAdsDocument } from "../components/apollo-components";
+import { ListAdsDocument } from "../components/apollo-components";
 import { Header } from "../components/layout/header";
 import { Hero } from "../components/layout/hero";
 import { initializeApollo } from "../lib/graphql.server";
 
 const Home = ({ ads }: any) => {
   console.log(ads);
+
   return (
     <div>
       <Hero />
@@ -32,7 +33,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const client = initializeApollo();
 
   const { data } = await client.query({
-    query: GetAdsDocument,
+    query: ListAdsDocument,
   });
   const ads = data.allAd;
 

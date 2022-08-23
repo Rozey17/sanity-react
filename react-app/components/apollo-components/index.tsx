@@ -1037,10 +1037,15 @@ export type StringFilter = {
   nin?: InputMaybe<Array<Scalars['String']>>;
 };
 
-export type GetAdsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ListAdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAdsQuery = { __typename?: 'RootQuery', allAd: Array<{ __typename?: 'Ad', _id?: string | null, contact?: number | null, description?: string | null, _type?: string | null, title?: string | null, subcategories?: Array<{ __typename?: 'AdSubCategory', _id?: string | null } | null> | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+export type ListAdsQuery = { __typename?: 'RootQuery', allAd: Array<{ __typename?: 'Ad', _id?: string | null, contact?: number | null, description?: string | null, _type?: string | null, title?: string | null, subcategories?: Array<{ __typename?: 'AdSubCategory', _id?: string | null } | null> | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+
+export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListCategoriesQuery = { __typename?: 'RootQuery', allAdCategory: Array<{ __typename?: 'AdCategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'AdSubCategory', _id?: string | null, name?: string | null } | null> | null }> };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1048,8 +1053,8 @@ export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetPostsQuery = { __typename?: 'RootQuery', allPost: Array<{ __typename?: 'Post', title?: string | null, contentRaw?: any | null, excerpt?: string | null, date?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, coverImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null, author?: { __typename?: 'Author', name?: string | null, picture?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null } | null }> };
 
 
-export const GetAdsDocument = gql`
-    query GetAds {
+export const ListAdsDocument = gql`
+    query ListAds {
   allAd {
     _id
     contact
@@ -1069,31 +1074,73 @@ export const GetAdsDocument = gql`
     `;
 
 /**
- * __useGetAdsQuery__
+ * __useListAdsQuery__
  *
- * To run a query within a React component, call `useGetAdsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useListAdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetAdsQuery({
+ * const { data, loading, error } = useListAdsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetAdsQuery(baseOptions?: Apollo.QueryHookOptions<GetAdsQuery, GetAdsQueryVariables>) {
+export function useListAdsQuery(baseOptions?: Apollo.QueryHookOptions<ListAdsQuery, ListAdsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetAdsQuery, GetAdsQueryVariables>(GetAdsDocument, options);
+        return Apollo.useQuery<ListAdsQuery, ListAdsQueryVariables>(ListAdsDocument, options);
       }
-export function useGetAdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAdsQuery, GetAdsQueryVariables>) {
+export function useListAdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListAdsQuery, ListAdsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetAdsQuery, GetAdsQueryVariables>(GetAdsDocument, options);
+          return Apollo.useLazyQuery<ListAdsQuery, ListAdsQueryVariables>(ListAdsDocument, options);
         }
-export type GetAdsQueryHookResult = ReturnType<typeof useGetAdsQuery>;
-export type GetAdsLazyQueryHookResult = ReturnType<typeof useGetAdsLazyQuery>;
-export type GetAdsQueryResult = Apollo.QueryResult<GetAdsQuery, GetAdsQueryVariables>;
+export type ListAdsQueryHookResult = ReturnType<typeof useListAdsQuery>;
+export type ListAdsLazyQueryHookResult = ReturnType<typeof useListAdsLazyQuery>;
+export type ListAdsQueryResult = Apollo.QueryResult<ListAdsQuery, ListAdsQueryVariables>;
+export const ListCategoriesDocument = gql`
+    query ListCategories {
+  allAdCategory {
+    _id
+    name
+    slug {
+      current
+    }
+    subcategories {
+      _id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useListCategoriesQuery__
+ *
+ * To run a query within a React component, call `useListCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<ListCategoriesQuery, ListCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListCategoriesQuery, ListCategoriesQueryVariables>(ListCategoriesDocument, options);
+      }
+export function useListCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListCategoriesQuery, ListCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListCategoriesQuery, ListCategoriesQueryVariables>(ListCategoriesDocument, options);
+        }
+export type ListCategoriesQueryHookResult = ReturnType<typeof useListCategoriesQuery>;
+export type ListCategoriesLazyQueryHookResult = ReturnType<typeof useListCategoriesLazyQuery>;
+export type ListCategoriesQueryResult = Apollo.QueryResult<ListCategoriesQuery, ListCategoriesQueryVariables>;
 export const GetPostsDocument = gql`
     query GetPosts {
   allPost {

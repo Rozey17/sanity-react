@@ -11,7 +11,7 @@ export const Search = () => {
       <span className="relative flex items-center text-gray-400">
         <input
           type="text"
-          className="flex p-3 text-sm capitalize rounded  focus:outline-none"
+          className="flex p-3 text-sm capitalize rounded focus:outline-none"
           placeholder="search for.."
         />
         <SpeakerphoneIcon className="absolute w-5 h-5 text-current right-3" />
@@ -20,7 +20,7 @@ export const Search = () => {
       <span className="relative flex items-center text-gray-400">
         <input
           type="text"
-          className="flex p-3 text-sm capitalize rounded  focus:outline-none"
+          className="flex p-3 text-sm capitalize rounded focus:outline-none"
           placeholder="located in"
         />
         <LocationMarkerIcon className="absolute w-5 h-5 text-current right-3" />
@@ -36,7 +36,7 @@ export const Search = () => {
         <AtSymbolIcon className="absolute w-5 h-5 text-current right-3" />
       </span>
 
-      <button className="button-primary">search</button>
+      <button className="p-3 button-primary">search</button>
     </form>
   );
 };

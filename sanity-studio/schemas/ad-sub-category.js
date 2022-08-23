@@ -20,12 +20,18 @@ export default {
       name: "category",
       title: "Ad Category",
       type: "reference",
-        to: [{ type: "ad-category" }],
+      to: [{ type: "ad-category" }],
     },
     {
-        name:'publishedAt',
-        title:'Published At',
-        type:'datetime',
-    }
+      name: "publishedAt",
+      title: "Published At",
+      type: "datetime",
+    },
+    {
+      name: "ads",
+      title: "Ads",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "ad" }] }],
+    },
   ],
 };
