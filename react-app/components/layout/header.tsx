@@ -7,7 +7,7 @@ import {
 export const Header = () => {
   return (
     <header>
-      <div className="flex justify-between px-40 py-5 text-white bg-transparent bg-opacity-30">
+      <div className="flex justify-between px-40 py-5 text-white bg-black bg-opacity-10">
         <span className="">
           <SpeakerphoneIcon className="w-5 h-5" />
         </span>
