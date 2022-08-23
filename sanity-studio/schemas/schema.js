@@ -31,9 +31,9 @@
 import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 // import { user, account, verificationToken } from "next-auth-sanity/schemas";
-import adSubCategory from "./ad-sub-category";
-import adCategory from "./ad-category";
-import ad from "./ad";
+import adSubCategory from "./sub-category";
+import adCategory from "./category";
+import ad from "./advert";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([

@@ -1,5 +1,5 @@
- query ListAds{
-      allAd {
+ query ListAdverts{
+      allAdvert {
         _id
         contact
         description

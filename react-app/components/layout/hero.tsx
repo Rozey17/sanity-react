@@ -28,11 +28,15 @@ export const Hero = () => {
           {/* new technique */}
           <div className="w-1/2 h-40 p-10 mx-auto bg-gray-100 rounded-lg shadow-lg">
             <div className="flex items-center justify-center h-full gap-3">
-              {data?.allAdCategory?.map((category, index) => (
+              {data?.allCategory?.map((category, index) => (
                 <div key={index} className="p-5 bg-white gap-y-2">
                   {category?.name as string}
                   <p>
-                    {category.subcategories?.map((item, index) => item?.name)}
+                    {category?.subcategories?.map((item, index) => (
+                      <span key={index} className="">
+                        {item?.adverts?.length} advert(s)
+                      </span>
+                    ))}
                   </p>
                 </div>
               ))}

@@ -1,6 +1,6 @@
 export default {
-  name: "ad-sub-category",
-  title: "Ad Sub Category",
+  name: "category",
+  title: "Category",
   type: "document",
   fields: [
     {
@@ -17,21 +17,15 @@ export default {
       },
     },
     {
-      name: "category",
-      title: "Ad Category",
-      type: "reference",
-      to: [{ type: "ad-category" }],
+      name: "subcategories",
+      title: " Sub Categories",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "sub-category" }] }],
     },
     {
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
-    },
-    {
-      name: "ads",
-      title: "Ads",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "ad" }] }],
     },
   ],
 };

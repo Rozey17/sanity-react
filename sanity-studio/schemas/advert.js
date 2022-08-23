@@ -1,6 +1,6 @@
 export default {
-  name: "ad",
-  title: "Ad",
+  name: "advert",
+  title: "Advert",
   type: "document",
   fields: [
     {
@@ -20,16 +20,15 @@ export default {
       name: "description",
       title: "Description",
       type: "string",
-      options:{
-        maxLength:500
-      }
-
+      options: {
+        maxLength: 500,
+      },
     },
     {
       name: "subcategories",
-      title: "Ad Sub Categories",
+      title: "Sub Categories",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "ad-sub-category" }] }],
+      of: [{ type: "reference", to: [{ type: "sub-category" }] }],
     },
     {
       name: "contact",

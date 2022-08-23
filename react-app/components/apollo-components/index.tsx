@@ -18,8 +18,8 @@ export type Scalars = {
   JSON: any;
 };
 
-export type Ad = Document & {
-  __typename?: 'Ad';
+export type Advert = Document & {
+  __typename?: 'Advert';
   /** Date the document was created */
   _createdAt?: Maybe<Scalars['DateTime']>;
   /** Document ID */
@@ -35,56 +35,11 @@ export type Ad = Document & {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Image>;
   slug?: Maybe<Slug>;
-  subcategories?: Maybe<Array<Maybe<AdSubCategory>>>;
+  subcategories?: Maybe<Array<Maybe<SubCategory>>>;
   title?: Maybe<Scalars['String']>;
 };
 
-export type AdCategory = Document & {
-  __typename?: 'AdCategory';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  _key?: Maybe<Scalars['String']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  name?: Maybe<Scalars['String']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  slug?: Maybe<Slug>;
-  subcategories?: Maybe<Array<Maybe<AdSubCategory>>>;
-};
-
-export type AdCategoryFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  name?: InputMaybe<StringFilter>;
-  publishedAt?: InputMaybe<DatetimeFilter>;
-  slug?: InputMaybe<SlugFilter>;
-};
-
-export type AdCategorySorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SortOrder>;
-  publishedAt?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SlugSorting>;
-};
-
-export type AdFilter = {
+export type AdvertFilter = {
   /** Apply filters on document level */
   _?: InputMaybe<Sanity_DocumentFilter>;
   _createdAt?: InputMaybe<DatetimeFilter>;
@@ -100,7 +55,7 @@ export type AdFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type AdSorting = {
+export type AdvertSorting = {
   _createdAt?: InputMaybe<SortOrder>;
   _id?: InputMaybe<SortOrder>;
   _key?: InputMaybe<SortOrder>;
@@ -112,52 +67,6 @@ export type AdSorting = {
   image?: InputMaybe<ImageSorting>;
   slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
-};
-
-export type AdSubCategory = Document & {
-  __typename?: 'AdSubCategory';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  _key?: Maybe<Scalars['String']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  category?: Maybe<AdCategory>;
-  name?: Maybe<Scalars['String']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  slug?: Maybe<Slug>;
-};
-
-export type AdSubCategoryFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  category?: InputMaybe<AdCategoryFilter>;
-  name?: InputMaybe<StringFilter>;
-  publishedAt?: InputMaybe<DatetimeFilter>;
-  slug?: InputMaybe<SlugFilter>;
-};
-
-export type AdSubCategorySorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SortOrder>;
-  publishedAt?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SlugSorting>;
 };
 
 export type Author = Document & {
@@ -215,6 +124,51 @@ export type BooleanFilter = {
   eq?: InputMaybe<Scalars['Boolean']>;
   /** Checks if the value is not equal to the given input. */
   neq?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type Category = Document & {
+  __typename?: 'Category';
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  name?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Slug>;
+  subcategories?: Maybe<Array<Maybe<SubCategory>>>;
+};
+
+export type CategoryFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  name?: InputMaybe<StringFilter>;
+  publishedAt?: InputMaybe<DatetimeFilter>;
+  slug?: InputMaybe<SlugFilter>;
+};
+
+export type CategorySorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  publishedAt?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SlugSorting>;
 };
 
 export type DateFilter = {
@@ -483,43 +437,38 @@ export type PostSorting = {
 
 export type RootQuery = {
   __typename?: 'RootQuery';
-  Ad?: Maybe<Ad>;
-  AdCategory?: Maybe<AdCategory>;
-  AdSubCategory?: Maybe<AdSubCategory>;
+  Advert?: Maybe<Advert>;
   Author?: Maybe<Author>;
+  Category?: Maybe<Category>;
   Document?: Maybe<Document>;
   Game?: Maybe<Game>;
   Post?: Maybe<Post>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
-  allAd: Array<Ad>;
-  allAdCategory: Array<AdCategory>;
-  allAdSubCategory: Array<AdSubCategory>;
+  SubCategory?: Maybe<SubCategory>;
+  allAdvert: Array<Advert>;
   allAuthor: Array<Author>;
+  allCategory: Array<Category>;
   allDocument: Array<Document>;
   allGame: Array<Game>;
   allPost: Array<Post>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
+  allSubCategory: Array<SubCategory>;
 };
 
 
-export type RootQueryAdArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryAdCategoryArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryAdSubCategoryArgs = {
+export type RootQueryAdvertArgs = {
   id: Scalars['ID'];
 };
 
 
 export type RootQueryAuthorArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCategoryArgs = {
   id: Scalars['ID'];
 };
 
@@ -549,27 +498,16 @@ export type RootQuerySanityImageAssetArgs = {
 };
 
 
-export type RootQueryAllAdArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Array<AdSorting>>;
-  where?: InputMaybe<AdFilter>;
+export type RootQuerySubCategoryArgs = {
+  id: Scalars['ID'];
 };
 
 
-export type RootQueryAllAdCategoryArgs = {
+export type RootQueryAllAdvertArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Array<AdCategorySorting>>;
-  where?: InputMaybe<AdCategoryFilter>;
-};
-
-
-export type RootQueryAllAdSubCategoryArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Array<AdSubCategorySorting>>;
-  where?: InputMaybe<AdSubCategoryFilter>;
+  sort?: InputMaybe<Array<AdvertSorting>>;
+  where?: InputMaybe<AdvertFilter>;
 };
 
 
@@ -578,6 +516,14 @@ export type RootQueryAllAuthorArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<Array<AuthorSorting>>;
   where?: InputMaybe<AuthorFilter>;
+};
+
+
+export type RootQueryAllCategoryArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Array<CategorySorting>>;
+  where?: InputMaybe<CategoryFilter>;
 };
 
 
@@ -618,6 +564,14 @@ export type RootQueryAllSanityImageAssetArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<Array<SanityImageAssetSorting>>;
   where?: InputMaybe<SanityImageAssetFilter>;
+};
+
+
+export type RootQueryAllSubCategoryArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Array<SubCategorySorting>>;
+  where?: InputMaybe<SubCategoryFilter>;
 };
 
 export type SanityAssetSourceData = {
@@ -1037,15 +991,62 @@ export type StringFilter = {
   nin?: InputMaybe<Array<Scalars['String']>>;
 };
 
-export type ListAdsQueryVariables = Exact<{ [key: string]: never; }>;
+export type SubCategory = Document & {
+  __typename?: 'SubCategory';
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  adverts?: Maybe<Array<Maybe<Advert>>>;
+  category?: Maybe<Category>;
+  name?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Slug>;
+};
+
+export type SubCategoryFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  category?: InputMaybe<CategoryFilter>;
+  name?: InputMaybe<StringFilter>;
+  publishedAt?: InputMaybe<DatetimeFilter>;
+  slug?: InputMaybe<SlugFilter>;
+};
+
+export type SubCategorySorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  publishedAt?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SlugSorting>;
+};
+
+export type ListAdvertsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListAdsQuery = { __typename?: 'RootQuery', allAd: Array<{ __typename?: 'Ad', _id?: string | null, contact?: number | null, description?: string | null, _type?: string | null, title?: string | null, subcategories?: Array<{ __typename?: 'AdSubCategory', _id?: string | null } | null> | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: number | null, description?: string | null, _type?: string | null, title?: string | null, subcategories?: Array<{ __typename?: 'SubCategory', _id?: string | null } | null> | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
 
 export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListCategoriesQuery = { __typename?: 'RootQuery', allAdCategory: Array<{ __typename?: 'AdCategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'AdSubCategory', _id?: string | null, name?: string | null } | null> | null }> };
+export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'SubCategory', _id?: string | null, name?: string | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null } | null> | null }> };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1053,9 +1054,9 @@ export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetPostsQuery = { __typename?: 'RootQuery', allPost: Array<{ __typename?: 'Post', title?: string | null, contentRaw?: any | null, excerpt?: string | null, date?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, coverImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null, author?: { __typename?: 'Author', name?: string | null, picture?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null } | null }> };
 
 
-export const ListAdsDocument = gql`
-    query ListAds {
-  allAd {
+export const ListAdvertsDocument = gql`
+    query ListAdverts {
+  allAdvert {
     _id
     contact
     description
@@ -1074,34 +1075,34 @@ export const ListAdsDocument = gql`
     `;
 
 /**
- * __useListAdsQuery__
+ * __useListAdvertsQuery__
  *
- * To run a query within a React component, call `useListAdsQuery` and pass it any options that fit your needs.
- * When your component renders, `useListAdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useListAdvertsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAdvertsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useListAdsQuery({
+ * const { data, loading, error } = useListAdvertsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useListAdsQuery(baseOptions?: Apollo.QueryHookOptions<ListAdsQuery, ListAdsQueryVariables>) {
+export function useListAdvertsQuery(baseOptions?: Apollo.QueryHookOptions<ListAdvertsQuery, ListAdvertsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ListAdsQuery, ListAdsQueryVariables>(ListAdsDocument, options);
+        return Apollo.useQuery<ListAdvertsQuery, ListAdvertsQueryVariables>(ListAdvertsDocument, options);
       }
-export function useListAdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListAdsQuery, ListAdsQueryVariables>) {
+export function useListAdvertsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListAdvertsQuery, ListAdvertsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ListAdsQuery, ListAdsQueryVariables>(ListAdsDocument, options);
+          return Apollo.useLazyQuery<ListAdvertsQuery, ListAdvertsQueryVariables>(ListAdvertsDocument, options);
         }
-export type ListAdsQueryHookResult = ReturnType<typeof useListAdsQuery>;
-export type ListAdsLazyQueryHookResult = ReturnType<typeof useListAdsLazyQuery>;
-export type ListAdsQueryResult = Apollo.QueryResult<ListAdsQuery, ListAdsQueryVariables>;
+export type ListAdvertsQueryHookResult = ReturnType<typeof useListAdvertsQuery>;
+export type ListAdvertsLazyQueryHookResult = ReturnType<typeof useListAdvertsLazyQuery>;
+export type ListAdvertsQueryResult = Apollo.QueryResult<ListAdvertsQuery, ListAdvertsQueryVariables>;
 export const ListCategoriesDocument = gql`
     query ListCategories {
-  allAdCategory {
+  allCategory {
     _id
     name
     slug {
@@ -1110,6 +1111,10 @@ export const ListCategoriesDocument = gql`
     subcategories {
       _id
       name
+      adverts {
+        _id
+        title
+      }
     }
   }
 }
