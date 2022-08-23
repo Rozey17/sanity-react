@@ -2,12 +2,15 @@ import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import React from "react";
 import { GetAdsDocument } from "../components/apollo-components";
+import { Header } from "../components/layout/header";
+import { Hero } from "../components/layout/hero";
 import { initializeApollo } from "../lib/graphql.server";
 
 const Home = ({ ads }: any) => {
   console.log(ads);
   return (
     <div>
+      <Hero />
       {ads.map((ad: any) => (
         <div key={ad._id}>
           <h1 className="text-cyan-500">{ad.title}</h1>

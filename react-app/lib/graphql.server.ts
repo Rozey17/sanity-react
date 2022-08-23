@@ -1,5 +1,5 @@
 // import { ApolloClient, InMemoryCache } from "@apollo/client";
-// import { setContext } from '@apollo/client/link/context';
+import { setContext } from "@apollo/client/link/context";
 // import {apolloClient, httpLink } from "./graphql"
 
 // const authLink = setContext((_, { headers }) => {
@@ -27,7 +27,7 @@
 import { useMemo } from "react";
 import {
   ApolloClient,
-  HttpLink,
+  createHttpLink,
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
@@ -38,13 +38,28 @@ import isEqual from "lodash/isEqual";
 export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = process.env.SANITY_API_TOKEN;
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
 
+const httpLink = createHttpLink({
+  uri: process.env.NEXT_PUBLIC_SANITY_GRAPHQL_URI,
+});
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
-    link: new HttpLink({
-      uri: process.env.NEXT_PUBLIC_SANITY_GRAPHQL_URI,
-    }),
+    link: authLink.concat(httpLink),
+    // link: new HttpLink({
+    //   uri: process.env.NEXT_PUBLIC_SANITY_GRAPHQL_URI,
+    // }),
     cache: new InMemoryCache({
       // typePolicies is not required to use Apollo with Next.js - only for doing pagination.
       typePolicies: {
