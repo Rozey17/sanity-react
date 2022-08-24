@@ -24,16 +24,32 @@ export default {
         maxLength: 500,
       },
     },
+    // {
+    //   name: "subcategories",
+    //   title: "Sub Categories",
+    //   type: "array",
+    //   of: [{ type: "reference", to: [{ type: "subcategory" }] }],
+    // },
     {
-      name: "subcategories",
-      title: "Sub Categories",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "sub-category" }] }],
+      name: "subcategory",
+      title: "Sub Category",
+      type: "reference",
+      to: [{ type: "subcategory" }],
     },
     {
       name: "contact",
       title: "Contact",
       type: "number",
+    },
+    {
+      name: "price",
+      title: "price",
+      type: "number",
+    },
+    {
+      name: "location",
+      title: "location",
+      type: "string",
     },
     {
       name: "image",

@@ -20,7 +20,7 @@ export default {
       name: "subcategories",
       title: " Sub Categories",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "sub-category" }] }],
+      of: [{ type: "reference", to: [{ type: "subcategory" }] }],
     },
     {
       name: "publishedAt",

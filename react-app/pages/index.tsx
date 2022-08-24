@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import React from "react";
+import { AdvertCard } from "../components/adverts/advertCard";
 import { ListAdvertsDocument } from "../components/apollo-components";
 import { Header } from "../components/layout/header";
 import { Hero } from "../components/layout/hero";
@@ -12,19 +13,17 @@ const Home = ({ ads }: any) => {
   return (
     <div>
       <Hero />
-      {ads.map((ad: any) => (
-        <div key={ad._id}>
-          <h1 className="text-cyan-500">{ad.title}</h1>
-          <p>{ad?.description}</p>
-          {ad?.image && (
-            <img
-              src={ad?.image?.asset.url}
-              className="object-cover h-80 w-80"
-              alt=""
-            />
-          )}
+      <section className="p-40 bg-gray-100 space-y-10">
+        <div className="flex justify-center items-center gap-2">
+          <button className="button-primary">latest ads</button>
+          <button className="button-primary">ending soon</button>
         </div>
-      ))}
+        <div className="flex gap-3">
+          {ads.map((ad, index) => (
+            <AdvertCard key={index} ad={ad} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

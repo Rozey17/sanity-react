@@ -5,9 +5,12 @@
         description
         _type
         title
-        subcategories {
+        subcategory {
           _id
+          name
         }
+        location
+        price
         image {
           asset {
             url

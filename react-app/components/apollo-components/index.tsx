@@ -34,8 +34,10 @@ export type Advert = Document & {
   contact?: Maybe<Scalars['Float']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Image>;
+  location?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['Float']>;
   slug?: Maybe<Slug>;
-  subcategories?: Maybe<Array<Maybe<SubCategory>>>;
+  subcategory?: Maybe<Subcategory>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -51,7 +53,10 @@ export type AdvertFilter = {
   contact?: InputMaybe<FloatFilter>;
   description?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
+  location?: InputMaybe<StringFilter>;
+  price?: InputMaybe<FloatFilter>;
   slug?: InputMaybe<SlugFilter>;
+  subcategory?: InputMaybe<SubcategoryFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
@@ -65,6 +70,8 @@ export type AdvertSorting = {
   contact?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   image?: InputMaybe<ImageSorting>;
+  location?: InputMaybe<SortOrder>;
+  price?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
 };
@@ -142,7 +149,7 @@ export type Category = Document & {
   name?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Slug>;
-  subcategories?: Maybe<Array<Maybe<SubCategory>>>;
+  subcategories?: Maybe<Array<Maybe<Subcategory>>>;
 };
 
 export type CategoryFilter = {
@@ -445,7 +452,7 @@ export type RootQuery = {
   Post?: Maybe<Post>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
-  SubCategory?: Maybe<SubCategory>;
+  Subcategory?: Maybe<Subcategory>;
   allAdvert: Array<Advert>;
   allAuthor: Array<Author>;
   allCategory: Array<Category>;
@@ -454,7 +461,7 @@ export type RootQuery = {
   allPost: Array<Post>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
-  allSubCategory: Array<SubCategory>;
+  allSubcategory: Array<Subcategory>;
 };
 
 
@@ -498,7 +505,7 @@ export type RootQuerySanityImageAssetArgs = {
 };
 
 
-export type RootQuerySubCategoryArgs = {
+export type RootQuerySubcategoryArgs = {
   id: Scalars['ID'];
 };
 
@@ -567,11 +574,11 @@ export type RootQueryAllSanityImageAssetArgs = {
 };
 
 
-export type RootQueryAllSubCategoryArgs = {
+export type RootQueryAllSubcategoryArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Array<SubCategorySorting>>;
-  where?: InputMaybe<SubCategoryFilter>;
+  sort?: InputMaybe<Array<SubcategorySorting>>;
+  where?: InputMaybe<SubcategoryFilter>;
 };
 
 export type SanityAssetSourceData = {
@@ -991,8 +998,8 @@ export type StringFilter = {
   nin?: InputMaybe<Array<Scalars['String']>>;
 };
 
-export type SubCategory = Document & {
-  __typename?: 'SubCategory';
+export type Subcategory = Document & {
+  __typename?: 'Subcategory';
   /** Date the document was created */
   _createdAt?: Maybe<Scalars['DateTime']>;
   /** Document ID */
@@ -1011,7 +1018,7 @@ export type SubCategory = Document & {
   slug?: Maybe<Slug>;
 };
 
-export type SubCategoryFilter = {
+export type SubcategoryFilter = {
   /** Apply filters on document level */
   _?: InputMaybe<Sanity_DocumentFilter>;
   _createdAt?: InputMaybe<DatetimeFilter>;
@@ -1026,7 +1033,7 @@ export type SubCategoryFilter = {
   slug?: InputMaybe<SlugFilter>;
 };
 
-export type SubCategorySorting = {
+export type SubcategorySorting = {
   _createdAt?: InputMaybe<SortOrder>;
   _id?: InputMaybe<SortOrder>;
   _key?: InputMaybe<SortOrder>;
@@ -1041,12 +1048,12 @@ export type SubCategorySorting = {
 export type ListAdvertsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: number | null, description?: string | null, _type?: string | null, title?: string | null, subcategories?: Array<{ __typename?: 'SubCategory', _id?: string | null } | null> | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: number | null, description?: string | null, _type?: string | null, title?: string | null, location?: string | null, price?: number | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
 
 export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'SubCategory', _id?: string | null, name?: string | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null } | null> | null }> };
+export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'Subcategory', _id?: string | null, name?: string | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null } | null> | null }> };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1062,9 +1069,12 @@ export const ListAdvertsDocument = gql`
     description
     _type
     title
-    subcategories {
+    subcategory {
       _id
+      name
     }
+    location
+    price
     image {
       asset {
         url
