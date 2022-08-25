@@ -1060,6 +1060,11 @@ export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPostsQuery = { __typename?: 'RootQuery', allPost: Array<{ __typename?: 'Post', title?: string | null, contentRaw?: any | null, excerpt?: string | null, date?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, coverImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null, author?: { __typename?: 'Author', name?: string | null, picture?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null } | null }> };
 
+export type ListSubCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListSubCategoriesQuery = { __typename?: 'RootQuery', allSubcategory: Array<{ __typename?: 'Subcategory', _id?: string | null, _type?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null, description?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null } | null> | null }> };
+
 
 export const ListAdvertsDocument = gql`
     query ListAdverts {
@@ -1233,3 +1238,64 @@ export function useGetPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>;
 export type GetPostsLazyQueryHookResult = ReturnType<typeof useGetPostsLazyQuery>;
 export type GetPostsQueryResult = Apollo.QueryResult<GetPostsQuery, GetPostsQueryVariables>;
+export const ListSubCategoriesDocument = gql`
+    query ListSubCategories {
+  allSubcategory {
+    _id
+    _type
+    name
+    slug {
+      current
+    }
+    category {
+      _id
+      name
+      slug {
+        current
+      }
+    }
+    adverts {
+      _id
+      title
+      slug {
+        current
+      }
+      description
+      subcategory {
+        _id
+        name
+        slug {
+          current
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useListSubCategoriesQuery__
+ *
+ * To run a query within a React component, call `useListSubCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListSubCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListSubCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListSubCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<ListSubCategoriesQuery, ListSubCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListSubCategoriesQuery, ListSubCategoriesQueryVariables>(ListSubCategoriesDocument, options);
+      }
+export function useListSubCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListSubCategoriesQuery, ListSubCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListSubCategoriesQuery, ListSubCategoriesQueryVariables>(ListSubCategoriesDocument, options);
+        }
+export type ListSubCategoriesQueryHookResult = ReturnType<typeof useListSubCategoriesQuery>;
+export type ListSubCategoriesLazyQueryHookResult = ReturnType<typeof useListSubCategoriesLazyQuery>;
+export type ListSubCategoriesQueryResult = Apollo.QueryResult<ListSubCategoriesQuery, ListSubCategoriesQueryVariables>;

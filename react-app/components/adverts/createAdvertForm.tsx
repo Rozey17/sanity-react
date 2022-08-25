@@ -1,9 +1,15 @@
+import { ClipboardIcon } from "@heroicons/react/outline";
+import { NumberInput, Select, TextInput } from "@mantine/core";
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { client } from "../../lib/sanity.server";
+import { useListSubCategoriesQuery } from "../apollo-components";
 
-function CreateAdForm() {
+export function CreateAdvertForm() {
+  const { data } = useListSubCategoriesQuery();
+  const listSubCategories =
+    data && data?.allSubcategory ? data?.allSubcategory : [];
   const {
     register,
     handleSubmit,
@@ -20,11 +26,10 @@ function CreateAdForm() {
       title: "",
       description: "",
       contact: "",
-      subcategories: [
-        {
-          _id: "86574630-c631-4b5f-b3f3-8a11e4572bdd",
-        },
-      ],
+      subcategory: "",
+      location: "",
+      price: 0,
+      // image: "",
     },
   });
 
@@ -43,23 +48,65 @@ function CreateAdForm() {
       onSubmit={handleSubmit(async (input) => {
         client
           .create({
-            _type: "ad",
+            _type: "advert",
             title: input.title,
             description: input.description,
             contact: input.contact,
-            subcategories: input.subcategories,
+            subcategory: {
+              _type: "subcategory",
+              _ref: input.subcategory,
+            },
+            price: input.price,
+            location: input.location,
+            // image: input.image,
           })
           .then((res) => {
             console.log(`Ad was created, document ID is ${res._id}`);
           });
       })}
     >
-      <input type="text" {...register("contact")} placeholder="contact" />
+      <TextInput type="text" {...register("contact")} placeholder="contact" />
       <textarea {...register("description")} placeholder="description" />
-      <input type="text" {...register("title")} placeholder="title" />
+      <TextInput type="text" {...register("title")} placeholder="title" />
+      <TextInput type="text" {...register("location")} placeholder="location" />
+      <Select
+        classNames={{
+          input: errors.subcategory ? "error-input" : "input",
+          label: "text-sm font-medium text-gray-600 font-sans",
+          dropdown: "font-sans",
+        }}
+        label=""
+        placeholder="Veuillez sélectionner une catégorie"
+        searchable
+        required
+        // nothingFound={f({ id: Translation.no_item })}
+        value={watch("subcategory")}
+        onChange={(value) =>
+          setValue("subcategory", value, {
+            shouldValidate: true,
+            shouldDirty: true,
+            shouldTouch: true,
+          })
+        }
+        data={listSubCategories.map((subcategory) => {
+          return {
+            label: subcategory.name,
+            value: subcategory._id,
+          };
+        })}
+        icon={<ClipboardIcon className="w-5 h-5 text-sky-500" />}
+      />
+      <NumberInput
+        placeholder="price"
+        onChange={(value) =>
+          setValue("price", value, {
+            shouldValidate: true,
+            shouldDirty: true,
+            shouldTouch: true,
+          })
+        }
+      />
       <button>submit</button>
     </form>
   );
 }
-
-export default CreateAdForm;

@@ -18,12 +18,13 @@ const Home = ({ ads }: any) => {
           <button className="button-primary">latest ads</button>
           <button className="button-primary">ending soon</button>
         </div>
-        <div className="flex gap-3">
+        <div className="grid grid-cols-4 gap-3">
           {ads.map((ad, index) => (
             <AdvertCard key={index} ad={ad} />
           ))}
         </div>
       </section>
+      <section className=""></section>
     </div>
   );
 };

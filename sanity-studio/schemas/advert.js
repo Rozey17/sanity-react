@@ -39,7 +39,7 @@ export default {
     {
       name: "contact",
       title: "Contact",
-      type: "number",
+      type: "string",
     },
     {
       name: "price",

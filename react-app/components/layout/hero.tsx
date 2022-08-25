@@ -1,3 +1,4 @@
+import { BriefcaseIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useListCategoriesQuery } from "../apollo-components";
 import { Search } from "../search";
@@ -5,6 +6,14 @@ import { Header } from "./header";
 
 export const Hero = () => {
   const { data } = useListCategoriesQuery();
+  const iconRenderer = (category: any) => {
+    switch (category?.slug?.current) {
+      case "cours-formations":
+        return <BriefcaseIcon className="h-14 w-14 text-teal-600" />;
+      default:
+        break;
+    }
+  };
   return (
     <section className="relative h-screen bg-slate-600">
       <img
@@ -29,15 +38,26 @@ export const Hero = () => {
           <div className="w-1/2 h-40 p-10 mx-auto bg-gray-100 rounded-lg shadow-lg">
             <div className="flex items-center justify-center h-full gap-3">
               {data?.allCategory?.map((category, index) => (
-                <div key={index} className="p-5 bg-white gap-y-2">
-                  {category?.name as string}
-                  <p>
-                    {category?.subcategories?.map((item, index) => (
-                      <span key={index} className="">
-                        {item?.adverts?.length} advert(s)
-                      </span>
-                    ))}
-                  </p>
+                <div
+                  key={index}
+                  className="p-4 bg-white gap-y-2 flex flex-col items-center h-32 w-44 hover:shadow-md duration-300"
+                >
+                  {iconRenderer(category)}
+                  <span className="text-center">
+                    <h4 className="text-sm font-medium">
+                      {category?.name as string}
+                    </h4>
+                    <p>
+                      {category?.subcategories?.map((item, index) => (
+                        <span key={index} className="text-xs text-gray-400">
+                          {item?.adverts?.length > 0
+                            ? item?.adverts?.length
+                            : 0}{" "}
+                          advert(s)
+                        </span>
+                      ))}
+                    </p>
+                  </span>
                 </div>
               ))}
             </div>

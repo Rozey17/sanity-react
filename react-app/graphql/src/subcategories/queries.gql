@@ -1,0 +1,1 @@
+query ListSubCategories{allSubcategory{_id,_type,name,slug{current},category{_id,name,slug{current}},adverts{_id,title,slug{current},description,subcategory{_id,name,slug{current}}}}}
