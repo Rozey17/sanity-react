@@ -30,7 +30,7 @@ export function CreateAdvertForm() {
       description: "",
       contact: "",
       subcategory: "",
-      location: "",
+      // location: {},
       price: 0,
       image: {},
     },
@@ -52,7 +52,7 @@ export function CreateAdvertForm() {
                 _ref: input.subcategory,
               },
               price: input.price,
-              location: input.location,
+              // location: input.location,
               image: {
                 _type: "image",
                 asset: {
@@ -71,11 +71,11 @@ export function CreateAdvertForm() {
         <TextInput type="text" {...register("contact")} placeholder="contact" />
         <textarea {...register("description")} placeholder="description" />
         <TextInput type="text" {...register("title")} placeholder="title" />
-        <TextInput
+        {/* <TextInput
           type="text"
           {...register("location")}
           placeholder="location"
-        />
+        /> */}
         <Select
           classNames={{
             input: errors.subcategory ? "error-input" : "input",
@@ -139,7 +139,7 @@ export function CreateAdvertForm() {
           // className={errors.photo ? "error-input" : "input"}
         />
         {previewImage && (
-          <img src={previewImage} className="h-40 w-40 object-contain" />
+          <img src={previewImage} className="h-60 w-60 object-contain" />
         )}
         <button>submit</button>
       </form>

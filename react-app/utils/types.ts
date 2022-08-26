@@ -3,7 +3,11 @@ export type Advert = {
   description: string;
   slug: string;
   contact: string;
-  location: string;
+  location: {
+    lat: number;
+    lng: number;
+    alt: number;
+  };
   image: {
     asset: {
       url: string;

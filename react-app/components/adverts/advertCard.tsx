@@ -30,7 +30,7 @@ export const AdvertCard = ({ ad }: { ad: Advert }) => {
           </span>
           <span className="flex items-center">
             <LocationMarkerIcon className="w-4 h-4 mr-1" />
-            <p className="text-sm">{ad?.location}</p>
+            {/* <p className="text-sm">{ad?.location?.}</p> */}
           </span>
         </div>
         <h4>{ad?.title}</h4>

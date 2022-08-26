@@ -1,13 +1,32 @@
+const getPosition = (options) => {
+  if (navigator.geolocation) {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+  }
+};
+
 export default {
   name: "advert",
   title: "Advert",
   type: "document",
+  initialValue: async () => ({
+    location: await getPosition().then(({ coords }) => {
+      const { longitude, latitude, altitude } = coords;
+      return {
+        _type: "geopoint",
+        lat: latitude,
+        lng: longitude,
+        alt: altitude,
+      };
+    }),
+  }),
   fields: [
     {
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().min(10).max(80),
+      validation: (Rule) => Rule.required().min(3).max(80),
     },
     {
       name: "slug",
