@@ -5,12 +5,17 @@ import {
   LocationMarkerIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import { Advert } from "../../utils/types";
 
-export const AdvertCard = ({ ad }: { ad: Advert }) => {
+export const AdvertCard = ({ advert }: { advert: Advert }) => {
+  const router = useRouter();
   return (
-    <div className="cursor-pointer duration-300 hover:shadow-md rounded-md overflow-hidden bg-white h-[360px]">
+    <div
+      className="cursor-pointer duration-300 hover:shadow-md rounded-md overflow-hidden bg-white h-[360px]"
+      onClick={() => router.push(`/advert/${advert?._id}`)}
+    >
       {/* <Image
         src={ad?.image?.asset.url}
         objectFit="cover"
@@ -18,7 +23,7 @@ export const AdvertCard = ({ ad }: { ad: Advert }) => {
         objectPosition="center"
       /> */}
       <img
-        src={ad?.image?.asset.url}
+        src={advert?.image?.asset.url}
         alt=""
         className="object-cover w-full h-3/5"
       />
@@ -26,16 +31,16 @@ export const AdvertCard = ({ ad }: { ad: Advert }) => {
         <div className="flex justify-between">
           <span className="flex items-center">
             <AtSymbolIcon className="w-4 h-4 mr-1" />
-            <p className="text-sm">{ad?.subcategory?.name}</p>
+            <p className="text-sm">{advert?.subcategory?.name}</p>
           </span>
           <span className="flex items-center">
             <LocationMarkerIcon className="w-4 h-4 mr-1" />
-            {/* <p className="text-sm">{ad?.location?.}</p> */}
+            {/* <p className="text-sm">{advert?.location?.}</p> */}
           </span>
         </div>
-        <h4>{ad?.title}</h4>
+        <h4>{advert?.title}</h4>
         <div className="flex justify-between items-center">
-          <h4 className="text-red-600 font-medium">{ad?.price} €</h4>
+          <h4 className="text-red-600 font-medium">{advert?.price} €</h4>
           <HeartIcon className="w-4 h-4" />
         </div>
       </div>

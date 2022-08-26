@@ -1,6 +1,9 @@
  query ListAdverts{
       allAdvert {
         _id
+        slug{
+          current
+        }
         contact
         description
         _type
@@ -23,3 +26,33 @@
         }
       }
     }
+
+query GetAdvert ($id: ID!){
+		Advert(id:$id) {
+
+_id
+ slug{
+          current
+        }
+        contact
+        description
+        _type
+        title
+        subcategory {
+          _id
+          name
+        }
+        location{
+          lat
+          lng
+          alt
+         
+        }
+        price
+        image {
+          asset {
+            url
+          }
+        }
+        }
+        }

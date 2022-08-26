@@ -1,7 +1,10 @@
 export type Advert = {
+  _id: string;
   title: string;
   description: string;
-  slug: string;
+  slug: {
+    current: string;
+  };
   contact: string;
   location: {
     lat: number;

@@ -20,7 +20,7 @@ const Home = ({ ads }: any) => {
         </div>
         <div className="grid grid-cols-4 gap-3">
           {ads.map((ad, index) => (
-            <AdvertCard key={index} ad={ad} />
+            <AdvertCard key={index} advert={ad} />
           ))}
         </div>
       </section>
