@@ -31,10 +31,10 @@ export type Advert = Document & {
   _type?: Maybe<Scalars['String']>;
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars['DateTime']>;
-  contact?: Maybe<Scalars['Float']>;
+  contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Image>;
-  location?: Maybe<Scalars['String']>;
+  location?: Maybe<Geopoint>;
   price?: Maybe<Scalars['Float']>;
   slug?: Maybe<Slug>;
   subcategory?: Maybe<Subcategory>;
@@ -50,10 +50,10 @@ export type AdvertFilter = {
   _rev?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
-  contact?: InputMaybe<FloatFilter>;
+  contact?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
-  location?: InputMaybe<StringFilter>;
+  location?: InputMaybe<GeopointFilter>;
   price?: InputMaybe<FloatFilter>;
   slug?: InputMaybe<SlugFilter>;
   subcategory?: InputMaybe<SubcategoryFilter>;
@@ -70,7 +70,7 @@ export type AdvertSorting = {
   contact?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   image?: InputMaybe<ImageSorting>;
-  location?: InputMaybe<SortOrder>;
+  location?: InputMaybe<GeopointSorting>;
   price?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
@@ -147,7 +147,6 @@ export type Category = Document & {
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars['DateTime']>;
   name?: Maybe<Scalars['String']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Slug>;
   subcategories?: Maybe<Array<Maybe<Subcategory>>>;
 };
@@ -162,7 +161,6 @@ export type CategoryFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   name?: InputMaybe<StringFilter>;
-  publishedAt?: InputMaybe<DatetimeFilter>;
   slug?: InputMaybe<SlugFilter>;
 };
 
@@ -174,7 +172,6 @@ export type CategorySorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
-  publishedAt?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SlugSorting>;
 };
 
@@ -1014,7 +1011,6 @@ export type Subcategory = Document & {
   adverts?: Maybe<Array<Maybe<Advert>>>;
   category?: Maybe<Category>;
   name?: Maybe<Scalars['String']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Slug>;
 };
 
@@ -1029,7 +1025,6 @@ export type SubcategoryFilter = {
   _updatedAt?: InputMaybe<DatetimeFilter>;
   category?: InputMaybe<CategoryFilter>;
   name?: InputMaybe<StringFilter>;
-  publishedAt?: InputMaybe<DatetimeFilter>;
   slug?: InputMaybe<SlugFilter>;
 };
 
@@ -1041,14 +1036,13 @@ export type SubcategorySorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
-  publishedAt?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SlugSorting>;
 };
 
 export type ListAdvertsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: number | null, description?: string | null, _type?: string | null, title?: string | null, location?: string | null, price?: number | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: string | null, description?: string | null, _type?: string | null, title?: string | null, price?: number | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
 
 export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1078,7 +1072,11 @@ export const ListAdvertsDocument = gql`
       _id
       name
     }
-    location
+    location {
+      lat
+      lng
+      alt
+    }
     price
     image {
       asset {

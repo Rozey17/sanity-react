@@ -18,6 +18,7 @@
     "@mantine/hooks": "^5.2.3",
     "@mantine/next": "^5.2.3",
     "@sanity/client": "^3.3.3",
+    "@sanity/google-maps-input": "^2.31.0",
     "@sanity/image-url": "^1.0.1",
     "@sanity/webhook": "^2.0.0",
     "axios": "^0.27.2",

@@ -20,18 +20,14 @@ export default {
       name: "category",
       title: "Category",
       type: "reference",
+      weak: true,
       to: [{ type: "category" }],
-    },
-    {
-      name: "publishedAt",
-      title: "Published At",
-      type: "datetime",
     },
     {
       name: "adverts",
       title: "Adverts",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "advert" }] }],
+      of: [{ type: "reference", weak: true, to: [{ type: "advert" }] }],
     },
   ],
 };

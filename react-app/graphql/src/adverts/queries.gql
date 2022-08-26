@@ -9,7 +9,12 @@
           _id
           name
         }
-        location
+        location{
+          lat
+          lng
+          alt
+         
+        }
         price
         image {
           asset {

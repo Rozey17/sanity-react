@@ -7,6 +7,7 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required().min(10).max(80),
     },
     {
       name: "slug",
@@ -24,17 +25,14 @@ export default {
         maxLength: 500,
       },
     },
-    // {
-    //   name: "subcategories",
-    //   title: "Sub Categories",
-    //   type: "array",
-    //   of: [{ type: "reference", to: [{ type: "subcategory" }] }],
-    // },
+
     {
       name: "subcategory",
       title: "Sub Category",
       type: "reference",
+      weak: true,
       to: [{ type: "subcategory" }],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "contact",
@@ -49,7 +47,7 @@ export default {
     {
       name: "location",
       title: "location",
-      type: "string",
+      type: "geopoint",
     },
     {
       name: "image",
