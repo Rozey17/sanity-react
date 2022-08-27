@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useListCategoriesQuery } from "../apollo-components";
 import { Search } from "../search";
+import { SliderComponent } from "../slider";
 import { Header } from "./header";
 
 export const Hero = () => {
@@ -38,7 +39,8 @@ export const Hero = () => {
           </div>
           {/* new technique */}
           <div className="w-1/2 h-40 p-10 mx-auto bg-gray-100 rounded-lg shadow-lg">
-            <div className="flex items-center justify-center h-full gap-3">
+            <SliderComponent />
+            {/* <div className="flex items-center justify-center h-full gap-3">
               {data?.allCategory?.map((category, index) => (
                 <div
                   key={index}
@@ -65,7 +67,7 @@ export const Hero = () => {
                   </span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

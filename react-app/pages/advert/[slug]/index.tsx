@@ -49,7 +49,7 @@ export default function AdvertPage({ advert }) {
             <div className="p-8 bg-white"></div>
           </div>
           <div className="space-y-10">
-            {advert?.title}
+            <p>{advert?.title}</p>
 
             <div className="flex flex-col justify-between p-8 space-y-10 bg-white">
               <p className="font-medium capitalize">ad owner</p>
