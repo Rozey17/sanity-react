@@ -17,10 +17,14 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
       onClick={() => router.push(`/advert/${advert?._id}`)}
     >
       {/* <Image
-        src={ad?.image?.asset.url}
+        src={advert?.image?.asset?.url}
+        quality="100%"
         objectFit="cover"
         layout="fill"
+        // height="60%"
+        // width="100%"
         objectPosition="center"
+        alt="image"
       /> */}
       <img
         src={advert?.image?.asset?.url}
