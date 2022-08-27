@@ -1,4 +1,5 @@
 import { BriefcaseIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 import React from "react";
 import { useListCategoriesQuery } from "../apollo-components";
 import { Search } from "../search";
@@ -6,10 +7,11 @@ import { Header } from "./header";
 
 export const Hero = () => {
   const { data } = useListCategoriesQuery();
+  const router = useRouter();
   const iconRenderer = (category: any) => {
     switch (category?.slug?.current) {
       case "cours-formations":
-        return <BriefcaseIcon className="h-14 w-14 text-teal-600" />;
+        return <BriefcaseIcon className="text-teal-600 h-14 w-14" />;
       default:
         break;
     }
@@ -40,7 +42,10 @@ export const Hero = () => {
               {data?.allCategory?.map((category, index) => (
                 <div
                   key={index}
-                  className="p-4 bg-white gap-y-2 flex flex-col items-center h-32 w-44 hover:shadow-md duration-300"
+                  className="flex flex-col items-center h-32 p-4 duration-300 bg-white cursor-pointer gap-y-2 w-44 hover:shadow-md"
+                  onClick={() =>
+                    router.push(`/categories/${category.slug.current}`)
+                  }
                 >
                   {iconRenderer(category)}
                   <span className="text-center">

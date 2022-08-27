@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useQuery } from "@apollo/client";
-import { initializeApollo } from "../../lib/graphql.server";
+import { initializeApollo } from "../../../lib/graphql.server";
 import {
   GetAdvertDocument,
   ListAdvertsDocument,
-} from "../../components/apollo-components";
+} from "../../../components/apollo-components";
 import { GetServerSideProps } from "next";
 
 const client = initializeApollo();
@@ -66,7 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   console.log(advert);
   return {
     props: {
-      advert: advert,
+      advert: advert.data,
     },
   };
 };

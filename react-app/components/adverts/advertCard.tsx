@@ -23,11 +23,11 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
         objectPosition="center"
       /> */}
       <img
-        src={advert?.image?.asset.url}
+        src={advert?.image?.asset?.url}
         alt=""
         className="object-cover w-full h-3/5"
       />
-      <div className="p-5 flex space-y-5 flex-col">
+      <div className="flex flex-col p-5 space-y-5">
         <div className="flex justify-between">
           <span className="flex items-center">
             <AtSymbolIcon className="w-4 h-4 mr-1" />
@@ -39,8 +39,8 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
           </span>
         </div>
         <h4>{advert?.title}</h4>
-        <div className="flex justify-between items-center">
-          <h4 className="text-red-600 font-medium">{advert?.price} €</h4>
+        <div className="flex items-center justify-between">
+          <h4 className="font-medium text-red-600">{advert?.price} €</h4>
           <HeartIcon className="w-4 h-4" />
         </div>
       </div>
