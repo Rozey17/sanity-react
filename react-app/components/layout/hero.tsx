@@ -38,36 +38,8 @@ export const Hero = () => {
             <Search />
           </div>
           {/* new technique */}
-          <div className="w-1/2 h-40 p-10 mx-auto bg-gray-100 rounded-lg shadow-lg">
+          <div className="w-3/5  p-10 mx-auto bg-gray-100 rounded-lg shadow-lg">
             <SliderComponent />
-            {/* <div className="flex items-center justify-center h-full gap-3">
-              {data?.allCategory?.map((category, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center h-32 p-4 duration-300 bg-white cursor-pointer gap-y-2 w-44 hover:shadow-md"
-                  onClick={() =>
-                    router.push(`/categories/${category.slug.current}`)
-                  }
-                >
-                  {iconRenderer(category)}
-                  <span className="text-center">
-                    <h4 className="text-sm font-medium">
-                      {category?.name as string}
-                    </h4>
-                    <p>
-                      {category?.subcategories?.map((item, index) => (
-                        <span key={index} className="text-xs text-gray-400">
-                          {item?.adverts?.length > 0
-                            ? item?.adverts?.length
-                            : 0}{" "}
-                          advert(s)
-                        </span>
-                      ))}
-                    </p>
-                  </span>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>

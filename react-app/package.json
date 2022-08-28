@@ -33,7 +33,8 @@
     "react-hook-form": "^7.34.2",
     "react-hot-toast": "^2.3.0",
     "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",

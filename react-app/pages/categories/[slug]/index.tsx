@@ -1,20 +1,74 @@
+import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import { GetServerSideProps } from "next";
 import React from "react";
 import { AdvertCard } from "../../../components/adverts/advertCard";
-import { ListAdvertsByCategoryDocument } from "../../../components/apollo-components";
+import {
+  ListAdvertsByCategoryDocument,
+  useListCategoriesQuery,
+} from "../../../components/apollo-components";
+import { Header } from "../../../components/layout/header";
 import { initializeApollo } from "../../../lib/graphql.server";
 
 const CategoriesPage = ({ adverts }) => {
+  const { data } = useListCategoriesQuery();
+  const listCategories = data && data?.allCategory ? data?.allCategory : [];
   return (
     <>
-      <div className="flex items-center justify-center p-5 bg-white border">
-        showing {adverts.length} of {adverts.length} ad(s) found
+      <Header />
+      <div className="grid grid-cols-5 h-full">
+        <aside className="top-0 sticky overflow-y-scroll p-10 scrollbar-hide  border-r col-span-1">
+          Catégories
+          {listCategories.map((item, index) => (
+            <div key={index} className="">
+              <p>{item?.name}</p>
+              <ul className="">
+                {item?.subcategories?.map((sub) => (
+                  <li key={sub?._id} className="text-sm px-5">
+                    {sub?.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </aside>
+        <div className="col-span-2 bg-gray-100 p-10">
+          {" "}
+          <div className="flex items-center justify-center p-5 bg-white border">
+            showing {adverts.length} of {adverts.length} ad(s) found
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {adverts?.map((ad, index) => (
+              <AdvertCard key={index} advert={ad} />
+            ))}
+          </div>
+        </div>
+        <div className="col-span-2">hello</div>
       </div>
-      <div className="grid grid-cols-4 gap-3">
-        {adverts?.map((ad, index) => (
-          <AdvertCard key={index} advert={ad} />
-        ))}
-      </div>
+      <section className="py-8 px-40 bg-white ">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            <PaperAirplaneIcon className="w-10 h-10 mr-2 rotate-45" />
+            <span className="">
+              <h3 className="font-medium text-2xl">Subscribe To Newsletter</h3>
+              <p className="">and receive new ads in inbox</p>
+            </span>
+          </div>
+          <div className="flex">
+            <input
+              type="text"
+              placeholder="enter your email address"
+              className="p-3 rounded-full rounded-r-none focus:outline-none border border-gray-500"
+            />
+            <button className="p-3 px-5 text-white rounded-full rounded-l-none focus:outline-none bg-black">
+              subscribe
+            </button>
+          </div>
+        </div>
+      </section>
+      <footer className="bg-slate-600 py-10 px-40">
+        <div className=""></div>
+        <div className=""></div>
+      </footer>
     </>
 
     // <>{JSON.stringify(adverts, null, 2)}</>

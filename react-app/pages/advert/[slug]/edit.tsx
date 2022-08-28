@@ -176,7 +176,19 @@ export default function EditAdvertPage({ advert }) {
         {previewImage && (
           <img src={previewImage} className="object-contain h-60 w-60" />
         )}
-        <button>submit</button>
+        <div className="flex space-x-5">
+          <button className="button-primary">submit</button>
+          <button
+            className="button-secondary"
+            onClick={() =>
+              client.delete({
+                id: advert?._id,
+              })
+            }
+          >
+            delete
+          </button>
+        </div>
       </form>
       <Toaster />
     </>

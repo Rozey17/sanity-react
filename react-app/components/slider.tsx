@@ -1,11 +1,26 @@
 import { BriefcaseIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { useListCategoriesQuery } from "./apollo-components";
+import { initializeApollo } from "../lib/graphql.server";
+import {
+  ListAdvertsByCategoryDocument,
+  useListAdvertsByCategoryQuery,
+  useListCategoriesQuery,
+} from "./apollo-components";
 
 export const SliderComponent = () => {
+  // const [slug, setSlug] = useState(null);
   const { data } = useListCategoriesQuery();
+  // async function advertsRenderer(slug: string) {
+  //  const {data} = useListCategoriesQuery({
+  //   variables:{
+  //     slug: slug
+  //   }
+  //  })
+  //   return adverts;
+  // }
+
   const router = useRouter();
   const iconRenderer = (category: any) => {
     switch (category?.slug?.current) {
@@ -18,13 +33,13 @@ export const SliderComponent = () => {
   const settings = {
     // className: "center",
     // centerPadding: "60px",
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     // draggable:true
-    arrows: false,
+    // arrows: false,
     // responsive: [
     //   {
     //     breakpoint: 1024,
@@ -54,7 +69,6 @@ export const SliderComponent = () => {
   };
   return (
     <Slider {...settings}>
-      {/* <div className="flex items-center justify-center h-full gap-3"> */}
       {data?.allCategory?.map((category, index) => (
         <div key={index} className="">
           <div
@@ -64,22 +78,14 @@ export const SliderComponent = () => {
           >
             {iconRenderer(category)}
             <span className="text-center">
-              <h4 className="text-sm font-medium">
-                {category?.name as string}
-              </h4>
-              <p>
-                {category?.subcategories?.map((item, index) => (
-                  <span key={index} className="text-xs text-gray-400">
-                    {item?.adverts?.length > 0 ? item?.adverts?.length : 0}{" "}
-                    advert(s)
-                  </span>
-                ))}
-              </p>
+              <p className="text-sm font-medium">{category?.name as string}</p>
+              {/* <p className="text-xs text-gray-400">
+                {advertsRenderer(category?.slug?.current).then(()=>console.log('nice'))} advert(s)
+              </p> */}
             </span>
           </div>
         </div>
       ))}
-      {/* </div> */}
     </Slider>
   );
 };
