@@ -1,10 +1,19 @@
 import Head from "next/head";
 import { initializeApollo } from "../../../lib/graphql.server";
-import { GetAdvertDocument } from "../../../components/apollo-components";
+import {
+  Advert,
+  GetAdvertDocument,
+} from "../../../components/apollo-components";
 import { Header } from "../../../components/layout/header";
 import { GetServerSideProps } from "next";
+import dynamic from "next/dynamic";
 
-export default function AdvertPage({ advert }) {
+const Map = dynamic(() => import("../../../components/map"), {
+  loading: () => <p>A map is loading</p>,
+  ssr: false,
+});
+
+export default function AdvertPage({ advert }: { advert: Advert }) {
   console.log(advert?.title);
   return (
     <>
@@ -39,23 +48,29 @@ export default function AdvertPage({ advert }) {
         </div>
       </div>
       <section className="px-40 py-20 bg-gray-100">
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-3 gap-10">
           <div className="col-span-2 space-y-10">
             <img
               src={advert?.image?.asset?.url}
               alt=""
               className="object-cover w-full h-[500px] "
             />
-            <div className="p-8 bg-white"></div>
+            <div className="p-8 bg-white space-y-10">
+              <h1 className="text-3xl font-bold capitalize">{advert?.title}</h1>
+              <p className="text-gray-700">{advert?.description}</p>
+            </div>
           </div>
           <div className="space-y-10">
-            <p>{advert?.title}</p>
+            <div className="flex flex-col justify-between p-8 space-y-10 bg-teal-600"></div>
 
             <div className="flex flex-col justify-between p-8 space-y-10 bg-white">
               <p className="font-medium capitalize">ad owner</p>
               <span className="p-5 text-white bg-red-400">
                 {advert?.contact}
               </span>
+            </div>
+            <div className="h-96">
+              {advert?.location && <Map ads={[advert]} />}
             </div>
           </div>
         </div>

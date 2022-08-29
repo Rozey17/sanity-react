@@ -27,7 +27,7 @@ const CategoriesPage = ({ adverts }) => {
   return (
     <>
       <Header />
-      <div className="grid grid-cols-5 h-full">
+      <div className="grid grid-cols-5 h-screen">
         <aside className="top-0 sticky overflow-y-scroll p-10 scrollbar-hide  border-r col-span-1">
           Catégories
           <Accordion transitionDuration={300}>
@@ -35,14 +35,15 @@ const CategoriesPage = ({ adverts }) => {
               <Accordion.Item key={index} value={item?.name}>
                 <Accordion.Control>{item?.name}</Accordion.Control>
                 {item.subcategories.map((sub) => (
-                  <Accordion.Panel key={sub._id}>{sub?.name}</Accordion.Panel>
+                  <Accordion.Panel key={sub._id}>
+                    <p className="text-sm text-gray-400">{sub?.name}</p>
+                  </Accordion.Panel>
                 ))}
               </Accordion.Item>
             ))}
           </Accordion>
         </aside>
         <div className="col-span-2 bg-gray-100 p-10 space-y-10">
-          {" "}
           <div className="flex items-center justify-center p-5 bg-white border">
             showing {adverts.length} of {adverts.length} ad(s) found
           </div>

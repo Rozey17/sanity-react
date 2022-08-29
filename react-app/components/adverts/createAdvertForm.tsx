@@ -39,7 +39,7 @@ export function CreateAdvertForm() {
   return (
     <>
       <form
-        className="flex flex-col w-1/3 mx-auto"
+        className="flex flex-col w-1/3 mx-auto space-y-5"
         onSubmit={handleSubmit(async (input) => {
           await client
             .create({
@@ -68,21 +68,14 @@ export function CreateAdvertForm() {
             });
         })}
       >
-        <TextInput type="text" {...register("contact")} placeholder="contact" />
-        <textarea {...register("description")} placeholder="description" />
-        <TextInput type="text" {...register("title")} placeholder="title" />
-        {/* <TextInput
-          type="text"
-          {...register("location")}
-          placeholder="location"
-        /> */}
+        <TextInput label="titre" {...register("title")} placeholder="title" />
         <Select
           classNames={{
             input: errors.subcategory ? "error-input" : "input",
             label: "text-sm font-medium text-gray-600 font-sans",
             dropdown: "font-sans",
           }}
-          label=""
+          label="sous catégorie"
           placeholder="Veuillez sélectionner une catégorie"
           searchable
           required
@@ -103,8 +96,22 @@ export function CreateAdvertForm() {
           })}
           // icon={<ClipboardIcon className="w-5 h-5 text-sky-500" />}
         />
+        <TextInput
+          label="contact"
+          {...register("contact")}
+          placeholder="contact"
+        />
+        <textarea {...register("description")} placeholder="description" />
+        {/* <TextInput
+          type="text"
+          {...register("location")}
+          placeholder="location"
+        /> */}
+
         <NumberInput
-          defaultValue={0}
+          // defaultValue={0}
+          label="price"
+          value={watch("price")}
           placeholder="price"
           onChange={(value) =>
             setValue("price", value, {
