@@ -14,6 +14,10 @@ const icon = L.icon({
 return (
   <MapContainer
     center={{ lat: ads[0]?.location?.lat, lng: ads[0]?.location?.lng }}
+    // bounds={ads.map((item, index) => [
+    //   item?.location?.alt,
+    //   item?.location?.lng,
+    // ])}
     zoom={13}
     scrollWheelZoom={false}
   >
@@ -23,7 +27,7 @@ return (
     />
     {ads?.map((item, index) => (
       <Marker
-        // icon={icon}
+        icon={icon}
         key={index}
         position={{
           lat: item?.location?.lat,

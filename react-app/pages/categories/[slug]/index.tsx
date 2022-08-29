@@ -33,10 +33,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
               <Accordion.Item key={index} value={item?.name}>
                 <Accordion.Control>{item?.name}</Accordion.Control>
                 {item.subcategories.map((sub) => (
-                  <Accordion.Panel
-                    key={sub._id}
-                    className="flex space-x-2 items-end"
-                  >
+                  <Accordion.Panel key={sub._id} className="">
                     <input type="checkbox" className="rounded-full mr-2" />
                     <span className="text-sm text-gray-400">{sub?.name}</span>
                   </Accordion.Panel>

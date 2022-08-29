@@ -1,5 +1,5 @@
 import { ClipboardIcon } from "@heroicons/react/outline";
-import { NumberInput, Select, TextInput } from "@mantine/core";
+import { NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { client } from "../../lib/sanity.server";
@@ -8,6 +8,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { createReadStream } from "fs";
 import { basename } from "path";
 import { useRouter } from "next/router";
+import slugify from "slugify";
+
 export function CreateAdvertForm() {
   const [imagesAssets, setImagesAssets] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
@@ -33,8 +35,13 @@ export function CreateAdvertForm() {
       contact: "",
       subcategory: "",
       // location: {},
+      slug: {
+        current: undefined,
+      },
       price: 0,
-      image: {},
+      image: {
+        asset: { url: undefined },
+      },
     },
   });
 
@@ -49,6 +56,9 @@ export function CreateAdvertForm() {
               title: input.title,
               description: input.description,
               contact: input.contact,
+              slug: {
+                current: slugify(input.title, { lower: true }),
+              },
               subcategory: {
                 _type: "reference",
                 _ref: input.subcategory,
@@ -104,7 +114,13 @@ export function CreateAdvertForm() {
           {...register("contact")}
           placeholder="contact"
         />
-        <textarea {...register("description")} placeholder="description" />
+        <Textarea
+          label="Description"
+          {...register("description")}
+          placeholder="description"
+          required
+          // className="border border-gray-300 focus:outline-none p-3 rounded"
+        />
         {/* <TextInput
           type="text"
           {...register("location")}
@@ -151,7 +167,8 @@ export function CreateAdvertForm() {
         {previewImage && (
           <img src={previewImage} className="h-60 w-60 object-contain" />
         )}
-        <button>submit</button>
+
+        <button className="button-primary w-full">submit</button>
       </form>
       <Toaster />
     </>

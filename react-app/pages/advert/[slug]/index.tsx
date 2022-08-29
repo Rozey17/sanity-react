@@ -7,6 +7,7 @@ import {
 import { Header } from "../../../components/layout/header";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -14,7 +15,9 @@ const Map = dynamic(() => import("../../../components/map"), {
 });
 
 export default function AdvertPage({ advert }: { advert: Advert }) {
-  console.log(advert?.title);
+  // console.log(advert?.title);
+  const router = useRouter();
+  const slug = router.query.slug;
   return (
     <>
       <Head>
@@ -59,6 +62,12 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               <h1 className="text-3xl font-bold capitalize">{advert?.title}</h1>
               <p className="text-gray-700">{advert?.description}</p>
             </div>
+            <button
+              className="button-primary"
+              onClick={() => router.push(`/advert/${slug}/edit`)}
+            >
+              modifier
+            </button>
           </div>
           <div className="space-y-10">
             <div className="flex flex-col justify-between p-8 space-y-10 bg-teal-600"></div>

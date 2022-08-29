@@ -2,7 +2,7 @@ import { ClipboardIcon } from "@heroicons/react/outline";
 import { NumberInput, Select, TextInput } from "@mantine/core";
 import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import slugify from "slugify";
 import toast, { Toaster } from "react-hot-toast";
 import { createReadStream } from "fs";
 import { basename } from "path";
@@ -46,7 +46,7 @@ export function EditAdvertForm() {
       description: advert?.description,
       contact: advert?.contact,
       subcategory: advert?.subcategory?._id,
-      // location: {},
+      slug: advert?.slug,
       price: advert?.price,
       image: advert?.image,
     },
@@ -61,38 +61,40 @@ export function EditAdvertForm() {
             .createOrReplace({
               _id: advert?._id,
               _type: "advert",
-              title: input.title,
-              description: input.description,
-              contact: input.contact,
+              title: input?.title,
+              description: input?.description,
+              contact: input?.contact,
+              slug: {
+                current: slugify(input?.title, { lower: true }),
+              },
+              // slug: input.slug,
               subcategory: {
                 _type: "reference",
-                _ref: input.subcategory,
+                _ref: input?.subcategory,
               },
-              price: input.price,
+              price: input?.price,
               // location: input.location,
-              image: {
-                _type: "image",
-                asset: {
-                  _type: "image",
-                  _ref: imagesAssets?._id,
-                },
-              },
+              // image: {
+              //   _type: "image",
+              //   asset: {
+              //     _type: "image",
+              //     _ref: imagesAssets && imagesAssets?._id,
+              //   },
+              // },
+              image: input.image,
             })
             .then((res) => {
               // console.log(`Ad was created, document ID is ${res._id}`);
-              reset();
+              // reset();
               toast.success(`Ad was created, document ID is ${res._id}`);
+              router.push(`/advert/${res._id}`);
             });
         })}
       >
-        <TextInput
-          //   value={watch("title")}
-          {...register("title")}
-          placeholder="title"
-        />
+        <TextInput label="Titre" {...register("title")} placeholder="title" />
 
         <TextInput
-          //   value={watch("contact")}
+          label="Contact"
           {...register("contact")}
           placeholder="contact"
         />
@@ -107,7 +109,7 @@ export function EditAdvertForm() {
             label: "text-sm font-medium text-gray-600 font-sans",
             dropdown: "font-sans",
           }}
-          label=""
+          label="catégorie"
           placeholder="Veuillez sélectionner une catégorie"
           searchable
           required
@@ -135,6 +137,7 @@ export function EditAdvertForm() {
         /> */}
 
         <NumberInput
+          label="price"
           value={watch("price")}
           placeholder="price"
           onChange={(value) =>
@@ -146,6 +149,7 @@ export function EditAdvertForm() {
           }
         />
         <input
+          // value={watch("image")}
           id="photo"
           type="file"
           accept="image/*"
