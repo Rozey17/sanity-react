@@ -23,7 +23,7 @@ return (
     />
     {ads?.map((item, index) => (
       <Marker
-        icon={icon}
+        // icon={icon}
         key={index}
         position={{
           lat: item?.location?.lat,

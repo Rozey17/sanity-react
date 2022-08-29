@@ -7,7 +7,8 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
-import { Advert } from "../../utils/types";
+import { Advert } from "../apollo-components";
+
 
 export const AdvertCard = ({ advert }: { advert: Advert }) => {
   const router = useRouter();

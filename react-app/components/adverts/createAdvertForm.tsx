@@ -7,12 +7,14 @@ import { useListSubCategoriesQuery } from "../apollo-components";
 import toast, { Toaster } from "react-hot-toast";
 import { createReadStream } from "fs";
 import { basename } from "path";
+import { useRouter } from "next/router";
 export function CreateAdvertForm() {
   const [imagesAssets, setImagesAssets] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const { data } = useListSubCategoriesQuery();
   const listSubCategories =
     data && data?.allSubcategory ? data?.allSubcategory : [];
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -63,8 +65,9 @@ export function CreateAdvertForm() {
             })
             .then((res) => {
               // console.log(`Ad was created, document ID is ${res._id}`);
-              reset();
-              toast.success(`Ad was created, document ID is ${res._id}`);
+              // reset();
+              // toast.success(`Ad was created, document ID is ${res._id}`);
+              router.push(`/advert/${res._id}`);
             });
         })}
       >

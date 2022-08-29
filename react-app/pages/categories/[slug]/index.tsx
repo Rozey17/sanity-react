@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import React, { useState } from "react";
 import { AdvertCard } from "../../../components/adverts/advertCard";
 import {
+  Advert,
   Category,
   ListAdvertsByCategoryDocument,
   Subcategory,
@@ -18,25 +19,26 @@ const Map = dynamic(() => import("../../../components/map"), {
   ssr: false,
 });
 
-const CategoriesPage = ({ adverts }) => {
-  const [opened, setOpened] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Category>(null);
-  const [selectedSubCat, setSelectedSubCat] = useState<Subcategory>(null);
+const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
   const { data } = useListCategoriesQuery();
   const listCategories = data && data?.allCategory ? data?.allCategory : [];
   return (
     <>
       <Header />
       <div className="grid grid-cols-5 h-screen">
-        <aside className="top-0 sticky overflow-y-scroll p-10 scrollbar-hide  border-r col-span-1">
+        <aside className="top-0 sticky overflow-y-scroll p-10 px-5 scrollbar-hide  border-r col-span-1">
           Catégories
           <Accordion transitionDuration={300}>
             {listCategories.map((item, index) => (
               <Accordion.Item key={index} value={item?.name}>
                 <Accordion.Control>{item?.name}</Accordion.Control>
                 {item.subcategories.map((sub) => (
-                  <Accordion.Panel key={sub._id}>
-                    <p className="text-sm text-gray-400">{sub?.name}</p>
+                  <Accordion.Panel
+                    key={sub._id}
+                    className="flex space-x-2 items-end"
+                  >
+                    <input type="checkbox" className="rounded-full mr-2" />
+                    <span className="text-sm text-gray-400">{sub?.name}</span>
                   </Accordion.Panel>
                 ))}
               </Accordion.Item>
