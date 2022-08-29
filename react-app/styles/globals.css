@@ -13,7 +13,10 @@ a {
 * {
   box-sizing: border-box;
 }
-
+.leaflet-container{
+            width: 100%;
+            height: 100%;
+        }
 .button-primary{
   @apply px-4 py-2 rounded-md flex bg-teal-500  text-sm capitalize font-medium active:bg-teal-600 text-white
 }

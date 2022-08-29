@@ -8,7 +8,12 @@ import {
 } from "../../../components/apollo-components";
 import { Header } from "../../../components/layout/header";
 import { initializeApollo } from "../../../lib/graphql.server";
+import dynamic from "next/dynamic";
 
+const Map = dynamic(() => import("../../../components/map"), {
+  loading: () => <p>A map is loading</p>,
+  ssr: false,
+});
 const CategoriesPage = ({ adverts }) => {
   const { data } = useListCategoriesQuery();
   const listCategories = data && data?.allCategory ? data?.allCategory : [];
@@ -42,8 +47,14 @@ const CategoriesPage = ({ adverts }) => {
             ))}
           </div>
         </div>
-        <div className="col-span-2">hello</div>
+        <div className="col-span-2">
+          {adverts.map((ad, index) => (
+            <Map key={index} lat={ad?.location?.lat} lng={ad?.location?.lng} />
+          ))}
+          {/* <Map /> */}
+        </div>
       </div>
+      {/* newsletter section */}
       <section className="py-8 px-40 bg-white ">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
@@ -56,15 +67,16 @@ const CategoriesPage = ({ adverts }) => {
           <div className="flex">
             <input
               type="text"
-              placeholder="enter your email address"
-              className="p-3 rounded-full rounded-r-none focus:outline-none border border-gray-500"
+              placeholder="Enter your email address"
+              className="p-3 px-5 rounded-full rounded-r-none focus:outline-none border border-gray-300 text-sm"
             />
-            <button className="p-3 px-5 text-white rounded-full rounded-l-none focus:outline-none bg-black">
-              subscribe
+            <button className="p-3 px-5 text-sm text-white rounded-full rounded-l-none focus:outline-none bg-black">
+              Subscribe
             </button>
           </div>
         </div>
       </section>
+      {/* footer */}
       <footer className="bg-slate-600 py-10 px-40">
         <div className=""></div>
         <div className=""></div>

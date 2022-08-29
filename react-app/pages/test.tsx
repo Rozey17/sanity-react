@@ -1,8 +1,8 @@
-import React from "react";
-import { CreateAdvertForm } from "../components/adverts/createAdvertForm";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("../components/map"), {
+  ssr: false,
+});
 
-const Test = () => {
-  return <CreateAdvertForm />;
-};
-
-export default Test;
+export default function Home() {
+  return "hey";
+}
