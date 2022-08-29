@@ -1061,7 +1061,7 @@ export type ListAdvertsByCategoryQuery = { __typename?: 'RootQuery', allAdvert: 
 export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'Subcategory', _id?: string | null, name?: string | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null } | null> | null }> };
+export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'Subcategory', _id?: string | null, name?: string | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null } | null } | null> | null }> };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1261,6 +1261,10 @@ export const ListCategoriesDocument = gql`
       adverts {
         _id
         title
+      }
+      category {
+        _id
+        name
       }
     }
   }

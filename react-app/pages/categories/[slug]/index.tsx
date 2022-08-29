@@ -1,20 +1,27 @@
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import { GetServerSideProps } from "next";
-import React from "react";
+import React, { useState } from "react";
 import { AdvertCard } from "../../../components/adverts/advertCard";
 import {
+  Category,
   ListAdvertsByCategoryDocument,
+  Subcategory,
   useListCategoriesQuery,
 } from "../../../components/apollo-components";
 import { Header } from "../../../components/layout/header";
 import { initializeApollo } from "../../../lib/graphql.server";
 import dynamic from "next/dynamic";
+import { Accordion, Collapse } from "@mantine/core";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
   ssr: false,
 });
+
 const CategoriesPage = ({ adverts }) => {
+  const [opened, setOpened] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<Category>(null);
+  const [selectedSubCat, setSelectedSubCat] = useState<Subcategory>(null);
   const { data } = useListCategoriesQuery();
   const listCategories = data && data?.allCategory ? data?.allCategory : [];
   return (
@@ -23,18 +30,16 @@ const CategoriesPage = ({ adverts }) => {
       <div className="grid grid-cols-5 h-full">
         <aside className="top-0 sticky overflow-y-scroll p-10 scrollbar-hide  border-r col-span-1">
           Catégories
-          {listCategories.map((item, index) => (
-            <div key={index} className="">
-              <p>{item?.name}</p>
-              <ul className="">
-                {item?.subcategories?.map((sub) => (
-                  <li key={sub?._id} className="text-sm px-5">
-                    {sub?.name}
-                  </li>
+          <Accordion transitionDuration={300}>
+            {listCategories.map((item, index) => (
+              <Accordion.Item key={index} value={item?.name}>
+                <Accordion.Control>{item?.name}</Accordion.Control>
+                {item.subcategories.map((sub) => (
+                  <Accordion.Panel key={sub._id}>{sub?.name}</Accordion.Panel>
                 ))}
-              </ul>
-            </div>
-          ))}
+              </Accordion.Item>
+            ))}
+          </Accordion>
         </aside>
         <div className="col-span-2 bg-gray-100 p-10 space-y-10">
           {" "}
