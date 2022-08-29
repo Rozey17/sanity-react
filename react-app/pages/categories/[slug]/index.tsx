@@ -36,7 +36,7 @@ const CategoriesPage = ({ adverts }) => {
             </div>
           ))}
         </aside>
-        <div className="col-span-2 bg-gray-100 p-10">
+        <div className="col-span-2 bg-gray-100 p-10 space-y-10">
           {" "}
           <div className="flex items-center justify-center p-5 bg-white border">
             showing {adverts.length} of {adverts.length} ad(s) found
@@ -48,10 +48,7 @@ const CategoriesPage = ({ adverts }) => {
           </div>
         </div>
         <div className="col-span-2">
-          {adverts.map((ad, index) => (
-            <Map key={index} lat={ad?.location?.lat} lng={ad?.location?.lng} />
-          ))}
-          {/* <Map /> */}
+          <Map ads={adverts} />
         </div>
       </div>
       {/* newsletter section */}
