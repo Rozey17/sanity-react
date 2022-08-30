@@ -9,8 +9,15 @@ import { createReadStream } from "fs";
 import { basename } from "path";
 import { useRouter } from "next/router";
 import slugify from "slugify";
+import { useMapEvents, MapContainer, TileLayer } from "react-leaflet";
+interface Location {
+  lat: number;
+  lng: number;
+}
 
 export function CreateAdvertForm() {
+  const [location, setLocation] = useState<Location>(null);
+
   const [imagesAssets, setImagesAssets] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const { data } = useListSubCategoriesQuery();
@@ -34,7 +41,7 @@ export function CreateAdvertForm() {
       description: "",
       contact: "",
       subcategory: "",
-      // location: {},
+      location: {},
       slug: {
         current: undefined,
       },
@@ -44,6 +51,40 @@ export function CreateAdvertForm() {
       },
     },
   });
+  // function MyComponent() {
+  //   const map = useMapEvents({
+  //     click: () => {
+  //       map.locate();
+  //     },
+  //     locationfound: (location) => {
+  //       console.log("location found:", location);
+  //        setValue("location",{
+  //         lat: location.latlng.lat,
+  //         lng: location.latlng.lng
+  //       } , {
+  //               shouldValidate: true,
+  //               shouldDirty: true,
+  //               shouldTouch: true,
+  //             })
+  //       // setLocation({
+  //       //   lat: location.latlng.lat,
+  //       //   lng: location.latlng.lng
+  //       // })
+  //     },
+  //   });
+  //   return null;
+  // }
+
+  // function MyMapComponent() {
+  //   return (
+  //     <MapContainer center={[50.5, 30.5]} zoom={13}>
+  //       <TileLayer
+  //         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  //         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  //       />
+  //       <MyComponent />
+  //     </MapContainer>
+  //   );
 
   return (
     <>
@@ -64,7 +105,7 @@ export function CreateAdvertForm() {
                 _ref: input.subcategory,
               },
               price: input.price,
-              // location: input.location,
+              location: input.location,
               image: {
                 _type: "image",
                 asset: {
@@ -119,7 +160,7 @@ export function CreateAdvertForm() {
           {...register("description")}
           placeholder="description"
           required
-          // className="border border-gray-300 focus:outline-none p-3 rounded"
+          // className="p-3 border border-gray-300 rounded focus:outline-none"
         />
         {/* <TextInput
           type="text"
@@ -165,10 +206,10 @@ export function CreateAdvertForm() {
           // className={errors.photo ? "error-input" : "input"}
         />
         {previewImage && (
-          <img src={previewImage} className="h-60 w-60 object-contain" />
+          <img src={previewImage} className="object-contain h-60 w-60" />
         )}
 
-        <button className="button-primary w-full">submit</button>
+        <button className="w-full button-primary">submit</button>
       </form>
       <Toaster />
     </>

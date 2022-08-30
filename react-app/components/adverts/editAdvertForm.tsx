@@ -46,7 +46,7 @@ export function EditAdvertForm() {
       description: advert?.description,
       contact: advert?.contact,
       subcategory: advert?.subcategory?._id,
-      slug: advert?.slug,
+      slug: advert?.slug.current,
       price: advert?.price,
       image: advert?.image,
     },
@@ -58,16 +58,14 @@ export function EditAdvertForm() {
         className="flex flex-col w-1/3 mx-auto"
         onSubmit={handleSubmit(async (input) => {
           await client
-            .createOrReplace({
-              _id: advert?._id,
-              _type: "advert",
+            .patch(advert?._id)
+            .set({
               title: input?.title,
               description: input?.description,
-              contact: input?.contact,
+              contact: input.contact,
               slug: {
                 current: slugify(input?.title, { lower: true }),
               },
-              // slug: input.slug,
               subcategory: {
                 _type: "reference",
                 _ref: input?.subcategory,
@@ -78,15 +76,16 @@ export function EditAdvertForm() {
               //   _type: "image",
               //   asset: {
               //     _type: "image",
-              //     _ref: imagesAssets && imagesAssets?._id,
+              //     _ref: imagesAssets?._id,
               //   },
               // },
-              image: input.image,
+              image: input.image === null ? advert?.image : input.image,
             })
+            .commit()
             .then((res) => {
               // console.log(`Ad was created, document ID is ${res._id}`);
-              // reset();
-              toast.success(`Ad was created, document ID is ${res._id}`);
+              reset();
+              // toast.success(`Ad was created, document ID is ${res._id}`);
               router.push(`/advert/${res._id}`);
             });
         })}

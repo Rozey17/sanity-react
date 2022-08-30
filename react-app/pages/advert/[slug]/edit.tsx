@@ -9,6 +9,7 @@ import { basename } from "path";
 
 import { useRouter } from "next/router";
 import {
+  Advert,
   GetAdvertDocument,
   useGetAdvertQuery,
   useListSubCategoriesQuery,
@@ -17,7 +18,7 @@ import { client } from "../../../lib/sanity.server";
 import { GetServerSideProps } from "next";
 import { initializeApollo } from "../../../lib/graphql.server";
 
-export default function EditAdvertPage({ advert }) {
+export default function EditAdvertPage({ advert }: { advert: Advert }) {
   const [imagesAssets, setImagesAssets] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const router = useRouter();
@@ -50,7 +51,10 @@ export default function EditAdvertPage({ advert }) {
       description: advert?.description,
       contact: advert?.contact,
       subcategory: advert?.subcategory?._id,
-      // location: {},
+      location: {
+        lat: advert?.location?.lat,
+        lng: advert?.location?.lng,
+      },
       price: advert?.price,
       image: advert?.image,
     },

@@ -25,7 +25,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
   return (
     <>
       <Header />
-      <div className="grid grid-cols-5 h-screen">
+      <div className="grid grid-cols-5 min-h-screen">
         <aside className="top-0 sticky overflow-y-scroll p-10 px-5 scrollbar-hide  border-r col-span-1">
           Catégories
           <Accordion transitionDuration={300}>
