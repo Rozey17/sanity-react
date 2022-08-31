@@ -1,5 +1,5 @@
 import { ClipboardIcon } from "@heroicons/react/outline";
-import { NumberInput, Select, TextInput } from "@mantine/core";
+import { NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
@@ -8,24 +8,17 @@ import { createReadStream } from "fs";
 import { basename } from "path";
 import { client } from "../../lib/sanity.server";
 import {
+  Advert,
   useGetAdvertQuery,
   useListSubCategoriesQuery,
 } from "../apollo-components";
 import { useRouter } from "next/router";
 
-export function EditAdvertForm() {
+export function EditAdvertForm({ advert }: { advert: Advert }) {
   const [imagesAssets, setImagesAssets] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const router = useRouter();
-  const slug = router.query.slug;
-  const { data: advertData } = useGetAdvertQuery({
-    variables: {
-      id: slug as string,
-    },
-  });
 
-  const advert = advertData && advertData?.Advert ? advertData?.Advert : null;
-  //   console.log(advert?.title);
   const { data } = useListSubCategoriesQuery();
   const listSubCategories =
     data && data?.allSubcategory ? data?.allSubcategory : [];
@@ -46,7 +39,7 @@ export function EditAdvertForm() {
       description: advert?.description,
       contact: advert?.contact,
       subcategory: advert?.subcategory?._id,
-      slug: advert?.slug.current,
+      slug: advert?.slug?.current,
       price: advert?.price,
       image: advert?.image,
     },
@@ -55,14 +48,14 @@ export function EditAdvertForm() {
   return (
     <>
       <form
-        className="flex flex-col w-1/3 mx-auto"
+        className="flex flex-col w-1/3 mx-auto space-y-5"
         onSubmit={handleSubmit(async (input) => {
           await client
             .patch(advert?._id)
             .set({
               title: input?.title,
               description: input?.description,
-              contact: input.contact,
+              contact: input?.contact,
               slug: {
                 current: slugify(input?.title, { lower: true }),
               },
@@ -72,35 +65,43 @@ export function EditAdvertForm() {
               },
               price: input?.price,
               // location: input.location,
-              // image: {
-              //   _type: "image",
-              //   asset: {
-              //     _type: "image",
-              //     _ref: imagesAssets?._id,
-              //   },
-              // },
-              image: input.image === null ? advert?.image : input.image,
+              image:
+                imagesAssets !== null
+                  ? {
+                      _type: "image",
+                      asset: {
+                        _type: "image",
+                        _ref: imagesAssets?._id,
+                      },
+                    }
+                  : advert?.image?.asset?._id,
             })
             .commit()
             .then((res) => {
               // console.log(`Ad was created, document ID is ${res._id}`);
-              reset();
+              // reset();
               // toast.success(`Ad was created, document ID is ${res._id}`);
               router.push(`/advert/${res._id}`);
             });
         })}
       >
-        <TextInput label="Titre" {...register("title")} placeholder="title" />
+        <TextInput
+          label="Titre"
+          {...register("title")}
+          placeholder="title"
+          required
+        />
 
         <TextInput
           label="Contact"
           {...register("contact")}
           placeholder="contact"
         />
-        <textarea
-          //   value={watch("description")}
+        <Textarea
+          label="Description"
           {...register("description")}
           placeholder="description"
+          required
         />
         <Select
           classNames={{
@@ -148,7 +149,7 @@ export function EditAdvertForm() {
           }
         />
         <input
-          // value={watch("image")}
+          {...register("image")}
           id="photo"
           type="file"
           accept="image/*"
@@ -175,7 +176,20 @@ export function EditAdvertForm() {
         {previewImage && (
           <img src={previewImage} className="object-contain h-60 w-60" />
         )}
-        <button>submit</button>
+        <div className="flex gap-5">
+          <button className="button-primary">submit</button>
+          <button
+            className="button-secondary"
+            onClick={() =>
+              client.delete(advert?._id).then((res) => {
+                router.push("/");
+                `Advert with id ${res._id} was deleted succesfully`;
+              })
+            }
+          >
+            submit
+          </button>
+        </div>
       </form>
       <Toaster />
     </>
