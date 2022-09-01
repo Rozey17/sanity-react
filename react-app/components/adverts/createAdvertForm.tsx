@@ -41,7 +41,7 @@ export function CreateAdvertForm() {
       description: "",
       contact: "",
       subcategory: "",
-      location: {},
+      // location: {},
       slug: {
         current: undefined,
       },
@@ -102,10 +102,11 @@ export function CreateAdvertForm() {
               },
               subcategory: {
                 _type: "reference",
+                _weak: true,
                 _ref: input.subcategory,
               },
               price: input.price,
-              location: input.location,
+              // location: input.location,
               image: {
                 _type: "image",
                 asset: {
@@ -169,7 +170,6 @@ export function CreateAdvertForm() {
         /> */}
 
         <NumberInput
-          // defaultValue={0}
           label="price"
           value={watch("price")}
           placeholder="price"
@@ -206,7 +206,11 @@ export function CreateAdvertForm() {
           // className={errors.photo ? "error-input" : "input"}
         />
         {previewImage && (
-          <img src={previewImage} className="object-contain h-60 w-60" />
+          <img
+            src={previewImage}
+            className="object-contain h-[500px] w-[500px]"
+            alt="preview image"
+          />
         )}
 
         <button className="w-full button-primary">submit</button>

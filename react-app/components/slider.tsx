@@ -4,32 +4,42 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { initializeApollo } from "../lib/graphql.server";
 import {
-  ListAdvertsByCategoryDocument,
-  useListAdvertsByCategoryQuery,
+  Category,
+  useListAdvertsBySubCategoryQuery,
+  useListAdvertsQuery,
   useListCategoriesQuery,
 } from "./apollo-components";
 
 export const SliderComponent = () => {
-  // const [slug, setSlug] = useState(null);
+  const [slug, setSlug] = useState(null);
   const { data } = useListCategoriesQuery();
-  // async function advertsRenderer(slug: string) {
-  //  const {data} = useListCategoriesQuery({
-  //   variables:{
-  //     slug: slug
-  //   }
-  //  })
-  //   return adverts;
-  // }
+
+  const { data: advertsData } = useListAdvertsQuery();
+  // const { data: advertsData } = useListAdvertsBySubCategoryQuery({
+  //   variables: {
+  //     slug: "a-vendre",
+  //   },
+  // });
+
+  const adverts =
+    advertsData && advertsData?.allAdvert ? advertsData?.allAdvert : [];
 
   const router = useRouter();
-  const iconRenderer = (category: any) => {
+
+  function getSlug(slug: string) {
+    setSlug(slug);
+  }
+  const iconRenderer = (category: Category) => {
     switch (category?.slug?.current) {
       case "cours-formations":
+        return <BriefcaseIcon className="text-teal-600 h-14 w-14" />;
+      case "immobilier":
         return <BriefcaseIcon className="text-teal-600 h-14 w-14" />;
       default:
         break;
     }
   };
+
   const settings = {
     // className: "center",
     // centerPadding: "60px",
@@ -72,16 +82,27 @@ export const SliderComponent = () => {
       {data?.allCategory?.map((category, index) => (
         <div key={index} className="">
           <div
-            //   key={index}
             className="flex flex-col items-center h-32 p-4 duration-300 bg-white cursor-pointer gap-y-2 w-44 hover:shadow-md"
-            onClick={() => router.push(`/categories/${category.slug.current}`)}
+            onClick={() => {
+              router.push(`/categories/${category.slug.current}`);
+              // setSlug(category.slug.current);
+            }}
           >
             {iconRenderer(category)}
+            {/* {getSlug(category.slug.current)} */}
             <span className="text-center">
               <p className="text-sm font-medium">{category?.name as string}</p>
-              {/* <p className="text-xs text-gray-400">
-                {advertsRenderer(category?.slug?.current).then(()=>console.log('nice'))} advert(s)
-              </p> */}
+              <p className="text-xs text-gray-400">
+                {" "}
+                {
+                  adverts.filter(
+                    (ad) =>
+                      ad?.subcategory?.category?.slug?.current ===
+                      category.slug.current
+                  ).length
+                }{" "}
+                advert(s)
+              </p>
             </span>
           </div>
         </div>

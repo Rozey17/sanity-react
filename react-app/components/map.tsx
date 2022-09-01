@@ -1,6 +1,7 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+// import "leaflet-draw/dist/leaflet.draw.css";
 import { Advert } from "./apollo-components";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
 import L from "leaflet";
@@ -9,6 +10,7 @@ const Map = ({ ads }: { ads: Advert[] }) => {
   const icon = L.icon({
     iconUrl:
       "/images/location-marker-location-pin-location-pointer-map-locator-map-pin-svgrepo-com.svg",
+    iconSize: [30, 30],
   });
 
   // const getPosition = (options) => {
@@ -38,7 +40,7 @@ const Map = ({ ads }: { ads: Advert[] }) => {
       //   item?.location?.alt,
       //   item?.location?.lng,
       // ])}
-      zoom={13}
+      zoom={3}
       scrollWheelZoom={false}
     >
       <TileLayer

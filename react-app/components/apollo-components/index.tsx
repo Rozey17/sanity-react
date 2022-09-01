@@ -1042,7 +1042,7 @@ export type SubcategorySorting = {
 export type ListAdvertsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: string | null, description?: string | null, _type?: string | null, title?: string | null, price?: number | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: string | null, description?: string | null, _type?: string | null, title?: string | null, price?: number | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
 
 export type GetAdvertQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1057,6 +1057,13 @@ export type ListAdvertsByCategoryQueryVariables = Exact<{
 
 
 export type ListAdvertsByCategoryQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null, _createdAt?: any | null, description?: string | null, contact?: string | null, price?: number | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+
+export type ListAdvertsBySubCategoryQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type ListAdvertsBySubCategoryQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null, _createdAt?: any | null, description?: string | null, contact?: string | null, price?: number | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
 
 export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1088,6 +1095,13 @@ export const ListAdvertsDocument = gql`
     subcategory {
       _id
       name
+      category {
+        _id
+        slug {
+          current
+        }
+        name
+      }
     }
     location {
       lat
@@ -1247,6 +1261,66 @@ export function useListAdvertsByCategoryLazyQuery(baseOptions?: Apollo.LazyQuery
 export type ListAdvertsByCategoryQueryHookResult = ReturnType<typeof useListAdvertsByCategoryQuery>;
 export type ListAdvertsByCategoryLazyQueryHookResult = ReturnType<typeof useListAdvertsByCategoryLazyQuery>;
 export type ListAdvertsByCategoryQueryResult = Apollo.QueryResult<ListAdvertsByCategoryQuery, ListAdvertsByCategoryQueryVariables>;
+export const ListAdvertsBySubCategoryDocument = gql`
+    query ListAdvertsBySubCategory($slug: String!) {
+  allAdvert(where: {subcategory: {category: {slug: {current: {eq: $slug}}}}}) {
+    _id
+    title
+    _createdAt
+    slug {
+      current
+    }
+    description
+    subcategory {
+      _id
+      name
+      slug {
+        current
+      }
+    }
+    contact
+    price
+    location {
+      lat
+      lng
+      alt
+    }
+    image {
+      asset {
+        url
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useListAdvertsBySubCategoryQuery__
+ *
+ * To run a query within a React component, call `useListAdvertsBySubCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAdvertsBySubCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListAdvertsBySubCategoryQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useListAdvertsBySubCategoryQuery(baseOptions: Apollo.QueryHookOptions<ListAdvertsBySubCategoryQuery, ListAdvertsBySubCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListAdvertsBySubCategoryQuery, ListAdvertsBySubCategoryQueryVariables>(ListAdvertsBySubCategoryDocument, options);
+      }
+export function useListAdvertsBySubCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListAdvertsBySubCategoryQuery, ListAdvertsBySubCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListAdvertsBySubCategoryQuery, ListAdvertsBySubCategoryQueryVariables>(ListAdvertsBySubCategoryDocument, options);
+        }
+export type ListAdvertsBySubCategoryQueryHookResult = ReturnType<typeof useListAdvertsBySubCategoryQuery>;
+export type ListAdvertsBySubCategoryLazyQueryHookResult = ReturnType<typeof useListAdvertsBySubCategoryLazyQuery>;
+export type ListAdvertsBySubCategoryQueryResult = Apollo.QueryResult<ListAdvertsBySubCategoryQuery, ListAdvertsBySubCategoryQueryVariables>;
 export const ListCategoriesDocument = gql`
     query ListCategories {
   allCategory {
