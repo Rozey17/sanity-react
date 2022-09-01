@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { initializeApollo } from "../lib/graphql.server";
+import { iconRenderer } from "../utils/helpers";
 import {
   Category,
   useListAdvertsBySubCategoryQuery,
@@ -29,16 +30,6 @@ export const SliderComponent = () => {
   function getSlug(slug: string) {
     setSlug(slug);
   }
-  const iconRenderer = (category: Category) => {
-    switch (category?.slug?.current) {
-      case "cours-formations":
-        return <BriefcaseIcon className="text-teal-600 h-14 w-14" />;
-      case "immobilier":
-        return <BriefcaseIcon className="text-teal-600 h-14 w-14" />;
-      default:
-        break;
-    }
-  };
 
   const settings = {
     // className: "center",
@@ -85,7 +76,6 @@ export const SliderComponent = () => {
             className="flex flex-col items-center h-32 p-4 duration-300 bg-white cursor-pointer gap-y-2 w-44 hover:shadow-md"
             onClick={() => {
               router.push(`/categories/${category.slug.current}`);
-              // setSlug(category.slug.current);
             }}
           >
             {iconRenderer(category)}
@@ -101,7 +91,7 @@ export const SliderComponent = () => {
                       category.slug.current
                   ).length
                 }{" "}
-                advert(s)
+                annonce(s)
               </p>
             </span>
           </div>

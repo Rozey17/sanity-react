@@ -8,8 +8,7 @@ import L from "leaflet";
 
 const Map = ({ ads }: { ads: Advert[] }) => {
   const icon = L.icon({
-    iconUrl:
-      "/images/location-marker-location-pin-location-pointer-map-locator-map-pin-svgrepo-com.svg",
+    iconUrl: "/images/icons8-marker-48.png",
     iconSize: [30, 30],
   });
 
