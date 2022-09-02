@@ -1,31 +1,52 @@
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import { GetServerSideProps } from "next";
 import React, { useState } from "react";
-import { AdvertCard } from "../../../components/adverts/advertCard";
-import {
-  Advert,
-  Category,
-  ListAdvertsByCategoryDocument,
-  Subcategory,
-  useListCategoriesQuery,
-} from "../../../components/apollo-components";
-import { Header } from "../../../components/layout/header";
-import { initializeApollo } from "../../../lib/graphql.server";
+
 import dynamic from "next/dynamic";
 import { Accordion, Collapse } from "@mantine/core";
 import { useRouter } from "next/router";
+import {
+  Advert,
+  ListAdvertsBySubCategoryDocument,
+  useListCategoriesQuery,
+} from "../../../../components/apollo-components";
+import { Header } from "../../../../components/layout/header";
+import { AdvertCard } from "../../../../components/adverts/advertCard";
+import { initializeApollo } from "../../../../lib/graphql.server";
+import Link from "next/link";
 
-const Map = dynamic(() => import("../../../components/map"), {
+const Map = dynamic(() => import("../../../../components/map"), {
   loading: () => <p>A map is loading</p>,
   ssr: false,
 });
 
 const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
   const router = useRouter();
-  const slug = router.query.slug;
+  // const slug = router.query.slug;
   const [id, setId] = useState("");
   const { data } = useListCategoriesQuery();
   const listCategories = data && data?.allCategory ? data?.allCategory : [];
+
+  const [focusArea, setFocusArea] = useState([
+    { focus: "No Poverty", isAdded: false },
+    { focus: "Zero Hunger", isAdded: false },
+    { focus: "Good Healthy and Well-Being", isAdded: false },
+    { focus: "Quality Education", isAdded: false },
+    { focus: "Gender Equality", isAdded: false },
+    { focus: "Clean Water and Sanitation", isAdded: false },
+    { focus: "Affordance and clean energy", isAdded: false },
+    { focus: "Decent work and economic growth", isAdded: false },
+    { focus: "Industry Innovation and Infrastructure", isAdded: false },
+    { focus: "Reduced Inequalities", isAdded: false },
+    { focus: "Sustainable cities and communities", isAdded: false },
+    { focus: "Responsible Consumption and Production", isAdded: false },
+    { focus: "Climate Action", isAdded: false },
+    { focus: "Life Below Wate", isAdded: false },
+    { focus: "Life on Land", isAdded: false },
+    { focus: "Peace, Justice and Strong Institutions", isAdded: false },
+    { focus: "Partnerships for the goals", isAdded: false },
+    { focus: "Sustainable Development Goals", isAdded: false },
+  ]);
   return (
     <>
       <Header />
@@ -41,6 +62,8 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
                     <input
                       type="checkbox"
                       className="mr-2 rounded-full"
+                      // checked={}
+                      onChange={(value) => !value.target.checked}
                       onClick={() => {
                         setId(sub?._id);
                         router.push(
@@ -92,8 +115,56 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
         </div>
       </section>
       {/* footer */}
-      <footer className="px-40 py-10 bg-slate-600">
-        <div className=""></div>
+      <footer className="px-40 py-10 bg-slate-700">
+        <div className="grid grid-cols-3 gap-10">
+          <div className="space-y-3">
+            <h1 className="text-xl text-white capitalize font-bold">
+              annonce 242
+            </h1>
+            <p className="text-gray-400 text-sm">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Laboriosam distinctio porro optio ea nostrum quod corrupti illum
+              non itaque quisquam!
+            </p>
+            <p className="text-gray-400 text-sm">if ou wish to contact us</p>
+          </div>
+          <div className="space-y-3">
+            <h1 className="text-xl text-white capitalize font-bold">
+              quick links
+            </h1>
+            {[
+              "How It Works",
+              "FAQ",
+              "News",
+              "Browse With Map",
+              "Browse Ads",
+            ].map((item, index) => (
+              <Link key={index} href="#">
+                <a className="text-gray-400 hover:text-white text-sm flex flex-col w-fit">
+                  {item}
+                </a>
+              </Link>
+            ))}
+          </div>
+          <div className="space-y-3">
+            <h1 className="text-xl text-white capitalize font-bold">
+              popular ads
+            </h1>
+            {[
+              "How It Works",
+              "FAQ",
+              "News",
+              "Browse With Map",
+              "Browse Ads",
+            ].map((item, index) => (
+              <Link key={index} href="#">
+                <a className="text-gray-400 hover:text-white text-sm flex flex-col w-fit">
+                  {item}
+                </a>
+              </Link>
+            ))}
+          </div>
+        </div>
         <div className=""></div>
       </footer>
     </>
@@ -105,11 +176,11 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const client = initializeApollo();
 
-  const slug = ctx.params.slug;
+  const subcategory = ctx.params.subcategory;
   const adverts = await client.query({
-    query: ListAdvertsByCategoryDocument,
+    query: ListAdvertsBySubCategoryDocument,
     variables: {
-      slug: slug as string,
+      slug: subcategory as string,
     },
   });
   console.log(adverts.data.allAdvert);

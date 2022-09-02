@@ -1068,7 +1068,7 @@ export type ListAdvertsBySubCategoryQuery = { __typename?: 'RootQuery', allAdver
 export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'Subcategory', _id?: string | null, name?: string | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null } | null } | null> | null }> };
+export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'Subcategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null } | null> | null }> };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1263,7 +1263,7 @@ export type ListAdvertsByCategoryLazyQueryHookResult = ReturnType<typeof useList
 export type ListAdvertsByCategoryQueryResult = Apollo.QueryResult<ListAdvertsByCategoryQuery, ListAdvertsByCategoryQueryVariables>;
 export const ListAdvertsBySubCategoryDocument = gql`
     query ListAdvertsBySubCategory($slug: String!) {
-  allAdvert(where: {subcategory: {category: {slug: {current: {eq: $slug}}}}}) {
+  allAdvert(where: {subcategory: {slug: {current: {eq: $slug}}}}) {
     _id
     title
     _createdAt
@@ -1332,6 +1332,9 @@ export const ListCategoriesDocument = gql`
     subcategories {
       _id
       name
+      slug {
+        current
+      }
       adverts {
         _id
         title
@@ -1339,6 +1342,9 @@ export const ListCategoriesDocument = gql`
       category {
         _id
         name
+        slug {
+          current
+        }
       }
     }
   }

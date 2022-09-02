@@ -70,6 +70,6 @@ query ListAdvertsByCategory($slug:String!){allAdvert(where :{subcategory :{categ
 {_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current}},contact,price,location{lat,lng,alt},image{asset{url}}}
 }
 
-query ListAdvertsBySubCategory($slug:String!){allAdvert(where :{subcategory :{category:{slug:{current : {eq: $slug}}}}})
+query ListAdvertsBySubCategory($slug:String!){allAdvert(where :{subcategory :{slug:{current : {eq: $slug}}}})
 {_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current}},contact,price,location{lat,lng,alt},image{asset{url}}}
 }

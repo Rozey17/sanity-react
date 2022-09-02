@@ -1,3 +1,3 @@
-query ListCategories{allCategory{_id, name,slug{current},subcategories{_id,name,adverts{
+query ListCategories{allCategory{_id, name,slug{current},subcategories{_id,name,slug{current},adverts{
     _id,title
-},category{_id,name}}}}
+},category{_id,name, slug{current}}}}}
