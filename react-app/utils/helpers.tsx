@@ -1,26 +1,55 @@
+import Image from "next/image";
 import { Category } from "../components/apollo-components";
 
 export const iconRenderer = (category: Category) => {
   switch (category?.slug?.current) {
     case "cours-formations":
       return (
-        <img src="images/books-study-svgrepo-com.svg" className=" h-14 w-14" />
+        <Image
+          height={56}
+          width={56}
+          src="/images/books-study-svgrepo-com.svg"
+          alt="image"
+        />
       );
     case "immobilier":
       return (
-        <img
-          src="images/real-estate-rent-svgrepo-com.svg"
-          className=" h-14 w-14"
+        <Image
+          height={56}
+          width={56}
+          src="/images/real-estate-rent-svgrepo-com.svg"
+          alt="image"
         />
       );
     case "a-vendre":
-      return <img src="images/ads-svgrepo-com.svg" className=" h-14 w-14" />;
+      return (
+        <Image
+          height={56}
+          width={56}
+          src="/images/a-vendre-y.png"
+          alt="image"
+        />
+      );
     case "animaux":
-      return <img src="images/cat-svgrepo-com.svg" className=" h-14 w-14" />;
+      return (
+        <Image
+          height={56}
+          width={56}
+          src="/images/cat-svgrepo-com.svg"
+          alt="image"
+        />
+      );
     case "vehicules":
-      return <img src="images/car-svgrepo-com.svg" className=" h-14 w-14" />;
+      return (
+        <Image
+          height={56}
+          width={56}
+          src="/images/car-svgrepo-com.svg"
+          alt="image"
+        />
+      );
     // case "immobilier":
-    //   return <img src="images/" className=" h-14 w-14" />;
+    //   return <img src="images/"  />;
     default:
       break;
   }

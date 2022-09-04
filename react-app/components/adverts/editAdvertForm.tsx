@@ -180,14 +180,15 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
           <button className="button-primary">submit</button>
           <button
             className="button-secondary"
-            onClick={() =>
-              client.delete(advert?._id).then((res) => {
-                router.push("/");
-                `Advert with id ${res._id} was deleted succesfully`;
-              })
-            }
+            onClick={async () => {
+              alert("sûr ?");
+              await client.delete(advert?._id).then(() => {
+                toast.success("Effacé avec succès !");
+                setTimeout(() => router.push("/"), 5000);
+              });
+            }}
           >
-            submit
+            delete
           </button>
         </div>
       </form>
