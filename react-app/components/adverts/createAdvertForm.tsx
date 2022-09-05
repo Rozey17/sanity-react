@@ -1,6 +1,6 @@
 import { ClipboardIcon } from "@heroicons/react/outline";
 import { NumberInput, Select, Textarea, TextInput } from "@mantine/core";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { client } from "../../lib/sanity.server";
 import { useListSubCategoriesQuery } from "../apollo-components";
@@ -16,7 +16,8 @@ interface Location {
 }
 
 export function CreateAdvertForm() {
-  const [location, setLocation] = useState<Location>(null);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
 
   const [imagesAssets, setImagesAssets] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
@@ -24,6 +25,22 @@ export function CreateAdvertForm() {
   const listSubCategories =
     data && data?.allSubcategory ? data?.allSubcategory : [];
   const router = useRouter();
+
+  // let navigator: Navigator;
+
+  useEffect(() => {
+    if (navigator?.geolocation) {
+      navigator.geolocation.watchPosition(function (
+        position: GeolocationPosition
+      ) {
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+      });
+    }
+  }, []);
+
+  console.log("lat:, lng", lat, lng);
+
   const {
     register,
     handleSubmit,
@@ -41,7 +58,10 @@ export function CreateAdvertForm() {
       description: "",
       contact: "",
       subcategory: "",
-      // location: {},
+      location: {
+        lat: undefined,
+        lng: undefined,
+      },
       slug: {
         current: undefined,
       },
@@ -51,40 +71,6 @@ export function CreateAdvertForm() {
       },
     },
   });
-  // function MyComponent() {
-  //   const map = useMapEvents({
-  //     click: () => {
-  //       map.locate();
-  //     },
-  //     locationfound: (location) => {
-  //       console.log("location found:", location);
-  //        setValue("location",{
-  //         lat: location.latlng.lat,
-  //         lng: location.latlng.lng
-  //       } , {
-  //               shouldValidate: true,
-  //               shouldDirty: true,
-  //               shouldTouch: true,
-  //             })
-  //       // setLocation({
-  //       //   lat: location.latlng.lat,
-  //       //   lng: location.latlng.lng
-  //       // })
-  //     },
-  //   });
-  //   return null;
-  // }
-
-  // function MyMapComponent() {
-  //   return (
-  //     <MapContainer center={[50.5, 30.5]} zoom={13}>
-  //       <TileLayer
-  //         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  //         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  //       />
-  //       <MyComponent />
-  //     </MapContainer>
-  //   );
 
   return (
     <>
@@ -106,7 +92,11 @@ export function CreateAdvertForm() {
                 _ref: input.subcategory,
               },
               price: input.price,
-              // location: input.location,
+              location: {
+                _type: "geopoint",
+                lat: lat,
+                lng: lng,
+              },
               image: {
                 _type: "image",
                 asset: {
