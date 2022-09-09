@@ -52,7 +52,10 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const httpLink = createHttpLink({
-  uri: process.env.NEXT_PUBLIC_SANITY_GRAPHQL_URI,
+  uri:
+    process.env.NODE_ENV === "development"
+      ? process.env.NEXT_PUBLIC_SANITY_GRAPHQL_URI
+      : process.env.SANITY_GRAPHQL_URI,
 });
 function createApolloClient() {
   return new ApolloClient({
