@@ -14,6 +14,7 @@ import { Header } from "../../../../components/layout/header";
 import { AdvertCard } from "../../../../components/adverts/advertCard";
 import { initializeApollo } from "../../../../lib/graphql.server";
 import Link from "next/link";
+import { Layout } from "../../../../components/layout";
 
 const Map = dynamic(() => import("../../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -31,8 +32,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
   const listCategories = data && data?.allCategory ? data?.allCategory : [];
 
   return (
-    <>
-      <Header />
+    <Layout>
       <div className="grid min-h-screen grid-cols-5">
         <aside className="sticky top-0 col-span-1 p-10 px-5 overflow-y-scroll border-r scrollbar-hide">
           Catégories
@@ -83,81 +83,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
         </div>
       </div>
       {/* newsletter section */}
-      <section className="px-40 py-8 bg-white ">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <PaperAirplaneIcon className="w-10 h-10 mr-2 rotate-45" />
-            <span className="">
-              <h3 className="text-2xl font-medium">Subscribe To Newsletter</h3>
-              <p className="">and receive new ads in inbox</p>
-            </span>
-          </div>
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="Enter your email address"
-              className="p-3 px-5 text-sm border border-gray-300 rounded-full rounded-r-none focus:outline-none"
-            />
-            <button className="p-3 px-5 text-sm text-white bg-black rounded-full rounded-l-none focus:outline-none">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </section>
-      {/* footer */}
-      <footer className="px-40 py-10 bg-slate-700">
-        <div className="grid grid-cols-3 gap-10">
-          <div className="space-y-3">
-            <h1 className="text-xl font-bold text-white capitalize">
-              annonce 242
-            </h1>
-            <p className="text-sm text-gray-400">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Laboriosam distinctio porro optio ea nostrum quod corrupti illum
-              non itaque quisquam!
-            </p>
-            <p className="text-sm text-gray-400">if ou wish to contact us</p>
-          </div>
-          <div className="space-y-3">
-            <h1 className="text-xl font-bold text-white capitalize">
-              quick links
-            </h1>
-            {[
-              "How It Works",
-              "FAQ",
-              "News",
-              "Browse With Map",
-              "Browse Ads",
-            ].map((item, index) => (
-              <Link key={index} href="#">
-                <a className="flex flex-col text-sm text-gray-400 hover:text-white w-fit">
-                  {item}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className="space-y-3">
-            <h1 className="text-xl font-bold text-white capitalize">
-              popular ads
-            </h1>
-            {[
-              "How It Works",
-              "FAQ",
-              "News",
-              "Browse With Map",
-              "Browse Ads",
-            ].map((item, index) => (
-              <Link key={index} href="#">
-                <a className="flex flex-col text-sm text-gray-400 hover:text-white w-fit">
-                  {item}
-                </a>
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div className=""></div>
-      </footer>
-    </>
+    </Layout>
 
     // <>{JSON.stringify(adverts, null, 2)}</>
   );

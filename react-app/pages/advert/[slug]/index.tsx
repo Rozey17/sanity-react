@@ -8,6 +8,9 @@ import { Header } from "../../../components/layout/header";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import toast, { Toaster } from "react-hot-toast";
+import { client } from "../../../lib/sanity.server";
+import { Layout } from "../../../components/layout";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -19,11 +22,11 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
   const router = useRouter();
   const slug = router.query.slug;
   return (
-    <>
+    <Layout>
       <Head>
         <title>Next.js Blog Example</title>
       </Head>
-      <Header />
+
       <div className="relative h-32 bg-slate-600">
         <img
           src="https://images.pexels.com/photos/6483582/pexels-photo-6483582.jpeg"
@@ -62,12 +65,29 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               <h1 className="text-3xl font-bold capitalize">{advert?.title}</h1>
               <p className="text-gray-700">{advert?.description}</p>
             </div>
-            <button
-              className="button-primary"
-              onClick={() => router.push(`/advert/${slug}/edit`)}
-            >
-              modifier
-            </button>
+            <div className="flex gap-5">
+              <button
+                className="button-primary"
+                onClick={() => router.push(`/advert/${slug}/edit`)}
+              >
+                modifier
+              </button>
+              <button
+                className="button-secondary"
+                onClick={() => {
+                  alert("sûr ?");
+                  client
+                    .delete(advert?._id)
+                    .then(() => {
+                      toast.success("Effacé avec succès !");
+                      router.push("/");
+                    })
+                    .catch((error) => toast.error(error));
+                }}
+              >
+                delete
+              </button>
+            </div>
           </div>
           <div className="space-y-10">
             <div className="flex flex-col justify-between p-8 space-y-10 bg-teal-600"></div>
@@ -84,7 +104,8 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
           </div>
         </div>
       </section>
-    </>
+      <Toaster />
+    </Layout>
   );
 }
 

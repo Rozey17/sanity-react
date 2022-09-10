@@ -1,11 +1,12 @@
 import React from "react";
 import { CreateAdvertForm } from "../../components/adverts/createAdvertForm";
+import { Layout } from "../../components/layout";
 
 const CreateAdvertPage = () => {
   return (
-    <div>
+    <Layout>
       <CreateAdvertForm />
-    </div>
+    </Layout>
   );
 };
 

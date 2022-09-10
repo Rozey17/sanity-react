@@ -5,6 +5,7 @@ import { useApollo } from "../lib/graphql.server";
 import { MantineProvider } from "@mantine/core";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Layout } from "../components/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps);
@@ -12,7 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <MantineProvider>
       <ApolloProvider client={client}>
+        {/* <Layout> */}
         <Component {...pageProps} />
+        {/* </Layout> */}
       </ApolloProvider>
     </MantineProvider>
   );

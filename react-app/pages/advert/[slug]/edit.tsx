@@ -18,9 +18,14 @@ import { client } from "../../../lib/sanity.server";
 import { GetServerSideProps } from "next";
 import { initializeApollo } from "../../../lib/graphql.server";
 import { EditAdvertForm } from "../../../components/adverts/editAdvertForm";
+import { Layout } from "../../../components/layout";
 
 export default function EditAdvertPage({ advert }: { advert: Advert }) {
-  return <EditAdvertForm advert={advert} />;
+  return (
+    <Layout>
+      <EditAdvertForm advert={advert} />
+    </Layout>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {

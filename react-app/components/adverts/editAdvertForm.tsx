@@ -178,18 +178,6 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
         )}
         <div className="flex gap-5">
           <button className="button-primary">submit</button>
-          <button
-            className="button-secondary"
-            onClick={async () => {
-              alert("sûr ?");
-              await client.delete(advert?._id).then(() => {
-                toast.success("Effacé avec succès !");
-                setTimeout(() => router.push("/"), 5000);
-              });
-            }}
-          >
-            delete
-          </button>
         </div>
       </form>
       <Toaster />

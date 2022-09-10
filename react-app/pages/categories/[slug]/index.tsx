@@ -14,6 +14,7 @@ import { initializeApollo } from "../../../lib/graphql.server";
 import dynamic from "next/dynamic";
 import { Accordion, Collapse } from "@mantine/core";
 import { useRouter } from "next/router";
+import { Layout } from "../../../components/layout";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -30,8 +31,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
   const { data } = useListCategoriesQuery();
   const listCategories = data && data?.allCategory ? data?.allCategory : [];
   return (
-    <>
-      <Header />
+    <Layout>
       <div className="grid min-h-screen grid-cols-5">
         <aside className="sticky top-0 col-span-1 p-10 px-5 overflow-y-scroll border-r scrollbar-hide">
           Catégories
@@ -79,34 +79,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
           {adverts.length > 0 && <Map ads={adverts} />}
         </div>
       </div>
-      {/* newsletter section */}
-      <section className="px-40 py-8 bg-white ">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <PaperAirplaneIcon className="w-10 h-10 mr-2 rotate-45" />
-            <span className="">
-              <h3 className="text-2xl font-medium">Subscribe To Newsletter</h3>
-              <p className="">and receive new ads in inbox</p>
-            </span>
-          </div>
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="Enter your email address"
-              className="p-3 px-5 text-sm border border-gray-300 rounded-full rounded-r-none focus:outline-none"
-            />
-            <button className="p-3 px-5 text-sm text-white bg-black rounded-full rounded-l-none focus:outline-none">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </section>
-      {/* footer */}
-      <footer className="px-40 py-10 bg-slate-600">
-        <div className=""></div>
-        <div className=""></div>
-      </footer>
-    </>
+    </Layout>
 
     // <>{JSON.stringify(adverts, null, 2)}</>
   );
