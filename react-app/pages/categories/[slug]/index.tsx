@@ -1,4 +1,4 @@
-import { PaperAirplaneIcon } from "@heroicons/react/outline";
+import { CheckIcon, PaperAirplaneIcon } from "@heroicons/react/outline";
 import { GetServerSideProps } from "next";
 import React, { useState } from "react";
 import { AdvertCard } from "../../../components/adverts/advertCard";
@@ -22,7 +22,10 @@ const Map = dynamic(() => import("../../../components/map"), {
 
 const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
   const router = useRouter();
-  const slug = router.query.slug;
+  const {
+    query: { slug },
+  } = router;
+
   const [id, setId] = useState("");
   const { data } = useListCategoriesQuery();
   const listCategories = data && data?.allCategory ? data?.allCategory : [];
@@ -35,18 +38,25 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
           <Accordion transitionDuration={300}>
             {listCategories.map((item, index) => (
               <Accordion.Item key={index} value={item?.name}>
-                <Accordion.Control>{item?.name}</Accordion.Control>
+                <Accordion.Control
+                  icon={
+                    item?.slug.current === slug && (
+                      <CheckIcon className="w-5 h-5 text-teal-500" />
+                    )
+                  }
+                >
+                  {item?.name}
+                </Accordion.Control>
                 {item.subcategories.map((sub) => (
                   <Accordion.Panel key={sub._id} className="">
                     <input
                       type="checkbox"
                       className="mr-2 rounded-full"
-                      onClick={() => {
-                        setId(sub?._id);
+                      onClick={() =>
                         router.push(
                           `/categories/${sub?.category?.slug?.current}/${sub?.slug?.current}`
-                        );
-                      }}
+                        )
+                      }
                     />
                     <span className="text-sm text-gray-400">{sub?.name}</span>
                   </Accordion.Panel>
@@ -66,7 +76,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
           </div>
         </div>
         <div className="col-span-2">
-          <Map ads={adverts} />
+          {adverts.length > 0 && <Map ads={adverts} />}
         </div>
       </div>
       {/* newsletter section */}
