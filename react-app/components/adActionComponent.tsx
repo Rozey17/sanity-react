@@ -67,7 +67,7 @@ export const AdActionComponent = () => {
         // overlayBlur={3}
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Partager"
+        title="Partager via"
         classNames={
           {
             // overlay: "z-20",

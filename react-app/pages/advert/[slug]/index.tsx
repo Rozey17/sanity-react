@@ -111,7 +111,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               <div className=" p-8  bg-white">
                 <AdActionComponent />
               </div>
-              <div className="h-96 z-20">
+              <div className="h-96">
                 {advert?.location && <Map ads={[advert]} />}
               </div>
             </div>
