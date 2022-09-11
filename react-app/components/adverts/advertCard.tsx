@@ -35,11 +35,11 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
       <div className="flex flex-col p-5 space-y-5">
         <div className="flex justify-between">
           <span className="flex items-center">
-            <AtSymbolIcon className="w-4 h-4 mr-1" />
-            <p className="text-sm">{advert?.subcategory?.name}</p>
+            <AtSymbolIcon className="w-3 h-3 mr-1" />
+            <p className="text-[12px]">{advert?.subcategory?.name}</p>
           </span>
           <span className="flex items-center">
-            <LocationMarkerIcon className="w-4 h-4 mr-1" />
+            <LocationMarkerIcon className="w-3 h-3 mr-1" />
             {/* <p className="text-sm">{advert?.location?.}</p> */}
           </span>
         </div>

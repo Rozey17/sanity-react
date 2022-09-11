@@ -75,7 +75,7 @@ export function CreateAdvertForm() {
   return (
     <>
       <form
-        className="flex flex-col w-1/3 mx-auto space-y-5"
+        className="space-y-5 w-2/5 mx-auto p-10 bg-white rounded-lg"
         onSubmit={handleSubmit(async (input) => {
           await client
             .create({
@@ -106,9 +106,6 @@ export function CreateAdvertForm() {
               },
             })
             .then((res) => {
-              // console.log(`Ad was created, document ID is ${res._id}`);
-              // reset();
-              // toast.success(`Ad was created, document ID is ${res._id}`);
               router.push(`/advert/${res._id}`);
             });
         })}

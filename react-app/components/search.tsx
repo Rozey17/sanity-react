@@ -1,42 +1,73 @@
 import {
   AtSymbolIcon,
+  ClipboardListIcon,
   LocationMarkerIcon,
   SpeakerphoneIcon,
 } from "@heroicons/react/outline";
+import { Select, TextInput } from "@mantine/core";
 import React from "react";
+import { useListSubCategoriesQuery } from "./apollo-components";
 
 export const Search = () => {
+  const { data } = useListSubCategoriesQuery();
+  const listSubCategories =
+    data && data?.allSubcategory ? data?.allSubcategory : [];
+
   return (
-    <form className="flex items-center justify-center pt-6 space-x-2">
-      <span className="relative flex items-center text-gray-400">
-        <input
+    <form className=" pt-6 ">
+      <div className="flex items-center justify-center gap-2">
+        <TextInput
           type="text"
-          className="flex p-3 text-sm capitalize rounded focus:outline-none"
+          className="  text-sm capitalize rounded focus:outline-none"
+          classNames={{
+            input: "py-5 text-sm capitalize rounded focus:outline-none",
+            label: "text-sm font-medium text-gray-600 font-sans",
+          }}
           placeholder="search for.."
+          icon={<SpeakerphoneIcon className=" w-5 h-5 text-current " />}
         />
-        <SpeakerphoneIcon className="absolute w-5 h-5 text-current right-3" />
-      </span>
 
-      <span className="relative flex items-center text-gray-400">
-        <input
+        <TextInput
           type="text"
-          className="flex p-3 text-sm capitalize rounded focus:outline-none"
+          className="  text-sm capitalize rounded focus:outline-none"
+          classNames={{
+            input: "py-5 text-sm capitalize rounded focus:outline-none",
+            label: "text-sm font-medium text-gray-600 font-sans",
+          }}
           placeholder="located in"
-        />
-        <LocationMarkerIcon className="absolute w-5 h-5 text-current right-3" />
-      </span>
-
-      <span className="relative flex items-center text-gray-400">
-        <input
-          type="text"
-          className="flex p-3 text-sm capitalize rounded focus:outline-none"
-          placeholder="in category"
+          icon={<LocationMarkerIcon className=" w-5 h-5 text-current " />}
         />
 
-        <AtSymbolIcon className="absolute w-5 h-5 text-current right-3" />
-      </span>
+        <Select
+          classNames={{
+            input: "py-5 text-sm capitalize rounded focus:outline-none",
+            label: "text-sm font-medium text-gray-600 font-sans",
+            dropdown: "font-sans",
+          }}
+          // label="sous catégorie"
+          className="  text-sm capitalize rounded focus:outline-none"
+          placeholder="sélection de catégorie"
+          searchable
+          required
+          // nothingFound={f({ id: Translation.no_item })}
+          // value={watch("subcategory")}
+          // onChange={(value) =>
+          //   setValue("subcategory", value, {
+          //     shouldValidate: true,
+          //     shouldDirty: true,
+          //     shouldTouch: true,
+          //   })
+          // }
+          data={listSubCategories.map((subcategory) => {
+            return {
+              label: subcategory.name,
+              value: subcategory._id,
+            };
+          })}
+        />
 
-      <button className="p-3 button-primary">search</button>
+        <button className="button-primary">search</button>
+      </div>
     </form>
   );
 };
