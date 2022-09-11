@@ -117,14 +117,14 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               </div>
               <div className="flex flex-col justify-between p-8 space-y-5 bg-white">
                 <p className="font-medium capitalize">ad action</p>
-                <div className="flex justify-between text-gray-500">
+                <div className="flex justify-between text-gray-500 text-sm">
                   <a href="#" className="flex flex-col">
                     <ShareIcon className="h-5" />
-                    <p className="capitalize">share</p>
+                    <p className="capitalize">partager</p>
                   </a>
                   <a href="#" className="flex flex-col">
                     <PrinterIcon className="h-5" />
-                    <p className="capitalize">print</p>
+                    <p className="capitalize">imprimer</p>
                   </a>{" "}
                   <a href="#" className="flex flex-col">
                     <HeartIcon className="h-5" />
@@ -132,7 +132,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                   </a>{" "}
                   <a href="#" className="flex flex-col">
                     <FlagIcon className="h-5" />
-                    <p className="capitalize">report</p>
+                    <p className="capitalize">signaler</p>
                   </a>
                 </div>
               </div>
