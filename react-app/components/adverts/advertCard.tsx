@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   AtSymbolIcon,
   BriefcaseIcon,
@@ -8,7 +9,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import { Advert } from "../apollo-components";
-
 
 export const AdvertCard = ({ advert }: { advert: Advert }) => {
   const router = useRouter();
@@ -28,7 +28,11 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
         alt="image"
       /> */}
       <img
-        src={advert?.image?.asset?.url}
+        src={
+          advert?.image?.asset
+            ? advert?.image?.asset?.url
+            : "/images/placeholder.jpg"
+        }
         alt=""
         className="object-cover w-full h-3/5"
       />

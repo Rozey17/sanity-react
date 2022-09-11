@@ -3,8 +3,8 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <footer className="px-40 py-10 bg-slate-700">
-      <div className="grid grid-cols-3 gap-10">
+    <footer className=" bg-slate-700">
+      <div className="grid grid-cols-3 gap-10 px-40 py-10">
         <div className="space-y-3">
           <h1 className="text-xl font-bold text-white capitalize">
             annonce 242
@@ -45,7 +45,7 @@ export const Footer = () => {
           )}
         </div>
       </div>
-      <div className=""></div>
+      <div className="bg-gray-800 p-10"></div>
     </footer>
   );
 };

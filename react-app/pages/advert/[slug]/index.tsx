@@ -61,7 +61,11 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
           <div className="grid grid-cols-3 gap-10">
             <div className="col-span-2 space-y-10">
               <img
-                src={advert?.image?.asset?.url}
+                src={
+                  advert?.image?.asset
+                    ? advert?.image?.asset?.url
+                    : "/images/placeholder.jpg"
+                }
                 alt=""
                 className="object-cover w-full h-[500px] "
               />
