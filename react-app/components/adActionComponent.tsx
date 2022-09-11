@@ -68,11 +68,10 @@ export const AdActionComponent = () => {
         opened={opened}
         onClose={() => setOpened(false)}
         title="Partager via"
-        classNames={
-          {
-            // overlay: "z-20",
-          }
-        }
+        classNames={{
+          modal: "z-20",
+          overlay: "z-10",
+        }}
       >
         <div className="flex gap-5">
           <FacebookShareButton

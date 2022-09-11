@@ -39,6 +39,7 @@ const Map = ({ ads }: { ads: Advert[] }) => {
       //   item?.location?.alt,
       //   item?.location?.lng,
       // ])}
+      className="z-0"
       zoom={3}
       scrollWheelZoom={false}
     >
