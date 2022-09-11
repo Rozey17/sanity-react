@@ -37,6 +37,7 @@
     "react-hot-toast": "^2.3.0",
     "react-leaflet": "^4.0.2",
     "react-map-gl": "6.1.12",
+    "react-share": "^4.4.0",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "slugify": "^1.6.5",
