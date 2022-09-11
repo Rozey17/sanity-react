@@ -1,14 +1,18 @@
 import React from "react";
 import {
   LoginIcon,
+  LogoutIcon,
   PlusIcon,
   PlusSmIcon,
   SpeakerphoneIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
+
 export const Header = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   return (
     <header>
       <div className="flex justify-between items-center px-40 py-5 text-white bg-black bg-opacity-10">
@@ -36,12 +40,22 @@ export const Header = () => {
           </a>
         </span>
         <span className="flex items-center gap-5">
-          <Link href="/profile">
-            <a>
-              <LoginIcon className=" h-7 w-7 text-white" />
-            </a>
-          </Link>
-          <button>compare</button>
+          {session?.user ? (
+            <div className="flex gap-2">
+              <p>{session?.user?.name}</p>
+              <button onClick={() => signOut()}>
+                <LogoutIcon className=" h-7 w-7 text-white" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <p>login</p>
+              <button onClick={() => signIn()}>
+                <LoginIcon className=" h-7 w-7 text-white" />
+              </button>
+            </div>
+          )}
+
           <button
             onClick={() => router.push("/advert/create")}
             className="flex items-center px-4 py-2 capitalize bg-teal-500 rounded-full font-medium"

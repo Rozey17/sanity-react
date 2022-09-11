@@ -6,18 +6,21 @@ import { MantineProvider } from "@mantine/core";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Layout } from "../components/layout";
+import { SessionProvider, signIn, useSession } from "next-auth/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps);
 
   return (
-    <MantineProvider>
-      <ApolloProvider client={client}>
-        {/* <Layout> */}
-        <Component {...pageProps} />
-        {/* </Layout> */}
-      </ApolloProvider>
-    </MantineProvider>
+    <SessionProvider>
+      <MantineProvider>
+        <ApolloProvider client={client}>
+          {/* <Layout> */}
+          <Component {...pageProps} />
+          {/* </Layout> */}
+        </ApolloProvider>
+      </MantineProvider>
+    </SessionProvider>
   );
 }
 
