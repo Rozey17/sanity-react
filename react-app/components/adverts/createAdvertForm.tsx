@@ -114,10 +114,10 @@ export function CreateAdvertForm() {
         <Select
           classNames={{
             input: errors.subcategory ? "error-input" : "input",
-            label: "text-sm font-medium text-gray-600 font-sans",
+            label: "text-sm font-medium text-gray-600 font-sans capitalize",
             dropdown: "font-sans",
           }}
-          label="sous catégorie"
+          label="dans la catégorie"
           placeholder="Veuillez sélectionner une catégorie"
           searchable
           required

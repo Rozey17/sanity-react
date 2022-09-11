@@ -62,11 +62,12 @@ export const Search = () => {
             return {
               label: subcategory.name,
               value: subcategory._id,
+              group: subcategory.category.name,
             };
           })}
         />
 
-        <button className="button-primary">search</button>
+        <button className="button-primary py-3">search</button>
       </div>
     </form>
   );
