@@ -12,6 +12,12 @@ import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import { client } from "../../../lib/sanity.server";
 import { Layout } from "../../../components/layout";
+import {
+  FlagIcon,
+  HeartIcon,
+  PrinterIcon,
+  ShareIcon,
+} from "@heroicons/react/outline";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -97,13 +103,38 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               </div>
             </div>
             <div className="space-y-10">
-              <div className="flex flex-col justify-between p-8 space-y-10 bg-teal-600"></div>
+              <div className=" p-5 bg-teal-600">
+                <p className="font-semibold text-white text-2xl text-center">
+                  {advert.price && `${advert.price} €`}
+                </p>
+              </div>
 
               <div className="flex flex-col justify-between p-8 space-y-10 bg-white">
                 <p className="font-medium capitalize">ad owner</p>
                 <span className="p-5 text-white bg-red-400">
                   {advert?.contact}
                 </span>
+              </div>
+              <div className="flex flex-col justify-between p-8 space-y-5 bg-white">
+                <p className="font-medium capitalize">ad action</p>
+                <div className="flex justify-between text-gray-500">
+                  <a href="#" className="flex flex-col">
+                    <ShareIcon className="h-5" />
+                    <p className="capitalize">share</p>
+                  </a>
+                  <a href="#" className="flex flex-col">
+                    <PrinterIcon className="h-5" />
+                    <p className="capitalize">print</p>
+                  </a>{" "}
+                  <a href="#" className="flex flex-col">
+                    <HeartIcon className="h-5" />
+                    <p className="capitalize">favoris</p>
+                  </a>{" "}
+                  <a href="#" className="flex flex-col">
+                    <FlagIcon className="h-5" />
+                    <p className="capitalize">report</p>
+                  </a>
+                </div>
               </div>
               <div className="h-96">
                 {advert?.location && <Map ads={[advert]} />}
