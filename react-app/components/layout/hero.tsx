@@ -18,11 +18,12 @@ export const Hero = () => {
     }
   };
   return (
-    <section className="relative h-screen bg-slate-600">
+    <section className="relative h-screen bg-gray-800">
       <img
-        src="https://images.pexels.com/photos/6483582/pexels-photo-6483582.jpeg"
+        // src="https://images.pexels.com/photos/6483582/pexels-photo-6483582.jpeg"
+        src="https://images.pexels.com/photos/4007744/pexels-photo-4007744.jpeg"
         alt=""
-        className="object-cover w-full h-full opacity-30"
+        className="object-cover w-full h-full opacity-40 bg-fixed"
       />
       <div className="absolute inset-0">
         <div className="relative space-y-40">
