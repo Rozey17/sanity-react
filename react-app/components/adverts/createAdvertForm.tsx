@@ -134,6 +134,7 @@ export function CreateAdvertForm() {
             return {
               label: subcategory.name,
               value: subcategory._id,
+              group: subcategory.category.name,
             };
           })}
           // icon={<ClipboardIcon className="w-5 h-5 text-sky-500" />}

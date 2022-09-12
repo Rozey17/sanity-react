@@ -39,6 +39,7 @@
     "react-map-gl": "6.1.12",
     "react-share": "^4.4.0",
     "react-slick": "^0.29.0",
+    "react-to-print": "^2.14.7",
     "slick-carousel": "^1.8.1",
     "slugify": "^1.6.5",
     "tailwind-scrollbar-hide": "^1.1.7",

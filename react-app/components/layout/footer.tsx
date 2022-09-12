@@ -45,7 +45,7 @@ export const Footer = () => {
           )}
         </div>
       </div>
-      <div className="bg-gray-800 p-10"></div>
+      <div className="bg-gray-800 p-6"></div>
     </footer>
   );
 };

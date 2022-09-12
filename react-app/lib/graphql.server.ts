@@ -40,13 +40,13 @@ export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = process.env.SANITY_API_TOKEN;
+  const token = process.env.NEXT_PUBLIC_SANITY_API_TOKEN;
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      // authorization: token ? `Bearer ${token}` : "",
-      authorization: `Bearer skE70tDNgkW95qVPXYUzPvNegxmYm0Jgr0UpFpBrHiSjZxPpgQJQ2KK70UeKYYzMETXTuLUc9aU0Y4zbgbGMGkMHhFjjPHHJpPvAIpZYsahZLN6DNows69X9qAEiASLbKOqiwtjX0Jnosm6Vw1Xiqm2Bt8EmqfUs0D0aYjgkcHaMnEMGvDY8`,
+      authorization: token ? `Bearer ${token}` : "",
+      // authorization: `Bearer skE70tDNgkW95qVPXYUzPvNegxmYm0Jgr0UpFpBrHiSjZxPpgQJQ2KK70UeKYYzMETXTuLUc9aU0Y4zbgbGMGkMHhFjjPHHJpPvAIpZYsahZLN6DNows69X9qAEiASLbKOqiwtjX0Jnosm6Vw1Xiqm2Bt8EmqfUs0D0aYjgkcHaMnEMGvDY8`,
     },
   };
 });

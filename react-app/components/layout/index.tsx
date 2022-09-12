@@ -1,13 +1,13 @@
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import React from "react";
 import { Footer } from "./footer";
-import { Header } from "./header";
+import { Header2 } from "./header-2";
 
 export const Layout = ({ children }: { children: any }) => {
   return (
     <div className="">
       <main className=" relative min-h-screen ">
-        <Header />
+        <Header2 />
         <div className="">{children}</div>
         <section className="px-40 py-8 bg-white ">
           <div className="flex items-center justify-between">
