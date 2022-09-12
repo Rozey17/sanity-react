@@ -18,9 +18,9 @@ export default NextAuth({
   secret: process.env.SECRET,
   providers: [
     Auth0Provider({
-      clientId: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string,
-      clientSecret: process.env.NEXT_PUBLIC_AUTH0_CLIENT_SECRET as string,
-      issuer: process.env.NEXT_PUBLIC_AUTH0_DOMAIN as string,
+      clientId: process.env.AUTH0_CLIENT_ID as string,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
+      issuer: process.env.AUTH0_DOMAIN as string,
       //   domain: process.env.AUTH0_DOMAIN as string,
     }),
   ],
