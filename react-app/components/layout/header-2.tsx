@@ -40,6 +40,12 @@ export const Header2 = () => {
           </a>
         </span>
         <span className="flex items-center gap-5">
+          <button
+            onClick={() => router.push("/signup")}
+            className="button-primary"
+          >
+            signup
+          </button>
           {session?.user ? (
             <div className="flex gap-2">
               <p>{session?.user?.name}</p>
@@ -48,12 +54,13 @@ export const Header2 = () => {
               </button>
             </div>
           ) : (
-            <div className="flex gap-2">
-              <p>login</p>
-              <button onClick={() => signIn()}>
-                <LoginIcon className=" h-7 w-7 " />
-              </button>
-            </div>
+            <button
+              className="flex items-center"
+              onClick={() => router.push("/signin")}
+            >
+              login
+              <LoginIcon className=" h-7 w-7  ml-2 " />
+            </button>
           )}
 
           <button

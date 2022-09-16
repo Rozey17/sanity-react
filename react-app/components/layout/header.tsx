@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-
+import { signUp } from "next-auth-sanity/client";
 export const Header = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -40,6 +40,12 @@ export const Header = () => {
           </a>
         </span>
         <span className="flex items-center gap-5">
+          <button
+            onClick={() => router.push("/signup")}
+            className="button-primary"
+          >
+            signup
+          </button>
           {session?.user ? (
             <div className="flex gap-2">
               <p>{session?.user?.name}</p>
@@ -48,12 +54,13 @@ export const Header = () => {
               </button>
             </div>
           ) : (
-            <div className="flex gap-2">
-              <p>login</p>
-              <button onClick={() => signIn()}>
-                <LoginIcon className=" h-7 w-7 text-white" />
-              </button>
-            </div>
+            <button
+              className="flex items-center"
+              onClick={() => router.push("/signin")}
+            >
+              login
+              <LoginIcon className=" h-7 w-7 text-white ml-2 " />
+            </button>
           )}
 
           <button
