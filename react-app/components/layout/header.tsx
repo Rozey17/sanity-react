@@ -40,12 +40,6 @@ export const Header = () => {
           </a>
         </span>
         <span className="flex items-center gap-5">
-          <button
-            onClick={() => router.push("/signup")}
-            className="button-primary"
-          >
-            signup
-          </button>
           {session?.user ? (
             <div className="flex gap-2">
               <p>{session?.user?.name}</p>
@@ -54,13 +48,21 @@ export const Header = () => {
               </button>
             </div>
           ) : (
-            <button
-              className="flex items-center"
-              onClick={() => router.push("/signin")}
-            >
-              login
-              <LoginIcon className=" h-7 w-7 text-white ml-2 " />
-            </button>
+            <>
+              <button
+                className="flex items-center"
+                onClick={() => router.push("/signin")}
+              >
+                login
+                <LoginIcon className=" h-7 w-7  ml-2 " />
+              </button>
+              <button
+                onClick={() => router.push("/signup")}
+                className="button-primary"
+              >
+                signup
+              </button>
+            </>
           )}
 
           <button
