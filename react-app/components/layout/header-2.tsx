@@ -65,7 +65,9 @@ export const Header2 = () => {
 
           <button
             onClick={() => {
-              session?.user ? router.push("/advert/create") : signIn();
+              session?.user
+                ? router.push("/advert/create")
+                : router.push("/signin");
             }}
             className="flex items-center px-4 py-2 capitalize bg-teal-500 rounded-full font-medium text-white"
           >

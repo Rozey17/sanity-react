@@ -13,6 +13,7 @@ import { client } from "../../../lib/sanity.server";
 import { Layout } from "../../../components/layout";
 import { AdActionComponent } from "../../../components/adActionComponent";
 import { useSession } from "next-auth/react";
+import { UserCircleIcon } from "@heroicons/react/outline";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -28,7 +29,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
   return (
     <Layout>
       <Head>
-        <title>Next.js Blog Example</title>
+        <title>{advert?.title}</title>
       </Head>
 
       <div className="relative h-32 bg-slate-600">
@@ -109,17 +110,25 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                 </p>
               </div>
 
-              <div className="flex flex-col justify-between p-8 space-y-10 bg-white">
+              <div className="flex flex-col justify-between p-8 space-y-5 bg-white">
                 <p className="font-medium capitalize">ad owner</p>
-                <p className="">{advert?.user?.name}</p>
-                <span className="p-5 text-white bg-red-400">
+                <div className="flex items-center gap-3">
+                  {/* <img
+                    src={advert.user.image}
+                    alt=""
+                    className="rounded-full object-cover h-20 w-20"
+                  /> */}
+                  <UserCircleIcon className="h-20 w-20" />
+                  <p className="">{advert.user.name}</p>
+                </div>
+                <div className="p-5 text-white bg-red-400">
                   {advert?.contact}
-                </span>
+                </div>
               </div>
               <div className=" p-8  bg-white">
                 <AdActionComponent />
               </div>
-              <div className="h-96">
+              <div className="h-80">
                 {advert?.location && <Map ads={[advert]} />}
               </div>
             </div>

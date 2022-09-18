@@ -8,6 +8,7 @@ import {
   useListUsersByEmailQuery,
   useListUsersLazyQuery,
   useListUsersQuery,
+  User,
 } from "../apollo-components";
 import toast, { Toaster } from "react-hot-toast";
 import { createReadStream } from "fs";
@@ -34,23 +35,27 @@ export function CreateAdvertForm() {
     data && data?.allSubcategory ? data?.allSubcategory : [];
   const router = useRouter();
 
-  const { data: usersData } = useListUsersQuery();
+  const { data: usersData } = useListUsersByEmailQuery({
+    variables: {
+      email: session?.user?.email,
+    },
+  });
 
-  const users = usersData?.allUser;
+  const user = usersData && usersData?.allUser ? usersData?.allUser[0] : null;
 
-  console.log(users);
-  // useEffect(() => {
-  //   if (navigator?.geolocation) {
-  //     navigator.geolocation.watchPosition(function (
-  //       position: GeolocationPosition
-  //     ) {
-  //       setLat(position.coords.latitude);
-  //       setLng(position.coords.longitude);
-  //     });
-  //   }
-  // }, []);
+  console.log(user);
+  useEffect(() => {
+    if (navigator?.geolocation) {
+      navigator.geolocation.watchPosition(function (
+        position: GeolocationPosition
+      ) {
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+      });
+    }
+  }, []);
 
-  // console.log("lat:, lng", lat, lng);
+  console.log("lat:, lng", lat, lng);
 
   const {
     register,
@@ -80,7 +85,7 @@ export function CreateAdvertForm() {
       image: {
         asset: { url: undefined },
       },
-      user: undefined,
+      user: user,
     },
   });
 
@@ -116,11 +121,11 @@ export function CreateAdvertForm() {
                   _ref: imagesAssets?._id,
                 },
               },
-              // user: {
-              //   _type: "reference",
-              //   _weak: true,
-              //   _ref: user?._id,
-              // },
+              user: {
+                _type: "reference",
+                _weak: true,
+                _ref: user?._id as User,
+              },
             })
             .then((res) => {
               router.push(`/advert/${res._id}`);
