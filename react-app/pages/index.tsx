@@ -3,14 +3,19 @@ import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import { GetStaticProps } from "next";
 import React from "react";
 import { AdvertCard } from "../components/adverts/advertCard";
-import { ListAdvertsDocument } from "../components/apollo-components";
+import {
+  ListAdvertsDocument,
+  useListUsersQuery,
+} from "../components/apollo-components";
 import { Footer } from "../components/layout/footer";
 import { Header } from "../components/layout/header";
 import { Hero } from "../components/layout/hero";
 import { initializeApollo } from "../lib/graphql.server";
 
 const Home = ({ ads }: any) => {
-  console.log(ads);
+  // console.log(ads);
+  const { data } = useListUsersQuery();
+  const users = data?.allUser;
 
   return (
     <>
@@ -21,10 +26,12 @@ const Home = ({ ads }: any) => {
           <button className="button-primary">ending soon</button>
         </div>
         <div className="grid grid-cols-4 gap-3">
-          {ads.map((ad, index) => (
+          {/* {ads.map((ad, index) => (
             <AdvertCard key={index} advert={ad} />
-          ))}
+          ))} */}
+          {JSON.stringify(users, null, 2)}
         </div>
+        <div className="">{data?.allUser?.map((user) => user._id)}</div>
       </section>
       <section className="px-40 py-8 bg-white ">
         <div className="flex items-center justify-between">

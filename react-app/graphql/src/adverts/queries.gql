@@ -1,6 +1,15 @@
  query ListAdverts{
       allAdvert {
         _id
+        user{
+          _id
+          _type
+          _createdAt
+          _updatedAt
+  name
+  email
+  image
+}
         slug{
           current
         }
@@ -39,6 +48,15 @@ query GetAdvert ($id: ID!){
 		Advert(id:$id) {
 
 _id
+user{
+          _id
+          _type
+          _createdAt
+          _updatedAt
+  name
+  email
+  image
+}
  slug{
           current
         }

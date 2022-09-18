@@ -12,6 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { client } from "../../../lib/sanity.server";
 import { Layout } from "../../../components/layout";
 import { AdActionComponent } from "../../../components/adActionComponent";
+import { useSession } from "next-auth/react";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -22,6 +23,8 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
   // console.log(advert?.title);
   const router = useRouter();
   const slug = router.query.slug;
+  const { data: session } = useSession();
+  console.log(session?.user["custom:_id"]);
   return (
     <Layout>
       <Head>
@@ -108,6 +111,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
 
               <div className="flex flex-col justify-between p-8 space-y-10 bg-white">
                 <p className="font-medium capitalize">ad owner</p>
+                <p className="">{advert?.user?.name}</p>
                 <span className="p-5 text-white bg-red-400">
                   {advert?.contact}
                 </span>

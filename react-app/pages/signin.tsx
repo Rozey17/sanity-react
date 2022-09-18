@@ -37,9 +37,16 @@ const Signup = () => {
             redirect: false,
             email: input.email,
             password: input.password,
+          }).then((res) => {
+            if (res.status === 200) {
+              return toast.success("connexion réussie");
+            } else if (res.error) {
+              toast.error(res.error);
+            } else {
+              toast.error("Une erreur est survenue");
+            }
           });
-          // .then(() => toast.success("connexion réussie"))
-          // .catch((err) => toast.error(err));
+          // .catch((res) => res.error && toast.error(res.error));
           //   reset();
         })}
       >

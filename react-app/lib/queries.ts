@@ -1,103 +1,24 @@
-import { gql } from "@apollo/client"
+import groq from "groq";
 
-export const AllPosts = gql`
-	query {
-		allPost {
-			title
-			slug {
-				current
-			}
-			contentRaw
-			excerpt
-			coverImage {
-				asset {
-					url
-					originalFilename
-					source{
-						id
-						url
-					}
-					path
-					uploadId
-					assetId
-					size
-					mimeType
-					extension
-					sha1hash
-				}
-			}
-			date
-			author{
-				name
-				picture {
-					asset {
-						url
-						originalFilename
-						source{
-							id
-							url
-						}
-						path
-						uploadId
-						assetId
-						size
-						mimeType
-						extension
-						sha1hash
-					}
-				}
-			}
-		}
-	}`
+export const getUserByIdQuery = groq`
+  *[_type == $userSchema && _id == $id][0]
+`;
 
-export const GetPostBySlug = gql`
-	query Post($slug: String!){
-		allPost(where:{
-    	slug: {current: { eq: $slug }}
-  	}) {
-			title
-			slug {
-				current
-			}
-			contentRaw
-			excerpt
-			coverImage {
-				asset {
-					url
-					originalFilename
-					source{
-						id
-						url
-					}
-					path
-					uploadId
-					assetId
-					size
-					mimeType
-					extension
-					sha1hash
-				}
-			}
-			date
-			author{
-				name
-				picture {
-					asset {
-						url
-						originalFilename
-						source{
-							id
-							url
-						}
-						path
-						uploadId
-						assetId
-						size
-						mimeType
-						extension
-						sha1hash
-					}
-				}
-			}
-		}
-	}`
+export const getUserByProviderAccountIdQuery = groq`
+  *[_type == $accountSchema && providerId == $providerId && providerAccountId == $providerAccountId] {
+    accessToken,
+    accessTokenExpires,
+    providerId,
+    providerType,
+    providerAccountId,
+    user->
+  }[0]
+`;
+
+export const getUserByEmailQuery = groq`
+  *[_type == $userSchema && email == $email][0]
+`;
+
+export const getVerificationTokenQuery = groq`
+  *[_type == $verificationTokenSchema && identifier == $identifier && token == $token][0]
+`;

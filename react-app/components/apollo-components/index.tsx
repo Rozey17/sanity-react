@@ -15,7 +15,61 @@ export type Scalars = {
   Float: number;
   Date: any;
   DateTime: any;
-  JSON: any;
+};
+
+export type Account = Document & {
+  __typename?: 'Account';
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  accessToken?: Maybe<Scalars['String']>;
+  accessTokenExpires?: Maybe<Scalars['String']>;
+  providerAccountId?: Maybe<Scalars['String']>;
+  providerId?: Maybe<Scalars['String']>;
+  providerType?: Maybe<Scalars['String']>;
+  refreshToken?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
+};
+
+export type AccountFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  accessToken?: InputMaybe<StringFilter>;
+  accessTokenExpires?: InputMaybe<StringFilter>;
+  providerAccountId?: InputMaybe<StringFilter>;
+  providerId?: InputMaybe<StringFilter>;
+  providerType?: InputMaybe<StringFilter>;
+  refreshToken?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserFilter>;
+};
+
+export type AccountSorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  accessToken?: InputMaybe<SortOrder>;
+  accessTokenExpires?: InputMaybe<SortOrder>;
+  providerAccountId?: InputMaybe<SortOrder>;
+  providerId?: InputMaybe<SortOrder>;
+  providerType?: InputMaybe<SortOrder>;
+  refreshToken?: InputMaybe<SortOrder>;
 };
 
 export type Advert = Document & {
@@ -39,6 +93,7 @@ export type Advert = Document & {
   slug?: Maybe<Slug>;
   subcategory?: Maybe<Subcategory>;
   title?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
 export type AdvertFilter = {
@@ -58,6 +113,7 @@ export type AdvertFilter = {
   slug?: InputMaybe<SlugFilter>;
   subcategory?: InputMaybe<SubcategoryFilter>;
   title?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserFilter>;
 };
 
 export type AdvertSorting = {
@@ -74,47 +130,6 @@ export type AdvertSorting = {
   price?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
-};
-
-export type Author = Document & {
-  __typename?: 'Author';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  _key?: Maybe<Scalars['String']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  name?: Maybe<Scalars['String']>;
-  picture?: Maybe<Image>;
-};
-
-export type AuthorFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  name?: InputMaybe<StringFilter>;
-  picture?: InputMaybe<ImageFilter>;
-};
-
-export type AuthorSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SortOrder>;
-  picture?: InputMaybe<ImageSorting>;
 };
 
 export type Block = {
@@ -270,47 +285,6 @@ export type FloatFilter = {
   neq?: InputMaybe<Scalars['Float']>;
 };
 
-export type Game = Document & {
-  __typename?: 'Game';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  _key?: Maybe<Scalars['String']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  name?: Maybe<Scalars['String']>;
-  slug?: Maybe<Slug>;
-};
-
-export type GameFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  name?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<SlugFilter>;
-};
-
-export type GameSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SlugSorting>;
-};
-
 export type Geopoint = {
   __typename?: 'Geopoint';
   _key?: Maybe<Scalars['String']>;
@@ -386,88 +360,33 @@ export type IntFilter = {
   neq?: InputMaybe<Scalars['Int']>;
 };
 
-export type Post = Document & {
-  __typename?: 'Post';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  _key?: Maybe<Scalars['String']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  author?: Maybe<Author>;
-  contentRaw?: Maybe<Scalars['JSON']>;
-  coverImage?: Maybe<Image>;
-  date?: Maybe<Scalars['DateTime']>;
-  excerpt?: Maybe<Scalars['String']>;
-  slug?: Maybe<Slug>;
-  title?: Maybe<Scalars['String']>;
-};
-
-export type PostFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  author?: InputMaybe<AuthorFilter>;
-  coverImage?: InputMaybe<ImageFilter>;
-  date?: InputMaybe<DatetimeFilter>;
-  excerpt?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<SlugFilter>;
-  title?: InputMaybe<StringFilter>;
-};
-
-export type PostSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  coverImage?: InputMaybe<ImageSorting>;
-  date?: InputMaybe<SortOrder>;
-  excerpt?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SlugSorting>;
-  title?: InputMaybe<SortOrder>;
-};
-
 export type RootQuery = {
   __typename?: 'RootQuery';
+  Account?: Maybe<Account>;
   Advert?: Maybe<Advert>;
-  Author?: Maybe<Author>;
   Category?: Maybe<Category>;
   Document?: Maybe<Document>;
-  Game?: Maybe<Game>;
-  Post?: Maybe<Post>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   Subcategory?: Maybe<Subcategory>;
+  User?: Maybe<User>;
+  allAccount: Array<Account>;
   allAdvert: Array<Advert>;
-  allAuthor: Array<Author>;
   allCategory: Array<Category>;
   allDocument: Array<Document>;
-  allGame: Array<Game>;
-  allPost: Array<Post>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSubcategory: Array<Subcategory>;
+  allUser: Array<User>;
 };
 
 
-export type RootQueryAdvertArgs = {
+export type RootQueryAccountArgs = {
   id: Scalars['ID'];
 };
 
 
-export type RootQueryAuthorArgs = {
+export type RootQueryAdvertArgs = {
   id: Scalars['ID'];
 };
 
@@ -478,16 +397,6 @@ export type RootQueryCategoryArgs = {
 
 
 export type RootQueryDocumentArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryGameArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryPostArgs = {
   id: Scalars['ID'];
 };
 
@@ -507,19 +416,24 @@ export type RootQuerySubcategoryArgs = {
 };
 
 
+export type RootQueryUserArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryAllAccountArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Array<AccountSorting>>;
+  where?: InputMaybe<AccountFilter>;
+};
+
+
 export type RootQueryAllAdvertArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<Array<AdvertSorting>>;
   where?: InputMaybe<AdvertFilter>;
-};
-
-
-export type RootQueryAllAuthorArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Array<AuthorSorting>>;
-  where?: InputMaybe<AuthorFilter>;
 };
 
 
@@ -536,22 +450,6 @@ export type RootQueryAllDocumentArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<Array<DocumentSorting>>;
   where?: InputMaybe<DocumentFilter>;
-};
-
-
-export type RootQueryAllGameArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Array<GameSorting>>;
-  where?: InputMaybe<GameFilter>;
-};
-
-
-export type RootQueryAllPostArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Array<PostSorting>>;
-  where?: InputMaybe<PostFilter>;
 };
 
 
@@ -576,6 +474,14 @@ export type RootQueryAllSubcategoryArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<Array<SubcategorySorting>>;
   where?: InputMaybe<SubcategoryFilter>;
+};
+
+
+export type RootQueryAllUserArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Array<UserSorting>>;
+  where?: InputMaybe<UserFilter>;
 };
 
 export type SanityAssetSourceData = {
@@ -1039,17 +945,64 @@ export type SubcategorySorting = {
   slug?: InputMaybe<SlugSorting>;
 };
 
+export type User = Document & {
+  __typename?: 'User';
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+};
+
+export type UserFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  email?: InputMaybe<StringFilter>;
+  image?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  password?: InputMaybe<StringFilter>;
+};
+
+export type UserSorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
+};
+
 export type ListAdvertsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: string | null, description?: string | null, _type?: string | null, title?: string | null, price?: number | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+export type ListAdvertsQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, contact?: string | null, description?: string | null, _type?: string | null, title?: string | null, price?: number | null, user?: { __typename?: 'User', _id?: string | null, _type?: string | null, _createdAt?: any | null, _updatedAt?: any | null, name?: string | null, email?: string | null, image?: string | null } | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
 
 export type GetAdvertQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAdvertQuery = { __typename?: 'RootQuery', Advert?: { __typename?: 'Advert', _id?: string | null, contact?: string | null, description?: string | null, _type?: string | null, title?: string | null, price?: number | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null } | null };
+export type GetAdvertQuery = { __typename?: 'RootQuery', Advert?: { __typename?: 'Advert', _id?: string | null, contact?: string | null, description?: string | null, _type?: string | null, title?: string | null, price?: number | null, user?: { __typename?: 'User', _id?: string | null, _type?: string | null, _createdAt?: any | null, _updatedAt?: any | null, name?: string | null, email?: string | null, image?: string | null } | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null } | null };
 
 export type ListAdvertsByCategoryQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -1070,21 +1023,37 @@ export type ListCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ListCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategories?: Array<{ __typename?: 'Subcategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null } | null> | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null } | null> | null }> };
 
-export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPostsQuery = { __typename?: 'RootQuery', allPost: Array<{ __typename?: 'Post', title?: string | null, contentRaw?: any | null, excerpt?: string | null, date?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, coverImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null, author?: { __typename?: 'Author', name?: string | null, picture?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, originalFilename?: string | null, path?: string | null, uploadId?: string | null, assetId?: string | null, size?: number | null, mimeType?: string | null, extension?: string | null, sha1hash?: string | null, source?: { __typename?: 'SanityAssetSourceData', id?: string | null, url?: string | null } | null } | null } | null } | null }> };
-
 export type ListSubCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ListSubCategoriesQuery = { __typename?: 'RootQuery', allSubcategory: Array<{ __typename?: 'Subcategory', _id?: string | null, _type?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, category?: { __typename?: 'Category', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null, adverts?: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null, description?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null } | null> | null }> };
+
+export type ListUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListUsersQuery = { __typename?: 'RootQuery', allUser: Array<{ __typename?: 'User', _id?: string | null, _type?: string | null, _createdAt?: any | null, _updatedAt?: any | null, _rev?: string | null, _key?: string | null, name?: string | null, email?: string | null, image?: string | null, password?: string | null }> };
+
+export type ListUsersByEmailQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ListUsersByEmailQuery = { __typename?: 'RootQuery', allUser: Array<{ __typename?: 'User', _id?: string | null, _type?: string | null, _createdAt?: any | null, _updatedAt?: any | null, _rev?: string | null, _key?: string | null, name?: string | null, email?: string | null, image?: string | null }> };
 
 
 export const ListAdvertsDocument = gql`
     query ListAdverts {
   allAdvert {
     _id
+    user {
+      _id
+      _type
+      _createdAt
+      _updatedAt
+      name
+      email
+      image
+    }
     slug {
       current
     }
@@ -1148,6 +1117,15 @@ export const GetAdvertDocument = gql`
     query GetAdvert($id: ID!) {
   Advert(id: $id) {
     _id
+    user {
+      _id
+      _type
+      _createdAt
+      _updatedAt
+      name
+      email
+      image
+    }
     slug {
       current
     }
@@ -1377,83 +1355,6 @@ export function useListCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type ListCategoriesQueryHookResult = ReturnType<typeof useListCategoriesQuery>;
 export type ListCategoriesLazyQueryHookResult = ReturnType<typeof useListCategoriesLazyQuery>;
 export type ListCategoriesQueryResult = Apollo.QueryResult<ListCategoriesQuery, ListCategoriesQueryVariables>;
-export const GetPostsDocument = gql`
-    query GetPosts {
-  allPost {
-    title
-    slug {
-      current
-    }
-    contentRaw
-    excerpt
-    coverImage {
-      asset {
-        url
-        originalFilename
-        source {
-          id
-          url
-        }
-        path
-        uploadId
-        assetId
-        size
-        mimeType
-        extension
-        sha1hash
-      }
-    }
-    date
-    author {
-      name
-      picture {
-        asset {
-          url
-          originalFilename
-          source {
-            id
-            url
-          }
-          path
-          uploadId
-          assetId
-          size
-          mimeType
-          extension
-          sha1hash
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useGetPostsQuery__
- *
- * To run a query within a React component, call `useGetPostsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPostsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetPostsQuery(baseOptions?: Apollo.QueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
-      }
-export function useGetPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
-        }
-export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>;
-export type GetPostsLazyQueryHookResult = ReturnType<typeof useGetPostsLazyQuery>;
-export type GetPostsQueryResult = Apollo.QueryResult<GetPostsQuery, GetPostsQueryVariables>;
 export const ListSubCategoriesDocument = gql`
     query ListSubCategories {
   allSubcategory {
@@ -1515,3 +1416,89 @@ export function useListSubCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type ListSubCategoriesQueryHookResult = ReturnType<typeof useListSubCategoriesQuery>;
 export type ListSubCategoriesLazyQueryHookResult = ReturnType<typeof useListSubCategoriesLazyQuery>;
 export type ListSubCategoriesQueryResult = Apollo.QueryResult<ListSubCategoriesQuery, ListSubCategoriesQueryVariables>;
+export const ListUsersDocument = gql`
+    query ListUsers {
+  allUser {
+    _id
+    _type
+    _createdAt
+    _updatedAt
+    _rev
+    _key
+    name
+    email
+    image
+    password
+  }
+}
+    `;
+
+/**
+ * __useListUsersQuery__
+ *
+ * To run a query within a React component, call `useListUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListUsersQuery(baseOptions?: Apollo.QueryHookOptions<ListUsersQuery, ListUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListUsersQuery, ListUsersQueryVariables>(ListUsersDocument, options);
+      }
+export function useListUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListUsersQuery, ListUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListUsersQuery, ListUsersQueryVariables>(ListUsersDocument, options);
+        }
+export type ListUsersQueryHookResult = ReturnType<typeof useListUsersQuery>;
+export type ListUsersLazyQueryHookResult = ReturnType<typeof useListUsersLazyQuery>;
+export type ListUsersQueryResult = Apollo.QueryResult<ListUsersQuery, ListUsersQueryVariables>;
+export const ListUsersByEmailDocument = gql`
+    query ListUsersByEmail($email: String!) {
+  allUser(where: {email: {eq: $email}}) {
+    _id
+    _type
+    _createdAt
+    _updatedAt
+    _rev
+    _key
+    name
+    email
+    image
+  }
+}
+    `;
+
+/**
+ * __useListUsersByEmailQuery__
+ *
+ * To run a query within a React component, call `useListUsersByEmailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListUsersByEmailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListUsersByEmailQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useListUsersByEmailQuery(baseOptions: Apollo.QueryHookOptions<ListUsersByEmailQuery, ListUsersByEmailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListUsersByEmailQuery, ListUsersByEmailQueryVariables>(ListUsersByEmailDocument, options);
+      }
+export function useListUsersByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListUsersByEmailQuery, ListUsersByEmailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListUsersByEmailQuery, ListUsersByEmailQueryVariables>(ListUsersByEmailDocument, options);
+        }
+export type ListUsersByEmailQueryHookResult = ReturnType<typeof useListUsersByEmailQuery>;
+export type ListUsersByEmailLazyQueryHookResult = ReturnType<typeof useListUsersByEmailLazyQuery>;
+export type ListUsersByEmailQueryResult = Apollo.QueryResult<ListUsersByEmailQuery, ListUsersByEmailQueryVariables>;

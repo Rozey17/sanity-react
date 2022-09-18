@@ -3,43 +3,54 @@ import { NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { client } from "../../lib/sanity.server";
-import { useListSubCategoriesQuery } from "../apollo-components";
+import {
+  useListSubCategoriesQuery,
+  useListUsersByEmailQuery,
+  useListUsersLazyQuery,
+  useListUsersQuery,
+} from "../apollo-components";
 import toast, { Toaster } from "react-hot-toast";
 import { createReadStream } from "fs";
 import { basename } from "path";
 import { useRouter } from "next/router";
 import slugify from "slugify";
 import { useMapEvents, MapContainer, TileLayer } from "react-leaflet";
+import { useSession } from "next-auth/react";
 interface Location {
   lat: number;
   lng: number;
 }
 
 export function CreateAdvertForm() {
+  const { data: session } = useSession();
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
 
   const [imagesAssets, setImagesAssets] = useState(null);
+
   const [previewImage, setPreviewImage] = useState(null);
   const { data } = useListSubCategoriesQuery();
   const listSubCategories =
     data && data?.allSubcategory ? data?.allSubcategory : [];
   const router = useRouter();
 
-  // let navigator: Navigator;
+  const { data: usersData } = useListUsersQuery();
 
-  useEffect(() => {
-    if (navigator?.geolocation) {
-      navigator.geolocation.watchPosition(function (
-        position: GeolocationPosition
-      ) {
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-      });
-    }
-  }, []);
+  const users = usersData?.allUser;
 
-  console.log("lat:, lng", lat, lng);
+  console.log(users);
+  // useEffect(() => {
+  //   if (navigator?.geolocation) {
+  //     navigator.geolocation.watchPosition(function (
+  //       position: GeolocationPosition
+  //     ) {
+  //       setLat(position.coords.latitude);
+  //       setLng(position.coords.longitude);
+  //     });
+  //   }
+  // }, []);
+
+  // console.log("lat:, lng", lat, lng);
 
   const {
     register,
@@ -69,6 +80,7 @@ export function CreateAdvertForm() {
       image: {
         asset: { url: undefined },
       },
+      user: undefined,
     },
   });
 
@@ -104,6 +116,11 @@ export function CreateAdvertForm() {
                   _ref: imagesAssets?._id,
                 },
               },
+              // user: {
+              //   _type: "reference",
+              //   _weak: true,
+              //   _ref: user?._id,
+              // },
             })
             .then((res) => {
               router.push(`/advert/${res._id}`);

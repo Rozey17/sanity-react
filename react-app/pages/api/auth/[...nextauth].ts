@@ -32,22 +32,27 @@ import Auth0Provider from "next-auth/providers/auth0";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { NextApiRequest, NextApiResponse } from "next";
-import { SanityAdapter, SanityCredentials } from "next-auth-sanity";
+
 import { client } from "../../../lib/sanity.server";
+import { SanityAdapter } from "../../../lib/adapter";
+import { SanityCredentials } from "../../../lib/credentials";
 
 const options: NextAuthOptions = {
   providers: [
-    Auth0Provider({
-      clientId: process.env.AUTH0_CLIENT_ID as string,
-      clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
-      issuer: process.env.AUTH0_DOMAIN as string,
-      //   domain: process.env.AUTH0_DOMAIN as string,
-    }),
+    // Auth0Provider({
+    //   clientId: process.env.AUTH0_CLIENT_ID as string,
+    //   clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
+    //   issuer: process.env.AUTH0_DOMAIN as string,
+    //   //   domain: process.env.AUTH0_DOMAIN as string,
+    // }),
     SanityCredentials(client), // only if you use sign in with credentials
   ],
   session: {
     strategy: "jwt",
+    // maxAge: 5000,
   },
+  secret: "somesecretsecret",
+
   adapter: SanityAdapter(client),
 };
 

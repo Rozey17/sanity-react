@@ -1,0 +1,7 @@
+ query ListUsers{
+allUser{_id,_type,_createdAt,_updatedAt,_rev,_key,name,email,image,password}
+      }
+
+query ListUsersByEmail($email:String!){allUser(where : {email: {eq: $email}} )
+{_id,_type,_createdAt,_updatedAt,_rev,_key,name,email,image}}
+

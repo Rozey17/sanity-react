@@ -7,6 +7,7 @@ import {
 import { Select, TextInput } from "@mantine/core";
 import React from "react";
 import { useListSubCategoriesQuery } from "./apollo-components";
+import Autocomplete from "react-google-autocomplete";
 
 export const Search = () => {
   const { data } = useListSubCategoriesQuery();
@@ -27,7 +28,7 @@ export const Search = () => {
           icon={<SpeakerphoneIcon className=" w-5 h-5 text-current " />}
         />
 
-        <TextInput
+        {/* <TextInput
           type="text"
           className="  text-sm capitalize rounded focus:outline-none"
           classNames={{
@@ -36,6 +37,12 @@ export const Search = () => {
           }}
           placeholder="located in"
           icon={<LocationMarkerIcon className=" w-5 h-5 text-current " />}
+        /> */}
+
+        <Autocomplete
+          className="rounded p-3 text-black border border-gray-300 font-sans text-sm focus:outline-none"
+          apiKey="AIzaSyCzgrgiyAUkKbLlAR2vT2PuEYw7hiRv7gg"
+          onPlaceSelected={(place) => console.log(place)}
         />
 
         <Select

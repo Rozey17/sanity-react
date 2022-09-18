@@ -1,11 +1,14 @@
 import { TextInput } from "@mantine/core";
 import { signUp } from "next-auth-sanity/client";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { Layout } from "../components/layout";
 
 const Signup = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -22,6 +25,7 @@ const Signup = () => {
       name: "",
       email: "",
       password: "",
+      image: undefined,
     },
   });
 
@@ -31,12 +35,27 @@ const Signup = () => {
         action=""
         className="w-1/3 mx-auto space-y-5"
         onSubmit={handleSubmit(async (input) => {
-          await signUp(input)
-            .then((res) =>
-              toast.success(`l'utilisateur ${res.name} a été créé avec succès`)
-            )
-            .catch((err) => toast.error(err));
-          reset();
+          try {
+            await signUp({
+              email: input.email,
+              password: input.password,
+              name: input.name,
+            });
+            // .then(
+            //   async (res) =>
+            //     await signIn("sanity-login", {
+            //       redirect: false,
+            //       email: input.email,
+            //       password: input.password,
+            //     })
+            // );
+
+            toast.success(`l'utilisateur ${input.name} a été créé avec succès`);
+            reset();
+            // router.push("/profile");
+          } catch (error) {
+            toast.error(error);
+          }
         })}
       >
         <TextInput

@@ -6,6 +6,8 @@ const getPosition = (options) => {
   }
 };
 
+
+
 export default {
   name: "advert",
   title: "Advert",
@@ -75,6 +77,14 @@ export default {
       options: {
         hotspot: true,
       },
+    },
+    {
+      name: "user",
+      title: "user",
+      type: "reference",
+      weak: true,
+      to: [{ type: "user" }],
+      validation: (Rule) => Rule.required(),
     },
   ],
 };
