@@ -119,7 +119,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                     className="rounded-full object-cover h-20 w-20"
                   /> */}
                   <UserCircleIcon className="h-20 w-20" />
-                  <p className="">{advert.user.name}</p>
+                  <p className="">{advert?.user?.name}</p>
                 </div>
                 <div className="p-5 text-white bg-red-400">
                   {advert?.contact}
