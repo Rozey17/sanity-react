@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ClipboardIcon } from "@heroicons/react/outline";
 import { NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import React, { ChangeEvent, useEffect, useState } from "react";
@@ -6,8 +7,6 @@ import { client } from "../../lib/sanity.server";
 import {
   useListSubCategoriesQuery,
   useListUsersByEmailQuery,
-  useListUsersLazyQuery,
-  useListUsersQuery,
   User,
 } from "../apollo-components";
 import toast, { Toaster } from "react-hot-toast";
@@ -16,6 +15,8 @@ import { basename } from "path";
 import { useRouter } from "next/router";
 import slugify from "slugify";
 import { useMapEvents, MapContainer, TileLayer } from "react-leaflet";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
 import { useSession } from "next-auth/react";
 interface Location {
   lat: number;
@@ -57,6 +58,39 @@ export function CreateAdvertForm() {
 
   console.log("lat:, lng", lat, lng);
 
+  const validationSchema = zod.object({
+    title: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "trop court")
+      .max(50, "trop long"),
+    name: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "trop court")
+      .max(50, "trop long"),
+    description: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(15, "trop court")
+      .max(500, "trop long"),
+    contact: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "trop court")
+      .max(50, "trop long"),
+    subcategory: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "trop court")
+      .max(50, "trop long"),
+  });
+
   const {
     register,
     handleSubmit,
@@ -66,7 +100,7 @@ export function CreateAdvertForm() {
     setValue,
     formState: { errors, isValid, isSubmitting },
   } = useForm({
-    //   resolver: zodResolver(validationSchema),
+    resolver: zodResolver(validationSchema),
     shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
@@ -132,11 +166,24 @@ export function CreateAdvertForm() {
             });
         })}
       >
-        <TextInput label="titre" {...register("title")} placeholder="title" />
+        <TextInput
+          classNames={{
+            input: errors.title
+              ? "border border-red-500 capitalize"
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
+          label="titre"
+          {...register("title")}
+          placeholder="title"
+          required
+        />
         <Select
           classNames={{
-            input: errors.subcategory ? "error-input" : "input",
-            label: "text-sm font-medium text-gray-600 font-sans capitalize",
+            input: errors.subcategory
+              ? "border border-red-500 capitalize"
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
             dropdown: "font-sans",
           }}
           label="dans la catégorie"
@@ -162,24 +209,38 @@ export function CreateAdvertForm() {
           // icon={<ClipboardIcon className="w-5 h-5 text-sky-500" />}
         />
         <TextInput
+          classNames={{
+            input: errors.contact
+              ? "border border-red-500 capitalize"
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
           label="contact"
           {...register("contact")}
           placeholder="contact"
+          required
         />
         <Textarea
+          classNames={{
+            input: errors.description
+              ? "border border-red-500 capitalize "
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
           label="Description"
           {...register("description")}
           placeholder="description"
           required
           // className="p-3 border border-gray-300 rounded focus:outline-none"
         />
-        {/* <TextInput
-          type="text"
-          {...register("location")}
-          placeholder="location"
-        /> */}
 
         <NumberInput
+          classNames={{
+            input: errors.price
+              ? "border border-red-500 capitalize "
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
           label="price"
           value={watch("price")}
           placeholder="price"
@@ -213,7 +274,6 @@ export function CreateAdvertForm() {
                 });
             }
           }}
-          // className={errors.photo ? "error-input" : "input"}
         />
         {previewImage && (
           <img
@@ -223,7 +283,16 @@ export function CreateAdvertForm() {
           />
         )}
 
-        <button className="w-full button-primary">submit</button>
+        <button
+          disabled={!isValid || isSubmitting}
+          className={
+            !isValid
+              ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
+              : "button-primary w-full"
+          }
+        >
+          {isSubmitting ? "Chargement..." : "Créer un compte"}
+        </button>
       </form>
       <Toaster />
     </>

@@ -41,8 +41,11 @@ export const Header2 = () => {
         </span>
         <span className="flex items-center gap-5">
           {session?.user ? (
-            <div className="flex gap-2">
-              <p>{session?.user?.name}</p>
+            <div className="flex gap-2 items-center">
+              <button onClick={() => router.push("/profile")}>
+                {session?.user?.name}
+              </button>
+
               <button onClick={() => signOut()}>
                 <LogoutIcon className=" h-7 w-7 " />
               </button>

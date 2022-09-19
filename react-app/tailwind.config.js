@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ["Ubuntu", "sans-serif"],
+      sans: ["Barlow", "sans-serif"],
     },
     extend: {},
   },

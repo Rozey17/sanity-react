@@ -19,6 +19,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          ></link>
           {/* <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@^1.8.0/dist/leaflet.css"
