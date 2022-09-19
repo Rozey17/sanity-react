@@ -56,7 +56,7 @@ const Home = ({ ads }: any) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const client = initializeApollo();
 
   const { data } = await client.query({

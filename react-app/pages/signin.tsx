@@ -39,7 +39,8 @@ const Signup = () => {
             password: input.password,
           }).then((res) => {
             if (res.status === 200) {
-              return toast.success("connexion réussie");
+              // return toast.success("connexion réussie");
+              router.push("/profile");
             } else if (res.error) {
               toast.error(res.error);
             } else {

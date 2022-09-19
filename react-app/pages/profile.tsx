@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import { Session } from "next-auth";
 import { getSession, useSession } from "next-auth/react";
 import React from "react";
 import {
@@ -8,7 +9,7 @@ import {
 } from "../components/apollo-components";
 import { Layout } from "../components/layout";
 
-const Profile = ({ currentUser }: { currentUser: User }) => {
+const Profile = ({ currentUser }) => {
   const { data } = useListUsersByEmailQuery({
     variables: {
       email: currentUser?.email,
@@ -37,8 +38,9 @@ const Profile = ({ currentUser }: { currentUser: User }) => {
 export default Profile;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession();
+  const session = await getSession(ctx);
   const currentUser = session?.user;
+  console.log(currentUser);
   if (!currentUser) {
     return {
       redirect: {
