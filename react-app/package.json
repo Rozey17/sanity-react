@@ -33,6 +33,7 @@
     "next-themes": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-geocode": "^0.2.3",
     "react-google-autocomplete": "^2.7.0",
     "react-google-places-autocomplete": "^3.4.0",
     "react-hook-form": "^7.34.2",

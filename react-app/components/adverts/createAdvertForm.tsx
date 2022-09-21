@@ -89,6 +89,15 @@ export function CreateAdvertForm() {
       })
       .min(2, "trop court")
       .max(50, "trop long"),
+    // location: zod.object({
+    //   lat: zod.string(),
+    //   lng: zod.string(),
+    // }),
+    // slug: zod.object({
+    //   current: zod.string(),
+    // }),
+    // image: zod.object({}),
+    price: zod.number().min(0).max(1000),
   });
 
   const {
@@ -100,7 +109,7 @@ export function CreateAdvertForm() {
     setValue,
     formState: { errors, isValid, isSubmitting },
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    // resolver: zodResolver(validationSchema),
     shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
@@ -126,7 +135,7 @@ export function CreateAdvertForm() {
   return (
     <>
       <form
-        className="space-y-5 w-2/5 mx-auto p-10 bg-white rounded-lg"
+        className="w-2/5 p-10 mx-auto space-y-5 bg-white rounded-lg"
         onSubmit={handleSubmit(async (input) => {
           await client
             .create({
@@ -231,7 +240,6 @@ export function CreateAdvertForm() {
           {...register("description")}
           placeholder="description"
           required
-          // className="p-3 border border-gray-300 rounded focus:outline-none"
         />
 
         <NumberInput
