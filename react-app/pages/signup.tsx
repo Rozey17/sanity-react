@@ -64,29 +64,20 @@ const Signup = () => {
           action=""
           className="w-1/3 mx-auto space-y-5"
           onSubmit={handleSubmit(async (input) => {
-            try {
-              await signUp({
-                email: input.email,
-                password: input.password,
-                name: input.name,
-              });
-              // .then(
-              //   async (res) =>
-              //     await signIn("sanity-login", {
-              //       redirect: false,
-              //       email: input.email,
-              //       password: input.password,
-              //     })
-              // );
+            await signUp({
+              email: input.email,
+              password: input.password,
+              name: input.name,
+            }).then((res) =>
+              !!res.id
+                ? toast.success(
+                    `l'utilisateur ${input.name} a été créé avec succès`
+                  )
+                : toast.error("Cet utilisateur existe déjà")
+            );
 
-              toast.success(
-                `l'utilisateur ${input.name} a été créé avec succès`
-              );
-              reset();
-              // router.push("/profile");
-            } catch (error) {
-              toast.error(error);
-            }
+            reset();
+            // router.push("/profile");
           })}
         >
           <TextInput
