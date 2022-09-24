@@ -73,7 +73,7 @@ export const Header = () => {
                 ? router.push("/advert/create")
                 : router.push("/signin");
             }}
-            className="flex items-center px-4 py-2 capitalize bg-teal-500 rounded-full font-medium"
+            className="button-primary flex items-center"
           >
             <PlusSmIcon className="w-5 h-5" />
             submit ad

@@ -39,12 +39,12 @@ import { SanityCredentials } from "../../../lib/credentials";
 
 const options: NextAuthOptions = {
   providers: [
-    // Auth0Provider({
-    //   clientId: process.env.AUTH0_CLIENT_ID as string,
-    //   clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
-    //   issuer: process.env.AUTH0_DOMAIN as string,
-    //   //   domain: process.env.AUTH0_DOMAIN as string,
-    // }),
+    Auth0Provider({
+      clientId: process.env.AUTH0_CLIENT_ID as string,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
+      issuer: process.env.AUTH0_DOMAIN as string,
+      //   domain: process.env.AUTH0_DOMAIN as string,
+    }),
     SanityCredentials(client), // only if you use sign in with credentials
   ],
   session: {

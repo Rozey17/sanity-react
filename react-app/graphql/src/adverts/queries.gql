@@ -91,3 +91,8 @@ query ListAdvertsByCategory($slug:String!){allAdvert(where :{subcategory :{categ
 query ListAdvertsBySubCategory($slug:String!){allAdvert(where :{subcategory :{slug:{current : {eq: $slug}}}})
 {_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current}},contact,price,location{lat,lng,alt},image{asset{url}}}
 }
+
+query ListAdvertSearch($lat:Float!,$lng:Float,$title:String!,$subcategory: ID!){allAdvert(where:{location :{lat:{eq:$lat},lng:{eq:$lng}},
+title:{matches:$title}, subcategory:{_id:{eq:$subcategory}}})
+{_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current}},contact,price,location{lat,lng,alt},image{asset{url}}}
+}

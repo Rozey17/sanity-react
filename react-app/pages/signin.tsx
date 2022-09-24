@@ -65,6 +65,9 @@ const Signup = () => {
         />
         <button className="button-primary">se connecter</button>
       </form>
+      <button className="" onClick={() => signIn("auth0")}>
+        connexion via auth0
+      </button>
       <Toaster />
     </Layout>
   );
