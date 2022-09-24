@@ -6,9 +6,34 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { Layout } from "../components/layout";
+import * as zod from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Signup = () => {
   const router = useRouter();
+  const validationSchema = zod.object({
+    name: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "Trop court")
+      .max(50, "Trop long"),
+    email: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .email("Email invalide"),
+
+    password: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(7, "Minimum 7 caractères")
+      .max(50, "Maximum 50 caractères"),
+    //  image: zod.object({
+
+    //  }).optional(),
+  });
   const {
     register,
     handleSubmit,
@@ -18,14 +43,14 @@ const Signup = () => {
     setValue,
     formState: { errors, isValid, isSubmitting },
   } = useForm({
-    //   resolver: zodResolver(validationSchema),
+    resolver: zodResolver(validationSchema),
     shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
       name: "",
       email: "",
       password: "",
-      image: undefined,
+      // image: undefined,
     },
   });
 
@@ -72,6 +97,7 @@ const Signup = () => {
             label="nom d'utilisateur"
             {...register("name")}
             placeholder="name"
+            required
           />
           <TextInput
             classNames={{
@@ -81,6 +107,7 @@ const Signup = () => {
             label="email"
             {...register("email")}
             placeholder="email"
+            required
           />
           <TextInput
             classNames={{
@@ -91,8 +118,18 @@ const Signup = () => {
             label="mot de passe"
             {...register("password")}
             placeholder="mot de passe"
+            required
           />
-          <button className="button-primary">créer compte</button>
+          <button
+            disabled={!isValid || isSubmitting}
+            className={
+              !isValid
+                ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
+                : "button-primary w-full"
+            }
+          >
+            {isSubmitting ? "Chargement..." : "Créer un compte"}
+          </button>
         </form>
         <Toaster />
       </div>

@@ -6,9 +6,26 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { Layout } from "../components/layout";
+import * as zod from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Signup = () => {
   const router = useRouter();
+  const validationSchema = zod.object({
+    email: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .email("Email invalide"),
+
+    password: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(7, "Minimum 7 caractères")
+      .max(50, "Maximum 50 caractères"),
+    // photo: zod.string().optional(),
+  });
   const {
     register,
     handleSubmit,
@@ -18,7 +35,7 @@ const Signup = () => {
     setValue,
     formState: { errors, isValid, isSubmitting },
   } = useForm({
-    //   resolver: zodResolver(validationSchema),
+    resolver: zodResolver(validationSchema),
     shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
@@ -72,7 +89,16 @@ const Signup = () => {
             {...register("password")}
             placeholder="mot de passe"
           />
-          <button className="button-primary">se connecter</button>
+          <button
+            disabled={!isValid || isSubmitting}
+            className={
+              !isValid
+                ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
+                : "button-primary w-full"
+            }
+          >
+            {isSubmitting ? "Chargement..." : "Se connecter"}
+          </button>
         </form>
       </div>
 
