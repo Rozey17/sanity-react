@@ -64,19 +64,33 @@ const Signup = () => {
           action=""
           className="w-1/3 mx-auto space-y-5"
           onSubmit={handleSubmit(async (input) => {
-            await signUp({
-              email: input.email,
-              password: input.password,
-              name: input.name,
-            }).then((res) =>
-              !!res.id
-                ? toast.success(
-                    `l'utilisateur ${input.name} a été créé avec succès`
-                  )
-                : toast.error("Cet utilisateur existe déjà")
-            );
-
-            reset();
+            try {
+              await signUp({
+                email: input.email,
+                password: input.password,
+                name: input.name,
+              }).then(async (res) =>
+                !!res.id
+                  ? await signIn("sanity-login", {
+                      redirect: false,
+                      email: input.email,
+                      password: input.password,
+                    }).then((res) => {
+                      if (res.status === 200) {
+                        // return toast.success("connexion réussie");
+                        router.push("/profile");
+                      } else if (res.error) {
+                        toast.error(res.error);
+                      } else {
+                        toast.error("Une erreur est survenue");
+                      }
+                    })
+                  : toast.error("Cet utilisateur existe déjà")
+              );
+            } catch (error) {
+              toast.error;
+            }
+            
             // router.push("/profile");
           })}
         >

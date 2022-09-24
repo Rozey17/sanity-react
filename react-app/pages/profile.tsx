@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { getSession, useSession } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
 import {
   useListAdvertsQuery,
@@ -25,12 +26,25 @@ const Profile = ({ currentUser }) => {
     <Layout>
       <div className="text-center p-20 bg-gray-100">
         <h1 className="text-center text-3xl font-extrabold">
-          liste des annonces
+          Liste des annonces
         </h1>
         <div className="">
-          {adverts
-            .filter((item) => item?.user?.email === user?.email)
-            .map((ad) => ad.title)}
+          {adverts.length === 0 ? (
+            <p className="">{`Vous n'avez aucune annonce`}</p>
+          ) : (
+            adverts
+              .filter((item) => item?.user?.email === user?.email)
+              .map((ad, index) => (
+                <ul key={index} className="">
+                  <li className="flex justify-center">
+                    <Link href={`/advert/${ad._id}`}>
+                      <a className="">{ad.title} </a>
+                    </Link>
+                    {/* dans {ad.subcategory.name} */}
+                  </li>
+                </ul>
+              ))
+          )}
         </div>
       </div>
     </Layout>
