@@ -23,8 +23,10 @@ const Profile = ({ currentUser }) => {
     advertsData && advertsData?.allAdvert ? advertsData?.allAdvert : [];
   return (
     <Layout>
-      <div className="text-center">
-        <h1 className="">liste des annonces</h1>
+      <div className="text-center p-20 bg-gray-100">
+        <h1 className="text-center text-3xl font-extrabold">
+          liste des annonces
+        </h1>
         <div className="">
           {adverts
             .filter((item) => item?.user?.email === user?.email)

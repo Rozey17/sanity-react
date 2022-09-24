@@ -18,11 +18,11 @@ a {
             height: 100%;
         }
 .button-primary{
-  @apply px-4 py-2 rounded-md  bg-teal-500  text-sm capitalize  font-medium active:bg-teal-600 text-white text-center
+  @apply px-4 py-2 rounded-md  bg-teal-500 flex items-center capitalize  font-medium active:bg-teal-600 text-white text-center
 }
 
 .button-secondary{
-  @apply px-4 py-2 rounded-md flex bg-red-500 text-sm capitalize font-medium active:bg-red-600 text-white text-center
+  @apply px-4 py-2 rounded-md flex bg-red-500 items-center capitalize font-medium active:bg-red-600 text-white text-center
 }
 
 @tailwind base;

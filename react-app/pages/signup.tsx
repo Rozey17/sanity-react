@@ -31,48 +31,71 @@ const Signup = () => {
 
   return (
     <Layout>
-      <form
-        action=""
-        className="w-1/3 mx-auto space-y-5"
-        onSubmit={handleSubmit(async (input) => {
-          try {
-            await signUp({
-              email: input.email,
-              password: input.password,
-              name: input.name,
-            });
-            // .then(
-            //   async (res) =>
-            //     await signIn("sanity-login", {
-            //       redirect: false,
-            //       email: input.email,
-            //       password: input.password,
-            //     })
-            // );
+      <div className="p-20 bg-gray-100 space-y-10">
+        <h1 className="text-center text-3xl font-extrabold">
+          Créer votre compte
+        </h1>
+        <form
+          action=""
+          className="w-1/3 mx-auto space-y-5"
+          onSubmit={handleSubmit(async (input) => {
+            try {
+              await signUp({
+                email: input.email,
+                password: input.password,
+                name: input.name,
+              });
+              // .then(
+              //   async (res) =>
+              //     await signIn("sanity-login", {
+              //       redirect: false,
+              //       email: input.email,
+              //       password: input.password,
+              //     })
+              // );
 
-            toast.success(`l'utilisateur ${input.name} a été créé avec succès`);
-            reset();
-            // router.push("/profile");
-          } catch (error) {
-            toast.error(error);
-          }
-        })}
-      >
-        <TextInput
-          label="nom d'utilisateur"
-          {...register("name")}
-          placeholder="name"
-        />
-        <TextInput label="email" {...register("email")} placeholder="email" />
-        <TextInput
-          type="password"
-          label="mot de passe"
-          {...register("password")}
-          placeholder="mot de passe"
-        />
-        <button className="button-primary">créer compte</button>
-      </form>
-      <Toaster />
+              toast.success(
+                `l'utilisateur ${input.name} a été créé avec succès`
+              );
+              reset();
+              // router.push("/profile");
+            } catch (error) {
+              toast.error(error);
+            }
+          })}
+        >
+          <TextInput
+            classNames={{
+              label: "font-sans capitalize font-medium",
+              input: "font-sans placeholder:capitalize",
+            }}
+            label="nom d'utilisateur"
+            {...register("name")}
+            placeholder="name"
+          />
+          <TextInput
+            classNames={{
+              label: "font-sans capitalize font-medium",
+              input: "font-sans placeholder:capitalize",
+            }}
+            label="email"
+            {...register("email")}
+            placeholder="email"
+          />
+          <TextInput
+            classNames={{
+              label: "font-sans capitalize font-medium",
+              input: "font-sans placeholder:capitalize",
+            }}
+            type="password"
+            label="mot de passe"
+            {...register("password")}
+            placeholder="mot de passe"
+          />
+          <button className="button-primary">créer compte</button>
+        </form>
+        <Toaster />
+      </div>
     </Layout>
   );
 };

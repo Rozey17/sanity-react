@@ -29,45 +29,56 @@ const Signup = () => {
 
   return (
     <Layout>
-      <form
-        action=""
-        className="w-1/3 mx-auto space-y-5"
-        onSubmit={handleSubmit(async (input) => {
-          await signIn("sanity-login", {
-            redirect: false,
-            email: input.email,
-            password: input.password,
-          }).then((res) => {
-            if (res.status === 200) {
-              // return toast.success("connexion réussie");
-              router.push("/profile");
-            } else if (res.error) {
-              toast.error(res.error);
-            } else {
-              toast.error("Une erreur est survenue");
-            }
-          });
-          // .catch((res) => res.error && toast.error(res.error));
-          //   reset();
-        })}
-      >
-        {/* <TextInput
-          label="nom d'utilisateur"
-          {...register("name")}
-          placeholder="name"
-        /> */}
-        <TextInput label="email" {...register("email")} placeholder="email" />
-        <TextInput
-          type="password"
-          label="mot de passe"
-          {...register("password")}
-          placeholder="mot de passe"
-        />
-        <button className="button-primary">se connecter</button>
-      </form>
-      <button className="" onClick={() => signIn("auth0")}>
+      <div className="p-20 bg-gray-100 space-y-10">
+        <h1 className="text-center text-3xl font-extrabold">Se connecter</h1>
+        <form
+          action=""
+          className="w-1/3 mx-auto space-y-5"
+          onSubmit={handleSubmit(async (input) => {
+            await signIn("sanity-login", {
+              redirect: false,
+              email: input.email,
+              password: input.password,
+            }).then((res) => {
+              if (res.status === 200) {
+                // return toast.success("connexion réussie");
+                router.push("/profile");
+              } else if (res.error) {
+                toast.error(res.error);
+              } else {
+                toast.error("Une erreur est survenue");
+              }
+            });
+            // .catch((res) => res.error && toast.error(res.error));
+            //   reset();
+          })}
+        >
+          <TextInput
+            classNames={{
+              label: "font-sans capitalize font-medium",
+              input: "font-sans placeholder:capitalize",
+            }}
+            label="email"
+            {...register("email")}
+            placeholder="email"
+          />
+          <TextInput
+            classNames={{
+              label: "font-sans capitalize font-medium",
+              input: "font-sans placeholder:capitalize",
+            }}
+            type="password"
+            label="mot de passe"
+            {...register("password")}
+            placeholder="mot de passe"
+          />
+          <button className="button-primary">se connecter</button>
+        </form>
+      </div>
+
+      {/* <button className="" onClick={() => signIn("auth0")}>
         connexion via auth0
-      </button>
+      </button> */}
       <Toaster />
     </Layout>
   );

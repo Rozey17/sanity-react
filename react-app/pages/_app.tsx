@@ -5,8 +5,8 @@ import { useApollo } from "../lib/graphql.server";
 import { MantineProvider } from "@mantine/core";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Layout } from "../components/layout";
 import { SessionProvider, signIn, useSession } from "next-auth/react";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps);
@@ -15,9 +15,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <SessionProvider>
       <MantineProvider>
         <ApolloProvider client={client}>
-          {/* <Layout> */}
+          <Head>
+            <title>Annonce 242</title>
+          </Head>
+
           <Component {...pageProps} />
-          {/* </Layout> */}
         </ApolloProvider>
       </MantineProvider>
     </SessionProvider>

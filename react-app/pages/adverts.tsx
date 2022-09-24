@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import React from "react";
 import { useListAdvertSearchQuery } from "../components/apollo-components";
 import { Layout } from "../components/layout";
 
@@ -9,12 +8,13 @@ const Adverts = () => {
   const latitude = router.query.lat as any;
   const longitude = router.query.lng as any;
   const title = router.query.title as string;
-  const subCategory = router.query.subcategory as string;
+  const subCategory = router.query.subCategory as string;
+
   const { data: adverts } = useListAdvertSearchQuery({
     variables: {
-      //   lat: latitude,
-      //   lng: longitude,
-      //   subcategory: subCategory,
+      lat: latitude,
+      lng: longitude,
+      subcategory: subCategory,
       title: title,
     },
   });

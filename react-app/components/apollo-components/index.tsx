@@ -1019,7 +1019,10 @@ export type ListAdvertsBySubCategoryQueryVariables = Exact<{
 export type ListAdvertsBySubCategoryQuery = { __typename?: 'RootQuery', allAdvert: Array<{ __typename?: 'Advert', _id?: string | null, title?: string | null, _createdAt?: any | null, description?: string | null, contact?: string | null, price?: number | null, slug?: { __typename?: 'Slug', current?: string | null } | null, subcategory?: { __typename?: 'Subcategory', _id?: string | null, name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null, location?: { __typename?: 'Geopoint', lat?: number | null, lng?: number | null, alt?: number | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
 
 export type ListAdvertSearchQueryVariables = Exact<{
+  lat: Scalars['Float'];
+  lng?: InputMaybe<Scalars['Float']>;
   title: Scalars['String'];
+  subcategory: Scalars['ID'];
 }>;
 
 
@@ -1307,8 +1310,10 @@ export type ListAdvertsBySubCategoryQueryHookResult = ReturnType<typeof useListA
 export type ListAdvertsBySubCategoryLazyQueryHookResult = ReturnType<typeof useListAdvertsBySubCategoryLazyQuery>;
 export type ListAdvertsBySubCategoryQueryResult = Apollo.QueryResult<ListAdvertsBySubCategoryQuery, ListAdvertsBySubCategoryQueryVariables>;
 export const ListAdvertSearchDocument = gql`
-    query ListAdvertSearch($title: String!) {
-  allAdvert(where: {title: {matches: $title}}) {
+    query ListAdvertSearch($lat: Float!, $lng: Float, $title: String!, $subcategory: ID!) {
+  allAdvert(
+    where: {location: {lat: {eq: $lat}, lng: {eq: $lng}}, title: {matches: $title}, subcategory: {_id: {eq: $subcategory}}}
+  ) {
     _id
     title
     _createdAt
@@ -1351,7 +1356,10 @@ export const ListAdvertSearchDocument = gql`
  * @example
  * const { data, loading, error } = useListAdvertSearchQuery({
  *   variables: {
+ *      lat: // value for 'lat'
+ *      lng: // value for 'lng'
  *      title: // value for 'title'
+ *      subcategory: // value for 'subcategory'
  *   },
  * });
  */

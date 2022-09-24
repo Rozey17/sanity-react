@@ -52,17 +52,17 @@ export const Header = () => {
           ) : (
             <>
               <button
-                className="flex items-center"
+                className="flex items-center capitalize font-medium"
                 onClick={() => router.push("/signin")}
               >
-                login
+                se connecter
                 <LoginIcon className=" h-7 w-7  ml-2 " />
               </button>
               <button
                 onClick={() => router.push("/signup")}
                 className="button-primary"
               >
-                signup
+                {` s'enregistrer`}
               </button>
             </>
           )}
@@ -73,10 +73,10 @@ export const Header = () => {
                 ? router.push("/advert/create")
                 : router.push("/signin");
             }}
-            className="button-primary flex items-center"
+            className="button-primary "
           >
             <PlusSmIcon className="w-5 h-5" />
-            submit ad
+            déposer une annonce
           </button>
         </span>
       </div>
