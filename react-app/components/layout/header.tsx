@@ -35,7 +35,7 @@ export const Header = () => {
             contact
           </a>
         </span>
-        <span className="flex items-center gap-5">
+        <span className="flex items-center gap-2">
           {session?.user ? (
             <div className="flex gap-2 items-center">
               <button onClick={() => router.push("/profile")}>
@@ -46,21 +46,12 @@ export const Header = () => {
               </button>
             </div>
           ) : (
-            <>
-              <button
-                className="flex items-center capitalize font-medium"
-                onClick={() => router.push("/signin")}
-              >
-                se connecter
-                <LoginIcon className=" h-7 w-7  ml-2 " />
-              </button>
-              <button
-                onClick={() => router.push("/signup")}
-                className="button-primary"
-              >
-                {` s'enregistrer`}
-              </button>
-            </>
+            <button
+              className="flex items-center capitalize font-medium"
+              onClick={() => router.push("/signin")}
+            >
+              <LoginIcon className=" h-7 w-7  ml-2 " />
+            </button>
           )}
 
           <button
