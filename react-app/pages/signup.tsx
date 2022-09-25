@@ -56,86 +56,91 @@ const Signup = () => {
 
   return (
     <Layout>
-      <div className="p-20 bg-gray-100 space-y-10">
-        <h1 className="text-center text-3xl font-extrabold">
-          Créer votre compte
-        </h1>
-        <form
-          action=""
-          className="w-1/3 mx-auto space-y-5"
-          onSubmit={handleSubmit(async (input) => {
-            try {
-              await signUp({
-                email: input.email,
-                password: input.password,
-                name: input.name,
-              }).then(async (res) =>
-                !!res.id
-                  ? await signIn("sanity-login", {
-                      redirect: false,
-                      email: input.email,
-                      password: input.password,
-                    }).then((res) => {
-                      if (res.status === 200) {
-                        // return toast.success("connexion réussie");
-                        router.push("/profile");
-                      } else if (res.error) {
-                        toast.error(res.error);
-                      } else {
-                        toast.error("Une erreur est survenue");
-                      }
-                    })
-                  : toast.error("Cet utilisateur existe déjà")
-              );
-            } catch (error) {
-              toast.error;
-            }
-            
-            // router.push("/profile");
-          })}
-        >
-          <TextInput
-            classNames={{
-              label: "font-sans capitalize font-medium",
-              input: "font-sans placeholder:capitalize",
-            }}
-            label="nom d'utilisateur"
-            {...register("name")}
-            placeholder="name"
-            required
+      <div className="p-20 bg-gradient-to-r from-rose-100 to-teal-100 space-y-10">
+        <div className="flex w-2/3 mx-auto h-[500px] shadow-lg rounded-3xl overflow-hidden">
+          <img
+            src="https://images.pexels.com/photos/7661643/pexels-photo-7661643.jpeg"
+            alt=""
+            className="h-full w-[45%] object-cover"
           />
-          <TextInput
-            classNames={{
-              label: "font-sans capitalize font-medium",
-              input: "font-sans placeholder:capitalize",
-            }}
-            label="email"
-            {...register("email")}
-            placeholder="email"
-            required
-          />
-          <TextInput
-            classNames={{
-              label: "font-sans capitalize font-medium",
-              input: "font-sans placeholder:capitalize",
-            }}
-            type="password"
-            label="mot de passe"
-            {...register("password")}
-            placeholder="mot de passe"
-            required
-          />
-          <button
-            disabled={!isValid || isSubmitting}
-            className={
-              !isValid
-                ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
-                : "button-primary w-full"
-            }
+          <form
+            action=""
+            className="w-[55%] space-y-5 p-10 bg-white"
+            onSubmit={handleSubmit(async (input) => {
+              try {
+                await signUp({
+                  email: input.email,
+                  password: input.password,
+                  name: input.name,
+                }).then(async (res) =>
+                  !!res.id
+                    ? await signIn("sanity-login", {
+                        redirect: false,
+                        email: input.email,
+                        password: input.password,
+                      }).then((res) => {
+                        if (res.status === 200) {
+                          router.push("/profile");
+                        } else if (res.error) {
+                          toast.error(res.error);
+                        } else {
+                          toast.error("Une erreur est survenue");
+                        }
+                      })
+                    : toast.error("Cet utilisateur existe déjà")
+                );
+              } catch (error) {
+                toast.error;
+              }
+            })}
           >
-            {isSubmitting ? "Chargement..." : "Créer un compte"}
-          </button>
-        </form>
+            <h1 className="text-center text-3xl font-extrabold pb-5 text-shadow-sm">
+              Créer votre compte
+            </h1>
+            <TextInput
+              classNames={{
+                label: "font-sans capitalize font-medium",
+                input: "font-sans placeholder:capitalize",
+              }}
+              label="nom d'utilisateur"
+              {...register("name")}
+              placeholder="name"
+              required
+            />
+            <TextInput
+              classNames={{
+                label: "font-sans capitalize font-medium",
+                input: "font-sans placeholder:capitalize",
+              }}
+              label="email"
+              {...register("email")}
+              placeholder="email"
+              required
+            />
+            <TextInput
+              classNames={{
+                label: "font-sans capitalize font-medium",
+                input: "font-sans placeholder:capitalize",
+              }}
+              type="password"
+              label="mot de passe"
+              {...register("password")}
+              placeholder="mot de passe"
+              required
+            />
+            <button
+              disabled={!isValid || isSubmitting}
+              className={
+                !isValid
+                  ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
+                  : "button-primary w-full"
+              }
+            >
+              {isSubmitting ? "Chargement..." : "Créer un compte"}
+            </button>
+          </form>
+        </div>
+
         <Toaster />
       </div>
     </Layout>

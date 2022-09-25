@@ -10,5 +10,8 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("tailwindcss-textshadow"),
+    require("tailwind-scrollbar-hide"),
+  ],
 };

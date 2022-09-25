@@ -4,21 +4,15 @@ import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import {
+  ListUsersByEmailDocument,
   useListAdvertsQuery,
   useListUsersByEmailQuery,
   User,
 } from "../components/apollo-components";
 import { Layout } from "../components/layout";
+import { initializeApollo } from "../lib/graphql.server";
 
-const Profile = ({ currentUser }) => {
-  const { data } = useListUsersByEmailQuery({
-    variables: {
-      email: currentUser?.email,
-    },
-  });
-
-  const user = data && data.allUser ? data.allUser[0] : null;
-
+const Profile = ({ user }) => {
   const { data: advertsData } = useListAdvertsQuery();
   const adverts =
     advertsData && advertsData?.allAdvert ? advertsData?.allAdvert : [];
@@ -52,6 +46,8 @@ const Profile = ({ currentUser }) => {
 export default Profile;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const client = initializeApollo();
+
   const session = await getSession(ctx);
   const currentUser = session?.user;
   console.log(currentUser);
@@ -63,9 +59,18 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     };
   }
+
+  const { data } = await client.query({
+    query: ListUsersByEmailDocument,
+    variables: {
+      email: currentUser?.email,
+    },
+  });
+  const user = data && data.allUser ? data.allUser[0] : null;
+
   return {
     props: {
-      currentUser,
+      user,
     },
   };
 };

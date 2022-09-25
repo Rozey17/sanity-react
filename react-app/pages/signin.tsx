@@ -46,11 +46,10 @@ const Signup = () => {
 
   return (
     <Layout>
-      <div className="p-20 bg-gray-100 space-y-10">
-        <h1 className="text-center text-3xl font-extrabold">Se connecter</h1>
+      <div className="p-20 bg-gradient-to-r from-rose-100 to-teal-100 space-y-10">
         <form
           action=""
-          className="w-1/3 mx-auto space-y-5"
+          className="w-1/3 mx-auto space-y-5 p-10 bg-white shadow-lg rounded-3xl overflow-hidden"
           onSubmit={handleSubmit(async (input) => {
             await signIn("sanity-login", {
               redirect: false,
@@ -58,7 +57,6 @@ const Signup = () => {
               password: input.password,
             }).then((res) => {
               if (res.status === 200) {
-                // return toast.success("connexion réussie");
                 router.push("/profile");
               } else if (res.error) {
                 toast.error(res.error);
@@ -66,10 +64,12 @@ const Signup = () => {
                 toast.error("Une erreur est survenue");
               }
             });
-            // .catch((res) => res.error && toast.error(res.error));
-            //   reset();
           })}
         >
+          <h1 className="text-center text-3xl font-extrabold text-shadow-md">
+            Se connecter
+          </h1>
+
           <TextInput
             classNames={{
               label: "font-sans capitalize font-medium",

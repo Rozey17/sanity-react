@@ -135,7 +135,7 @@ export function CreateAdvertForm() {
   return (
     <>
       <form
-        className="w-2/5 p-10 mx-auto space-y-5 bg-white rounded-lg"
+        className="w-2/5 p-10 mx-auto space-y-5 bg-white rounded-lg shadow-lg"
         onSubmit={handleSubmit(async (input) => {
           await client
             .create({
@@ -175,6 +175,9 @@ export function CreateAdvertForm() {
             });
         })}
       >
+        <h1 className="text-center text-3xl font-extrabold text-shadow-md">
+          Créér votre annonce gratuitement
+        </h1>
         <TextInput
           classNames={{
             input: errors.title
@@ -299,7 +302,7 @@ export function CreateAdvertForm() {
               : "button-primary w-full"
           }
         >
-          {isSubmitting ? "Chargement..." : "Créer un compte"}
+          {isSubmitting ? "Chargement..." : "Déposer une annonce"}
         </button>
       </form>
       <Toaster />
