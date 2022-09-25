@@ -59,7 +59,7 @@ const Signup = () => {
               if (res.status === 200) {
                 router.push("/profile");
               } else if (res.status === 401) {
-                toast.error('Email ou mot de passe invalide');
+                toast.error("Email ou mot de passe invalide");
               } else {
                 toast.error("Une erreur est survenue");
               }
@@ -94,7 +94,7 @@ const Signup = () => {
             className={
               !isValid
                 ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
-                : "button-primary w-full"
+                : "button-third w-full"
             }
           >
             {isSubmitting ? "Chargement..." : "Se connecter"}

@@ -10,18 +10,11 @@ import {
   User,
 } from "../apollo-components";
 import toast, { Toaster } from "react-hot-toast";
-import { createReadStream } from "fs";
-import { basename } from "path";
 import { useRouter } from "next/router";
 import slugify from "slugify";
-import { useMapEvents, MapContainer, TileLayer } from "react-leaflet";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import { useSession } from "next-auth/react";
-interface Location {
-  lat: number;
-  lng: number;
-}
 
 export function CreateAdvertForm() {
   const { data: session } = useSession();
@@ -65,12 +58,6 @@ export function CreateAdvertForm() {
       })
       .min(2, "trop court")
       .max(50, "trop long"),
-    name: zod
-      .string({
-        required_error: "Ce champ est obligatoire",
-      })
-      .min(2, "trop court")
-      .max(50, "trop long"),
     description: zod
       .string({
         required_error: "Ce champ est obligatoire",
@@ -89,15 +76,33 @@ export function CreateAdvertForm() {
       })
       .min(2, "trop court")
       .max(50, "trop long"),
-    // location: zod.object({
-    //   lat: zod.string(),
-    //   lng: zod.string(),
-    // }),
-    // slug: zod.object({
-    //   current: zod.string(),
-    // }),
-    // image: zod.object({}),
+    // location: zod
+    //   .object({
+    //     lat: zod.number(),
+    //     lng: zod.number(),
+    //   })
+    //   .optional(),
+    // slug: zod
+    //   .object({
+    //     current: zod.string(),
+    //   })
+    //   .optional(),
+    // image: zod
+    //   .object({
+    //     asset: zod.object({
+    //       url: zod.string(),
+    //     }),
+    //   })
+    //   .optional(),
     price: zod.number().min(0).max(1000),
+    // user: zod
+    //   .object({
+    //     user: zod.object({
+    //       name: zod.string(),
+    //       email: zod.string().email(),
+    //     }),
+    //   })
+    //   .optional(),
   });
 
   const {
@@ -109,7 +114,7 @@ export function CreateAdvertForm() {
     setValue,
     formState: { errors, isValid, isSubmitting },
   } = useForm({
-    // resolver: zodResolver(validationSchema),
+    resolver: zodResolver(validationSchema),
     shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
@@ -175,7 +180,7 @@ export function CreateAdvertForm() {
             });
         })}
       >
-        <h1 className="text-center text-3xl font-extrabold text-shadow-md">
+        <h1 className="text-center text-3xl font-extrabold text-shadow-md line-clamp-2">
           Créér votre annonce gratuitement
         </h1>
         <TextInput
@@ -187,7 +192,7 @@ export function CreateAdvertForm() {
           }}
           label="titre"
           {...register("title")}
-          placeholder="title"
+          placeholder="intitulé de l'annonce"
           required
         />
         <Select
@@ -223,7 +228,7 @@ export function CreateAdvertForm() {
         <TextInput
           classNames={{
             input: errors.contact
-              ? "border border-red-500 capitalize"
+              ? "border border-red-500 capitalize font-sans"
               : "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
@@ -235,8 +240,8 @@ export function CreateAdvertForm() {
         <Textarea
           classNames={{
             input: errors.description
-              ? "border border-red-500 capitalize "
-              : "capitalize font-sans",
+              ? "border border-red-500 font-sans capitalize "
+              : " font-sans placeholder:capitalize",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="Description"
@@ -252,9 +257,9 @@ export function CreateAdvertForm() {
               : "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
-          label="price"
+          label="prix"
           value={watch("price")}
-          placeholder="price"
+          placeholder="prix"
           onChange={(value) =>
             setValue("price", value, {
               shouldValidate: true,
@@ -299,7 +304,7 @@ export function CreateAdvertForm() {
           className={
             !isValid
               ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
-              : "button-primary w-full"
+              : "button-third w-full"
           }
         >
           {isSubmitting ? "Chargement..." : "Déposer une annonce"}

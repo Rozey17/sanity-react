@@ -13,5 +13,6 @@ module.exports = {
   plugins: [
     require("tailwindcss-textshadow"),
     require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/line-clamp"),
   ],
 };

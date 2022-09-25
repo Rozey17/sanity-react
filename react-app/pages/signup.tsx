@@ -59,7 +59,7 @@ const Signup = () => {
       <div className="p-20 bg-gradient-to-r from-rose-100 to-teal-100 space-y-10">
         <div className="flex w-2/3 mx-auto h-[500px] shadow-lg rounded-3xl overflow-hidden">
           <img
-            src="https://images.pexels.com/photos/7661643/pexels-photo-7661643.jpeg"
+            src="https://images.pexels.com/photos/3843285/pexels-photo-3843285.jpeg"
             alt=""
             className="h-full w-[45%] object-cover"
           />
@@ -87,7 +87,7 @@ const Signup = () => {
                           toast.error("Une erreur est survenue");
                         }
                       })
-                    : toast.error("Cet utilisateur existe déjà")
+                    : toast.error("Cet email est déjà utilisé")
                 );
               } catch (error) {
                 toast.error;
@@ -104,7 +104,7 @@ const Signup = () => {
               }}
               label="nom d'utilisateur"
               {...register("name")}
-              placeholder="name"
+              placeholder="nom d'utilisateur"
               required
             />
             <TextInput
@@ -133,7 +133,7 @@ const Signup = () => {
               className={
                 !isValid
                   ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
-                  : "button-primary w-full"
+                  : "button-third w-full"
               }
             >
               {isSubmitting ? "Chargement..." : "Créer un compte"}

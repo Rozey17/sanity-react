@@ -21,6 +21,9 @@ a {
   @apply px-4 py-2 rounded-md  bg-teal-500 flex items-center justify-center capitalize  font-medium active:bg-teal-600 text-white 
 }
 
+.button-third{
+  @apply px-4 py-2 rounded-md  bg-white flex items-center justify-center capitalize  font-medium active:bg-gray-50 text-teal-500 border-2 border-teal-500 
+}
 .button-secondary{
   @apply px-4 py-2 rounded-md flex bg-red-500 items-center capitalize font-medium active:bg-red-600 text-white text-center
 }

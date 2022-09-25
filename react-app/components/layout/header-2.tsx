@@ -24,17 +24,13 @@ export const Header2 = () => {
         </Link>
         <span className="flex space-x-5">
           <a href="#" className="flex capitalize">
-            home
+            accueil
           </a>
+
           <a href="#" className="flex capitalize">
-            browse ads
+            nouveautés
           </a>
-          <a href="#" className="flex capitalize">
-            news
-          </a>
-          <a href="#" className="flex capitalize">
-            pages
-          </a>
+
           <a href="#" className="flex capitalize">
             contact
           </a>

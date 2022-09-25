@@ -1,18 +1,13 @@
-import { ClipboardIcon } from "@heroicons/react/outline";
 import { NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
 import toast, { Toaster } from "react-hot-toast";
-import { createReadStream } from "fs";
-import { basename } from "path";
 import { client } from "../../lib/sanity.server";
-import {
-  Advert,
-  useGetAdvertQuery,
-  useListSubCategoriesQuery,
-} from "../apollo-components";
+import { Advert, useListSubCategoriesQuery } from "../apollo-components";
 import { useRouter } from "next/router";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
 
 export function EditAdvertForm({ advert }: { advert: Advert }) {
   const [imagesAssets, setImagesAssets] = useState(null);
@@ -22,6 +17,35 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
   const { data } = useListSubCategoriesQuery();
   const listSubCategories =
     data && data?.allSubcategory ? data?.allSubcategory : [];
+
+  const validationSchema = zod.object({
+    title: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "trop court")
+      .max(50, "trop long"),
+    description: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(15, "trop court")
+      .max(500, "trop long"),
+    contact: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "trop court")
+      .max(50, "trop long"),
+    subcategory: zod
+      .string({
+        required_error: "Ce champ est obligatoire",
+      })
+      .min(2, "trop court")
+      .max(50, "trop long"),
+
+    price: zod.number().min(0).max(1000),
+  });
   const {
     register,
     handleSubmit,
@@ -31,7 +55,7 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
     setValue,
     formState: { errors, isValid, isSubmitting },
   } = useForm({
-    //   resolver: zodResolver(validationSchema),
+    resolver: zodResolver(validationSchema),
     shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
@@ -48,7 +72,7 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
   return (
     <>
       <form
-        className="flex flex-col w-1/3 mx-auto space-y-5"
+        className="flex flex-col w-2/5 rounded-lg shadow-lg mx-auto space-y-5 p-10 bg-white"
         onSubmit={handleSubmit(async (input) => {
           await client
             .patch(advert?._id)
@@ -64,7 +88,7 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
                 _ref: input?.subcategory,
               },
               price: input?.price,
-              // location: input.location,
+
               image:
                 imagesAssets !== null
                   ? {
@@ -78,38 +102,34 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
             })
             .commit()
             .then((res) => {
-              // console.log(`Ad was created, document ID is ${res._id}`);
-              // reset();
-              // toast.success(`Ad was created, document ID is ${res._id}`);
               router.push(`/advert/${res._id}`);
             });
         })}
       >
+        <h1 className="text-center text-3xl font-extrabold text-shadow-md line-clamp-2">
+          Modifier votre annonce
+        </h1>
         <TextInput
-          label="Titre"
+          classNames={{
+            input: errors.title
+              ? "border border-red-500 capitalize"
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
+          label="titre"
           {...register("title")}
-          placeholder="title"
-          required
-        />
-
-        <TextInput
-          label="Contact"
-          {...register("contact")}
-          placeholder="contact"
-        />
-        <Textarea
-          label="Description"
-          {...register("description")}
-          placeholder="description"
+          placeholder="intitulé de l'annonce"
           required
         />
         <Select
           classNames={{
-            input: errors.subcategory ? "error-input" : "input",
-            label: "text-sm font-medium text-gray-600 font-sans",
+            input: errors.subcategory
+              ? "border border-red-500 capitalize"
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
             dropdown: "font-sans",
           }}
-          label="catégorie"
+          label="dans la catégorie"
           placeholder="Veuillez sélectionner une catégorie"
           searchable
           required
@@ -126,20 +146,45 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
             return {
               label: subcategory.name,
               value: subcategory._id,
+              group: subcategory.category.name,
             };
           })}
-          // icon={<ClipboardIcon className="w-5 h-5 text-sky-500" />}
         />
-        {/* <TextInput
-          type="text"
-          {...register("location")}
-          placeholder="location"
-        /> */}
+        <TextInput
+          classNames={{
+            input: errors.contact
+              ? "border border-red-500 capitalize font-sans"
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
+          label="contact"
+          {...register("contact")}
+          placeholder="contact"
+          required
+        />
+        <Textarea
+          classNames={{
+            input: errors.description
+              ? "border border-red-500 font-sans capitalize "
+              : " font-sans placeholder:capitalize",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
+          label="Description"
+          {...register("description")}
+          placeholder="description"
+          required
+        />
 
         <NumberInput
-          label="price"
+          classNames={{
+            input: errors.price
+              ? "border border-red-500 capitalize "
+              : "capitalize font-sans",
+            label: " font-medium text-gray-600 font-sans capitalize",
+          }}
+          label="prix"
           value={watch("price")}
-          placeholder="price"
+          placeholder="prix"
           onChange={(value) =>
             setValue("price", value, {
               shouldValidate: true,
@@ -171,14 +216,20 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
                 });
             }
           }}
-          // className={errors.photo ? "error-input" : "input"}
         />
         {previewImage && (
           <img src={previewImage} className="object-contain h-60 w-60" />
         )}
-        <div className="flex gap-5">
-          <button className="button-primary">submit</button>
-        </div>
+        <button
+          disabled={!isValid || isSubmitting}
+          className={
+            !isValid
+              ? "disabled:cursor-not-allowed text-gray-400 bg-gray-200  w-full px-4 py-2 rounded-md font-medium"
+              : "button-third w-full"
+          }
+        >
+          {isSubmitting ? "Chargement..." : "Modifier"}
+        </button>
       </form>
       <Toaster />
     </>

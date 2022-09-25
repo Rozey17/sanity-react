@@ -23,7 +23,9 @@ import { Layout } from "../../../components/layout";
 export default function EditAdvertPage({ advert }: { advert: Advert }) {
   return (
     <Layout>
-      <EditAdvertForm advert={advert} />
+      <div className="p-20 space-y-10 bg-gradient-to-r from-rose-100 to-teal-100">
+        <EditAdvertForm advert={advert} />
+      </div>
     </Layout>
   );
 }
