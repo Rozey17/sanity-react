@@ -23,8 +23,17 @@ import { Layout } from "../../../components/layout";
 export default function EditAdvertPage({ advert }: { advert: Advert }) {
   return (
     <Layout>
-      <div className="p-20 space-y-10 bg-gradient-to-r from-rose-100 to-teal-100">
+      <div className=" relative p-20 space-y-10 bg-gradient-to-r from-rose-100 to-teal-100">
+        {/* <img
+          src="https://images.pexels.com/photos/6476582/pexels-photo-6476582.jpeg"
+          alt=""
+          className="h-full w-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0">
+          <div className="relative p-20 space-y-10"> */}
         <EditAdvertForm advert={advert} />
+        {/* </div>
+        </div> */}
       </div>
     </Layout>
   );
