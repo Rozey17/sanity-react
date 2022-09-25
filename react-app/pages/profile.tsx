@@ -25,9 +25,7 @@ const Profile = ({ currentUser }) => {
   return (
     <Layout>
       <div className="text-center p-20 bg-gray-100">
-        <h1 className="text-center text-3xl font-extrabold">
-          Liste des annonces
-        </h1>
+        <h1 className="text-center text-3xl font-extrabold">Vos annonces</h1>
         <div className="">
           {adverts.length === 0 ? (
             <p className="">{`Vous n'avez aucune annonce`}</p>
