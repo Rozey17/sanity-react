@@ -15,6 +15,7 @@ import slugify from "slugify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import { useSession } from "next-auth/react";
+import { uuid } from "@sanity/uuid";
 
 export function CreateAdvertForm() {
   const { data: session } = useSession();
@@ -144,6 +145,7 @@ export function CreateAdvertForm() {
         onSubmit={handleSubmit(async (input) => {
           await client
             .create({
+              _id: uuid(),
               _type: "advert",
               title: input.title,
               description: input.description,
@@ -176,11 +178,11 @@ export function CreateAdvertForm() {
               },
             })
             .then((res) => {
-              router.push(`/advert/${res._id}`);
+              router.push(`/advert/${res.slug.current}`);
             });
         })}
       >
-        <h1 className="text-center text-3xl font-extrabold text-shadow-md line-clamp-2">
+        <h1 className="text-center text-3xl font-extrabold text-shadow-md mx-auto w-2/3">
           Créér votre annonce gratuitement
         </h1>
         <TextInput

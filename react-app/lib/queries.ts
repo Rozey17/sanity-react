@@ -23,6 +23,6 @@ export const getVerificationTokenQuery = groq`
   *[_type == $verificationTokenSchema && identifier == $identifier && token == $token][0]
 `;
 
-// export const getAdvertsBySearch = groq`[_type == advert && title match $title ]
-// {_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current}},contact,price,location{lat,lng,alt},image{asset{url}}}
-// `;
+export const getAdvertsBySearch = groq`[_type == advert && title match $title ]
+{_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current}},contact,price,location{lat,lng,alt},image{asset{url}}}
+`;

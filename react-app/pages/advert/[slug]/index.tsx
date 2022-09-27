@@ -4,6 +4,7 @@ import { initializeApollo } from "../../../lib/graphql.server";
 import {
   Advert,
   GetAdvertDocument,
+  ListAdvertsBySlugDocument,
 } from "../../../components/apollo-components";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
@@ -21,11 +22,9 @@ const Map = dynamic(() => import("../../../components/map"), {
 });
 
 export default function AdvertPage({ advert }: { advert: Advert }) {
-  // console.log(advert?.title);
   const router = useRouter();
   const slug = router.query.slug;
   const { data: session } = useSession();
-  console.log(session?.user["custom:_id"]);
   return (
     <Layout>
       <Head>
@@ -175,16 +174,18 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const client = initializeApollo();
 
   const slug = ctx.params.slug;
-  const advert = await client.query({
-    query: GetAdvertDocument,
+  const adverts = await client.query({
+    query: ListAdvertsBySlugDocument,
     variables: {
-      id: slug as string,
+      slug: slug as string,
     },
   });
-  console.log(advert?.data?.Advert);
+
+  const advert = adverts.data.allAdvert[0] || null;
+  console.log(advert);
   return {
     props: {
-      advert: advert?.data?.Advert,
+      advert: advert,
     },
   };
 };

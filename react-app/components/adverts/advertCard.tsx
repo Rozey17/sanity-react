@@ -58,7 +58,7 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
   return (
     <div
       className="cursor-pointer duration-300 hover:shadow-md rounded-md overflow-hidden bg-white h-[360px]"
-      onClick={() => router.push(`/advert/${advert?._id}`)}
+      onClick={() => router.push(`/advert/${advert?.slug.current}`)}
     >
       {/* <Image
         src={advert?.image?.asset?.url}
