@@ -8,10 +8,21 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link rel="manifest" href="/manifest.json" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&&display=optional"
+            rel="apple-touch-icon"
+            href="/images/android-chrome-192x192.png"
+          ></link>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          ></link>
 
           <meta name="theme-color" content="#fff" />
         </Head>
