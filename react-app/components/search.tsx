@@ -30,12 +30,11 @@ export const Search = () => {
         <div className="flex items-center justify-center gap-2">
           <TextInput
             type="text"
-            className="  text-sm  rounded focus:outline-none"
+            // className="  text-sm  rounded focus:outline-none"
             classNames={{
-              input: "py-5 text-sm  rounded focus:outline-none",
-              label: "text-sm font-medium text-gray-600 font-sans",
+              input: "py-5  font-sans rounded focus:outline-none",
             }}
-            placeholder="search for.."
+            placeholder="Rechercher ..."
             onChange={(e) => setTitle(e.target.value)}
             icon={<SpeakerphoneIcon className=" w-5 h-5 text-current " />}
           />
@@ -55,7 +54,8 @@ export const Search = () => {
 
           <Select
             classNames={{
-              input: "py-5 text-sm capitalize rounded focus:outline-none",
+              input:
+                "py-5 text-sm capitalize font-sans rounded focus:outline-none",
               label: "text-sm font-medium text-gray-600 font-sans",
               dropdown: "font-sans",
             }}
