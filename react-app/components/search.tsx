@@ -36,7 +36,7 @@ export const Search = () => {
             }}
             placeholder="Rechercher ..."
             onChange={(e) => setTitle(e.target.value)}
-            icon={<SpeakerphoneIcon className=" w-5 h-5 text-current " />}
+            // icon={<SpeakerphoneIcon className=" w-5 h-5 text-current " />}
           />
 
           <Autocomplete
