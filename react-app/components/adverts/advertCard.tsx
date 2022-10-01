@@ -81,7 +81,7 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
       />
       <div className="flex flex-col p-5 space-y-5">
         <div className="flex justify-between text-gray-500">
-          <span className="flex items-center">
+          <span className="flex items-center ">
             {/* <AtSymbolIcon className="w-3 h-3 mr-1 " /> */}
             <svg
               className="w-4 h-4 mr-1 fill-gray-500"

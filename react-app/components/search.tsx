@@ -10,7 +10,7 @@ import {
   useListAdvertSearchQuery,
   useListSubCategoriesQuery,
 } from "./apollo-components";
-import Autocomplete from "react-google-autocomplete";
+import { usePlacesWidget } from "react-google-autocomplete";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { useRouter } from "next/router";
 
@@ -23,9 +23,19 @@ export const Search = () => {
   const { data } = useListSubCategoriesQuery();
   const listSubCategories =
     data && data?.allSubcategory ? data?.allSubcategory : [];
+  const { ref, autocompleteRef } = usePlacesWidget({
+    apiKey: "AIzaSyCzgrgiyAUkKbLlAR2vT2PuEYw7hiRv7gg",
 
+    onPlaceSelected: (place) =>
+      geocodeByAddress(place.formatted_address)
+        .then((results) => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          setLatitude(lat);
+          setLongitude(lng);
+        }),
+  });
   return (
-    <>
+    <div>
       <form className=" pt-6 ">
         <div className="flex items-center justify-center gap-2">
           <TextInput
@@ -36,20 +46,18 @@ export const Search = () => {
             }}
             placeholder="Rechercher ..."
             onChange={(e) => setTitle(e.target.value)}
-            // icon={<SpeakerphoneIcon className=" w-5 h-5 text-current " />}
+            icon={<SpeakerphoneIcon className=" w-5 h-5 text-current " />}
           />
 
-          <Autocomplete
-            className="rounded p-3 text-black border border-gray-300 font-sans text-sm focus:outline-none"
-            apiKey="AIzaSyCzgrgiyAUkKbLlAR2vT2PuEYw7hiRv7gg"
-            onPlaceSelected={(place) =>
-              geocodeByAddress(place.formatted_address)
-                .then((results) => getLatLng(results[0]))
-                .then(({ lat, lng }) => {
-                  setLatitude(lat);
-                  setLongitude(lng);
-                })
-            }
+          <TextInput
+            ref={ref}
+            type="text"
+            // className="  text-sm  rounded focus:outline-none"
+            classNames={{
+              input: "py-5  font-sans rounded focus:outline-none",
+            }}
+            placeholder="Indiquer un lieu..."
+            icon={<LocationMarkerIcon className=" w-5 h-5 text-current " />}
           />
 
           <Select
@@ -63,7 +71,6 @@ export const Search = () => {
             className="  text-sm capitalize rounded focus:outline-none"
             placeholder="sélection de catégorie"
             searchable
-            required
             // nothingFound={f({ id: Translation.no_item })}
             // value={watch("subcategory")}
             // onChange={(value) =>
@@ -95,6 +102,6 @@ export const Search = () => {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 };

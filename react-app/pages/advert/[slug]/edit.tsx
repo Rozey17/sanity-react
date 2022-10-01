@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import {
   Advert,
   GetAdvertDocument,
+  ListAdvertsBySlugDocument,
   useGetAdvertQuery,
   useListSubCategoriesQuery,
 } from "../../../components/apollo-components";
@@ -43,16 +44,18 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const client = initializeApollo();
 
   const slug = ctx.params.slug;
-  const advert = await client.query({
-    query: GetAdvertDocument,
+  const adverts = await client.query({
+    query: ListAdvertsBySlugDocument,
     variables: {
-      id: slug as string,
+      slug: slug as string,
     },
   });
-  console.log(advert.data.Advert);
+
+  const advert = adverts.data.allAdvert[0] || null;
+  console.log(advert);
   return {
     props: {
-      advert: advert?.data?.Advert,
+      advert: advert,
     },
   };
 };

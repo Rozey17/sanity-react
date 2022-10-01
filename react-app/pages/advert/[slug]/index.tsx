@@ -78,7 +78,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                 </h1>
                 <p className="text-gray-700">{advert?.description}</p>
               </div>
-              <div className="flex gap-5">
+              {/* <div className="flex gap-5">
                 <button
                   className="button-primary"
                   onClick={() => router.push(`/advert/${slug}/edit`)}
@@ -100,7 +100,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                 >
                   delete
                 </button>
-              </div>
+              </div> */}
             </div>
             <div className="space-y-10">
               <div className=" p-5 bg-teal-500">
