@@ -33,7 +33,7 @@ const Profile = ({ user }) => {
               .map((ad, index) => (
                 <ul key={index} className="">
                   <li className="grid grid-cols-3  mx-auto w-2/3">
-                    <Link href={`/advert/${ad._id}`}>{ad.title}</Link>
+                    <Link href={`/advert/${ad.slug.current}`}>{ad.title}</Link>
                     <Link href={`/advert/${ad.slug.current}/edit`}>
                       modifier
                     </Link>

@@ -57,53 +57,28 @@ export function CreateAdvertForm() {
       .string({
         required_error: "Ce champ est obligatoire",
       })
-      .min(2, "trop court")
-      .max(50, "trop long"),
+      .min(2, "Trop court")
+      .max(50, "Trop long"),
     description: zod
       .string({
         required_error: "Ce champ est obligatoire",
       })
-      .min(15, "trop court")
-      .max(500, "trop long"),
+      .min(15, "Trop court")
+      .max(500, "Trop long"),
     contact: zod
       .string({
         required_error: "Ce champ est obligatoire",
       })
-      .min(2, "trop court")
-      .max(50, "trop long"),
+      .min(2, "Trop court")
+      .max(50, "Trop long"),
     subcategory: zod
       .string({
         required_error: "Ce champ est obligatoire",
       })
-      .min(2, "trop court")
-      .max(50, "trop long"),
-    // location: zod
-    //   .object({
-    //     lat: zod.number(),
-    //     lng: zod.number(),
-    //   })
-    //   .optional(),
-    // slug: zod
-    //   .object({
-    //     current: zod.string(),
-    //   })
-    //   .optional(),
-    // image: zod
-    //   .object({
-    //     asset: zod.object({
-    //       url: zod.string(),
-    //     }),
-    //   })
-    //   .optional(),
+      .min(2, "Trop court")
+      .max(50, "Trop long"),
+
     price: zod.number().min(0).max(1000),
-    // user: zod
-    //   .object({
-    //     user: zod.object({
-    //       name: zod.string(),
-    //       email: zod.string().email(),
-    //     }),
-    //   })
-    //   .optional(),
   });
 
   const {
@@ -116,7 +91,7 @@ export function CreateAdvertForm() {
     formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(validationSchema),
-    shouldUseNativeValidation: true, //show native error messages on the browser
+    // shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
       title: "",
@@ -187,15 +162,14 @@ export function CreateAdvertForm() {
         </h1>
         <TextInput
           classNames={{
-            input: errors.title
-              ? "border border-red-500 capitalize"
-              : "capitalize font-sans",
+            input: "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="titre"
           {...register("title")}
           placeholder="intitulé de l'annonce"
           required
+          error={errors.title && errors.title.message}
         />
         <Select
           classNames={{
@@ -229,34 +203,30 @@ export function CreateAdvertForm() {
         />
         <TextInput
           classNames={{
-            input: errors.contact
-              ? "border border-red-500 capitalize font-sans"
-              : "capitalize font-sans",
+            input: "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="contact"
           {...register("contact")}
           placeholder="contact"
           required
+          error={errors.contact && errors.contact.message}
         />
         <Textarea
           classNames={{
-            input: errors.description
-              ? "border border-red-500 font-sans capitalize "
-              : " font-sans placeholder:capitalize",
+            input: " font-sans placeholder:capitalize",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="Description"
           {...register("description")}
           placeholder="description"
           required
+          error={errors.description && errors.description.message}
         />
 
         <NumberInput
           classNames={{
-            input: errors.price
-              ? "border border-red-500 capitalize "
-              : "capitalize font-sans",
+            input: "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="prix"
@@ -269,6 +239,8 @@ export function CreateAdvertForm() {
               shouldTouch: true,
             })
           }
+          required
+          error={errors.price && errors.price.message}
         />
         <input
           id="photo"

@@ -56,7 +56,7 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
     formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(validationSchema),
-    shouldUseNativeValidation: true, //show native error messages on the browser
+    // shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
       title: advert?.title,
@@ -102,7 +102,7 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
             })
             .commit()
             .then((res) => {
-              router.push(`/advert/${res._id}`);
+              router.push(`/advert/${advert?.slug?.current}`);
             });
         })}
       >
@@ -111,15 +111,14 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
         </h1>
         <TextInput
           classNames={{
-            input: errors.title
-              ? "border border-red-500 capitalize"
-              : "capitalize font-sans",
+            input: "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="titre"
           {...register("title")}
           placeholder="intitulé de l'annonce"
           required
+          error={errors.title && errors.title.message}
         />
         <Select
           classNames={{
@@ -149,37 +148,34 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
               group: subcategory.category.name,
             };
           })}
+          // icon={<ClipboardIcon className="w-5 h-5 text-sky-500" />}
         />
         <TextInput
           classNames={{
-            input: errors.contact
-              ? "border border-red-500 capitalize font-sans"
-              : "capitalize font-sans",
+            input: "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="contact"
           {...register("contact")}
           placeholder="contact"
           required
+          error={errors.contact && errors.contact.message}
         />
         <Textarea
           classNames={{
-            input: errors.description
-              ? "border border-red-500 font-sans capitalize "
-              : " font-sans placeholder:capitalize",
+            input: " font-sans placeholder:capitalize",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="Description"
           {...register("description")}
           placeholder="description"
           required
+          error={errors.description && errors.description.message}
         />
 
         <NumberInput
           classNames={{
-            input: errors.price
-              ? "border border-red-500 capitalize "
-              : "capitalize font-sans",
+            input: "capitalize font-sans",
             label: " font-medium text-gray-600 font-sans capitalize",
           }}
           label="prix"
@@ -192,6 +188,8 @@ export function EditAdvertForm({ advert }: { advert: Advert }) {
               shouldTouch: true,
             })
           }
+          required
+          error={errors.price && errors.price.message}
         />
         <input
           {...register("image")}

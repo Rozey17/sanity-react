@@ -41,7 +41,7 @@ export const Hero = () => {
           </div>
           {/* new technique */}
           <div className="w-3/5  p-10 mx-auto bg-gray-100 rounded-lg shadow-lg">
-            {/* <SliderComponent /> */}
+            <SliderComponent />
           </div>
         </div>
       </div>
