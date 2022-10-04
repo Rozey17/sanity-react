@@ -23,17 +23,17 @@ const Home = ({ ads }: any) => {
           ))}
         </div>
       </section>
-      <section className="relative bg-black h-[550px] text-white bg-fixed">
+      <section className="relative bg-slate-800 h-[400px] text-white bg-fixed">
         <img
           src="https://images.pexels.com/photos/303383/pexels-photo-303383.jpeg"
           alt=""
           className="h-full w-full object-cover opacity-50"
         />
         <div className="absolute inset-0">
-          <div className="flex flex-col px-40  py-28">
+          <div className="flex flex-col px-40 py-20">
             <div className="space-y-5">
               <h1 className="text-3xl font-bold">
-                Enregistrez-vous et bénéficiez de
+                Enregistrez-vous et vous pourrez
               </h1>
               <ul className="px-5">
                 <li className="list-disc">Déposer vos annonces gratuitement</li>

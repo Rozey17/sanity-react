@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { AdvertCard } from "../components/adverts/advertCard";
 import {
   ListUsersByEmailDocument,
   useListAdvertsQuery,
@@ -28,33 +29,36 @@ const Profile = ({ user }) => {
           {adverts.length === 0 ? (
             <p className="">{`Vous n'avez aucune annonce`}</p>
           ) : (
-            adverts
-              .filter((item) => item?.user?.email === user?.email)
-              .map((ad, index) => (
-                <ul key={index} className="">
-                  <li className="grid grid-cols-3  mx-auto w-2/3">
-                    <Link href={`/advert/${ad.slug.current}`}>{ad.title}</Link>
-                    <Link href={`/advert/${ad.slug.current}/edit`}>
-                      modifier
-                    </Link>
-                    <button
-                      // className="button-secondary p-1 text-center"
-                      onClick={() => {
-                        alert("sûr ?");
-                        client
-                          .delete(ad._id)
-                          .then(() => {
-                            toast.success("Effacé avec succès !");
-                            router.push("/");
-                          })
-                          .catch((error) => toast.error(error));
-                      }}
-                    >
-                      supprimer
-                    </button>
-                  </li>
-                </ul>
-              ))
+            <div className="grid grid-cols-5 gap-3">
+              {adverts
+                .filter((item) => item?.user?.email === user?.email)
+                .map((ad, index) => (
+                  // <ul key={index} className="">
+                  //   <li className="grid grid-cols-3  mx-auto w-2/3">
+                  //     <Link href={`/advert/${ad.slug.current}`}>{ad.title}</Link>
+                  //     <Link href={`/advert/${ad.slug.current}/edit`}>
+                  //       modifier
+                  //     </Link>
+                  //     <button
+                  //       // className="button-secondary p-1 text-center"
+                  //       onClick={() => {
+                  //         alert("sûr ?");
+                  //         client
+                  //           .delete(ad._id)
+                  //           .then(() => {
+                  //             toast.success("Effacé avec succès !");
+                  //             router.push("/");
+                  //           })
+                  //           .catch((error) => toast.error(error));
+                  //       }}
+                  //     >
+                  //       supprimer
+                  //     </button>
+                  //   </li>
+                  // </ul>
+                  <AdvertCard key={index} advert={ad} />
+                ))}
+            </div>
           )}
         </div>
       </div>
