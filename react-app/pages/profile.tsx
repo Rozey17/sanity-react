@@ -33,30 +33,34 @@ const Profile = ({ user }) => {
               {adverts
                 .filter((item) => item?.user?.email === user?.email)
                 .map((ad, index) => (
-                  // <ul key={index} className="">
-                  //   <li className="grid grid-cols-3  mx-auto w-2/3">
-                  //     <Link href={`/advert/${ad.slug.current}`}>{ad.title}</Link>
-                  //     <Link href={`/advert/${ad.slug.current}/edit`}>
-                  //       modifier
-                  //     </Link>
-                  //     <button
-                  //       // className="button-secondary p-1 text-center"
-                  //       onClick={() => {
-                  //         alert("sûr ?");
-                  //         client
-                  //           .delete(ad._id)
-                  //           .then(() => {
-                  //             toast.success("Effacé avec succès !");
-                  //             router.push("/");
-                  //           })
-                  //           .catch((error) => toast.error(error));
-                  //       }}
-                  //     >
-                  //       supprimer
-                  //     </button>
-                  //   </li>
-                  // </ul>
-                  <AdvertCard key={index} advert={ad} />
+                  <div key={index} className="flex flex-col gap-5">
+                    <AdvertCard advert={ad} />
+                    <div className="flex space-x-2 items-center">
+                      <button
+                        className="button-primary"
+                        onClick={() =>
+                          router.push(`/advert/${ad.slug.current}/edit`)
+                        }
+                      >
+                        modifier
+                      </button>
+                      <button
+                        className="button-secondary"
+                        onClick={() => {
+                          alert("sûr ?");
+                          client
+                            .delete(ad._id)
+                            .then(() => {
+                              toast.success("Effacé avec succès !");
+                              router.push("/");
+                            })
+                            .catch((error) => toast.error(error));
+                        }}
+                      >
+                        supprimer
+                      </button>
+                    </div>
+                  </div>
                 ))}
             </div>
           )}

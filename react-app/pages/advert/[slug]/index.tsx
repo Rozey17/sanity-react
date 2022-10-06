@@ -15,6 +15,7 @@ import { Layout } from "../../../components/layout";
 import { AdActionComponent } from "../../../components/adActionComponent";
 import { useSession } from "next-auth/react";
 import { UserCircleIcon } from "@heroicons/react/outline";
+import Link from "next/link";
 
 const Map = dynamic(() => import("../../../components/map"), {
   loading: () => <p>A map is loading</p>,
@@ -39,7 +40,19 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
         />
         <div className="absolute inset-0">
           <div className="flex items-center justify-between px-40 py-10 text-white">
-            <span>hey</span>
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold">{advert.title}</h1>
+              <div className="flex gap-3 items-center text-sm">
+                <Link href="/">Accueil</Link> {">"}{" "}
+                <Link
+                  href={`/categories/${advert.subcategory.category.slug.current}`}
+                >
+                  {advert.subcategory.category.name}
+                </Link>
+                {">"} <p className="">{advert.subcategory.name}</p>
+              </div>
+            </div>
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -78,29 +91,6 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                 </h1>
                 <p className="text-gray-700">{advert?.description}</p>
               </div>
-              {/* <div className="flex gap-5">
-                <button
-                  className="button-primary"
-                  onClick={() => router.push(`/advert/${slug}/edit`)}
-                >
-                  modifier
-                </button>
-                <button
-                  className="button-secondary"
-                  onClick={() => {
-                    alert("sûr ?");
-                    client
-                      .delete(advert?._id)
-                      .then(() => {
-                        toast.success("Effacé avec succès !");
-                        router.push("/");
-                      })
-                      .catch((error) => toast.error(error));
-                  }}
-                >
-                  delete
-                </button>
-              </div> */}
             </div>
             <div className="space-y-10">
               <div className=" p-5 bg-teal-500">
@@ -110,13 +100,8 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               </div>
 
               <div className="flex flex-col justify-between p-8 space-y-5 bg-white">
-                <p className="font-medium capitalize">ad owner</p>
+                <p className="font-medium">Annonce publiée par</p>
                 <div className="flex items-center gap-3">
-                  {/* <img
-                    src={advert.user.image}
-                    alt=""
-                    className="rounded-full object-cover h-20 w-20"
-                  /> */}
                   <UserCircleIcon className="h-20 w-20" />
                   <p className="">{advert?.user?.name}</p>
                 </div>
