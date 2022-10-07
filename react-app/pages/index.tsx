@@ -17,7 +17,7 @@ const Home = ({ ads }: any) => {
           <button className="button-primary">latest ads</button>
           <button className="button-primary">ending soon</button>
         </div>
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-5">
           {ads.map((ad, index) => (
             <AdvertCard key={index} advert={ad} />
           ))}

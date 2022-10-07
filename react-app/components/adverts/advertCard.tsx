@@ -57,7 +57,7 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
 
   return (
     <div
-      className="cursor-pointer duration-300 hover:shadow-md rounded-md overflow-hidden bg-white h-[360px]"
+      className="cursor-pointer duration-300 hover:shadow-md rounded-md overflow-hidden bg-white h-[300px]"
       onClick={() => router.push(`/advert/${advert?.slug.current}`)}
     >
       {/* <Image
@@ -77,7 +77,7 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
             : "/images/placeholder.jpg"
         }
         alt=""
-        className="object-cover w-full h-3/5"
+        className="object-cover w-full h-[55%]"
       />
       <div className="flex flex-col p-5 space-y-5">
         <div className="flex justify-between text-gray-500">
@@ -96,10 +96,10 @@ export const AdvertCard = ({ advert }: { advert: Advert }) => {
           </span>
           <span className="flex items-center">
             <LocationMarkerIcon className="w-4 h-4 mr-1" />
-            <p className="text-[13px]">{address}</p>
+            <p className="text-[13px] line-clamp-1">{address}</p>
           </span>
         </div>
-        <h4>{advert?.title}</h4>
+        <h4 className="line-clamp-1">{advert?.title}</h4>
         <div className="flex items-center justify-between">
           <h4 className="font-medium text-red-600">{advert?.price} €</h4>
           <HeartIcon className="w-4 h-4" />

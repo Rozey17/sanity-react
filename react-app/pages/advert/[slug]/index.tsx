@@ -49,7 +49,13 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                 >
                   {advert.subcategory.category.name}
                 </Link>
-                {">"} <p className="">{advert.subcategory.name}</p>
+                {">"}{" "}
+                <Link
+                  href={`/categories/${advert.subcategory.category.slug.current}/${advert.subcategory.slug.current}`}
+                  className=""
+                >
+                  {advert.subcategory.name}
+                </Link>
               </div>
             </div>
 
