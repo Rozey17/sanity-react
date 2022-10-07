@@ -44,11 +44,12 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
                       <CheckIcon className="w-5 h-5 text-teal-500" />
                     )
                   }
+                  className="font-sans"
                 >
                   <p className="text-sm">{item?.name}</p>
                 </Accordion.Control>
                 {item.subcategories.map((sub) => (
-                  <Accordion.Panel key={sub._id} className="">
+                  <Accordion.Panel key={sub._id} className="font-sans">
                     <input
                       type="checkbox"
                       className="mr-2 rounded-full"
