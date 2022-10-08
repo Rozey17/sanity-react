@@ -59,20 +59,6 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               </div>
             </div>
 
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-10 h-10 "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               stroke="currentColor"
@@ -85,7 +71,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
         </div>
       </div>
       {!advert ? (
-        <section className="px-40 py-20 bg-gray-100">No ad found</section>
+        <section className="px-40 py-20 bg-gray-100">{`Pas d'annonce trouvée`}</section>
       ) : (
         <section className="px-40 py-20 bg-gray-100">
           <div className="grid grid-cols-3 gap-10">
