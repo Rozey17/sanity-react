@@ -44,7 +44,7 @@ export const SignupForm = () => {
     formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(validationSchema),
-    shouldUseNativeValidation: true, //show native error messages on the browser
+    // shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
       name: "",
@@ -57,7 +57,7 @@ export const SignupForm = () => {
     <>
       <div className="flex w-2/3 mx-auto h-[500px] shadow-lg rounded-3xl overflow-hidden">
         <img
-          src="https://images.pexels.com/photos/3843285/pexels-photo-3843285.jpeg"
+          src="/images/pexels-photo-3843285.jpeg"
           alt=""
           className="h-full w-[45%] object-cover"
         />
@@ -97,12 +97,12 @@ export const SignupForm = () => {
           </h1>
           <TextInput
             classNames={{
-              label: "font-sans capitalize font-medium",
-              input: "font-sans placeholder:capitalize",
+              label: "font-sans font-medium",
+              input: "font-sans ",
             }}
-            label="nom d'utilisateur"
+            label="Nom d'utilisateur"
             {...register("name")}
-            placeholder="nom d'utilisateur"
+            placeholder="Nom d'utilisateur"
             required
           />
           <TextInput
@@ -117,13 +117,13 @@ export const SignupForm = () => {
           />
           <TextInput
             classNames={{
-              label: "font-sans capitalize font-medium",
-              input: "font-sans placeholder:capitalize",
+              label: "font-sans font-medium",
+              input: "font-sans",
             }}
             type="password"
-            label="mot de passe"
+            label="Mot de passe"
             {...register("password")}
-            placeholder="mot de passe"
+            placeholder="Mot de passe"
             required
           />
           <button

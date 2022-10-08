@@ -13,13 +13,13 @@ export const SigninForm = () => {
   const validationSchema = zod.object({
     email: zod
       .string({
-        required_error: "Ce champ est obligatoire",
+        required_error: "Une adresse email est requise",
       })
       .email("Email invalide"),
 
     password: zod
       .string({
-        required_error: "Ce champ est obligatoire",
+        required_error: "Un mot de passe est requis",
       })
       .min(7, "Minimum 7 caractères")
       .max(50, "Maximum 50 caractères"),
@@ -35,7 +35,7 @@ export const SigninForm = () => {
     formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(validationSchema),
-    shouldUseNativeValidation: true, //show native error messages on the browser
+    // shouldUseNativeValidation: true, //show native error messages on the browser
     mode: "onChange", // show errors as you type
     defaultValues: {
       email: "",
@@ -75,16 +75,18 @@ export const SigninForm = () => {
           label="email"
           {...register("email")}
           placeholder="email"
+          error={errors.email && errors.email.message}
         />
         <TextInput
           classNames={{
-            label: "font-sans capitalize font-medium",
-            input: "font-sans placeholder:capitalize",
+            label: "font-sans font-medium",
+            input: "font-sans",
           }}
           type="password"
-          label="mot de passe"
+          label="Mot de passe"
           {...register("password")}
-          placeholder="mot de passe"
+          placeholder="Mot de passe"
+          error={errors.password && errors.password.message}
         />
         <button
           disabled={!isValid || isSubmitting}

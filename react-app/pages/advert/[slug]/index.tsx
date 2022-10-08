@@ -32,7 +32,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
         <title>{advert?.title}</title>
       </Head>
 
-      <div className="relative h-32 bg-slate-600">
+      <div className="relative h-32 bg-slate-800">
         <img
           src="/images/pexels-photo-4007744.jpeg"
           alt=""
@@ -59,7 +59,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
               </div>
             </div>
 
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -72,6 +72,14 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
                 strokeLinejoin="round"
                 d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
+            </svg> */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              className="w-10 h-10 "
+              viewBox="0 0 24 24"
+            >
+              <path d="M13.895 15.875l-.895-.447v-11c6.65 2.217 9 2.363 9 5.162v9.41h-7v-1.336c0-.758-.428-1.45-1.105-1.789zm-4.895-15.875h-4v4.292l4-1.292v-3zm10 0h-4v3l4 1.292v-4.292zm-10 17.664c0-.757.428-1.45 1.105-1.789l.895-.447v-11c-6.523 2.175-9 2.307-9 5.162v9.41h7v-1.336zm6 6.336h7v-3h-7v3zm-13 0h7v-3h-7v3z" />
             </svg>
           </div>
         </div>
