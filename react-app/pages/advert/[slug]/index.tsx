@@ -34,9 +34,9 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
 
       <div className="relative h-32 bg-slate-600">
         <img
-          src="https://images.pexels.com/photos/6483582/pexels-photo-6483582.jpeg"
+          src="/images/pexels-photo-4007744.jpeg"
           alt=""
-          className="object-cover w-full h-full opacity-30"
+          className="object-cover object-center w-full h-full opacity-30"
         />
         <div className="absolute inset-0">
           <div className="flex items-center justify-between px-40 py-10 text-white">

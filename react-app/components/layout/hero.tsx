@@ -8,18 +8,9 @@ import { SliderComponent } from "../slider";
 import { Header } from "./header";
 
 export const Hero = () => {
-  const { data } = useListCategoriesQuery();
-  const router = useRouter();
-  const iconRenderer = (category: any) => {
-    switch (category?.slug?.current) {
-      case "cours-formations":
-        return <BriefcaseIcon className="text-teal-600 h-14 w-14" />;
-      default:
-        break;
-    }
-  };
+ 
   return (
-    <section className="relative h-screen bg-cover bg-center bg-fixed bg-[url('https://images.pexels.com/photos/4007744/pexels-photo-4007744.jpeg')]">
+    <section className="relative h-screen bg-cover bg-center bg-fixed bg-[url('/images/pexels-photo-4007744.jpeg')]">
       <div className="absolute inset-0 bg-opacity-40 bg-gray-800">
         <div className="relative space-y-40">
           <Header />
