@@ -45,7 +45,7 @@ export const SignupForm = () => {
   } = useForm({
     resolver: zodResolver(validationSchema),
     // shouldUseNativeValidation: true, //show native error messages on the browser
-    mode: "onChange", // show errors as you type
+    // mode: "onChange", // show errors as you type
     defaultValues: {
       name: "",
       email: "",
@@ -92,8 +92,8 @@ export const SignupForm = () => {
             }
           })}
         >
-          <h1 className="text-center text-3xl font-extrabold pb-5 text-shadow-sm">
-            Créer votre compte
+          <h1 className="text-center text-xl font-extrabold pb-5 text-shadow-sm">
+            Détails du compte
           </h1>
           <TextInput
             classNames={{

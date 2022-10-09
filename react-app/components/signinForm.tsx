@@ -17,12 +17,11 @@ export const SigninForm = () => {
       })
       .email("Email invalide"),
 
-    password: zod
-      .string({
-        required_error: "Un mot de passe est requis",
-      })
-      .min(7, "Minimum 7 caractères")
-      .max(50, "Maximum 50 caractères"),
+    password: zod.string({
+      required_error: "Un mot de passe est requis",
+    }),
+    // .min(7, "Minimum 7 caractères")
+    // .max(50, "Maximum 50 caractères"),
     // photo: zod.string().optional(),
   });
   const {

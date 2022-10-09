@@ -14,8 +14,8 @@ export const Header2 = () => {
   const router = useRouter();
   const { data: session } = useSession();
   return (
-    <header>
-      <div className="flex justify-between items-center px-40 py-5 bg-white text-gray-600">
+    <header className="fixed top-0 w-full z-10">
+      <div className="flex justify-between items-center px-40 py-5 bg-white text-gray-600 ">
         <Link href="/">
           <a className="flex gap-2 items-center">
             <h2 className="text-xl font-bold">Annonce 242</h2>
@@ -43,7 +43,13 @@ export const Header2 = () => {
               </button>
 
               <button onClick={() => signOut()}>
-                <LogoutIcon className=" h-7 w-7 " />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className=" h-5 w-5 "
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z" />
+                </svg>
               </button>
             </div>
           ) : (
@@ -51,7 +57,13 @@ export const Header2 = () => {
               className="flex items-center capitalize font-medium"
               onClick={() => router.push("/signin")}
             >
-              <LoginIcon className=" h-7 w-7  ml-2 " />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className=" h-5 w-5  ml-2 transform -scale-x-100 "
+                viewBox="0 0 24 24"
+              >
+                <path d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z" />
+              </svg>
             </button>
           )}
 

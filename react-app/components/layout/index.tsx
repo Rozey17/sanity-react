@@ -8,7 +8,7 @@ export const Layout = ({ children }: { children: any }) => {
     <div className="">
       <main className=" relative min-h-screen ">
         <Header2 />
-        <div className="">{children}</div>
+        <div className="py-10">{children}</div>
         <section className="px-40 py-8 bg-white ">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
