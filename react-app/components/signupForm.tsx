@@ -45,7 +45,7 @@ export const SignupForm = () => {
   } = useForm({
     resolver: zodResolver(validationSchema),
     // shouldUseNativeValidation: true, //show native error messages on the browser
-    // mode: "onChange", // show errors as you type
+    mode: "onChange", // show errors as you type
     defaultValues: {
       name: "",
       email: "",
@@ -104,6 +104,7 @@ export const SignupForm = () => {
             {...register("name")}
             placeholder="Nom d'utilisateur"
             required
+            error={errors.name && errors.name.message}
           />
           <TextInput
             classNames={{
@@ -114,6 +115,7 @@ export const SignupForm = () => {
             {...register("email")}
             placeholder="email"
             required
+            error={errors.email && errors.email.message}
           />
           <TextInput
             classNames={{
@@ -125,6 +127,7 @@ export const SignupForm = () => {
             {...register("password")}
             placeholder="Mot de passe"
             required
+            error={errors.password && errors.password.message}
           />
           <button
             disabled={!isValid || isSubmitting}

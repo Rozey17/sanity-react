@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   LoginIcon,
   LogoutIcon,
@@ -13,9 +13,30 @@ import { signUp } from "next-auth-sanity/client";
 export const Header = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  const [show, setShow] = useState(false);
+  const transitionHeader = () => {
+    if (window.scrollY > 100) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", transitionHeader);
+
+    return () => window.removeEventListener("scroll", transitionHeader);
+  }, []);
+
   return (
-    <header className="fixed top-0 w-full z-10">
-      <div className="flex justify-between items-center px-40 py-5 text-white backdrop-blur-sm">
+    <header className="fixed top-0 w-full z-10 ">
+      <div
+        className={
+          show
+            ? "flex justify-between items-center px-40 py-5 text-white bg-black"
+            : "flex justify-between items-center px-40 py-5 text-white backdrop-blur-sm"
+        }
+      >
         <Link href="/">
           <a className="flex gap-2 items-center">
             <h2 className="text-xl font-bold">Annonce 242</h2>

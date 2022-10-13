@@ -33,7 +33,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
   return (
     <Layout>
       <div className="grid min-h-screen grid-cols-6">
-        <aside className="sticky top-0 col-span-1 p-10 px-5 overflow-y-scroll border-r scrollbar-hide">
+        <aside className="sticky top-0 col-span-1 py-20  px-5 overflow-y-scroll border-r scrollbar-hide">
           Catégories
           <Accordion transitionDuration={300}>
             {listCategories.map((item, index) => (
@@ -66,7 +66,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
             ))}
           </Accordion>
         </aside>
-        <div className="col-span-3 p-10 space-y-10 bg-gray-100">
+        <div className="col-span-3 px-10 py-20 space-y-10 bg-gray-100">
           <div className="flex items-center justify-center p-5 bg-white border">
             showing {adverts.length} of {adverts.length} ad(s) found
           </div>
@@ -76,7 +76,7 @@ const CategoriesPage = ({ adverts }: { adverts: Advert[] }) => {
             ))}
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-2 pt-10">
           {adverts.length > 0 && <Map ads={adverts} />}
         </div>
       </div>

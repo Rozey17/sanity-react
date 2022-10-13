@@ -32,41 +32,43 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
         <title>{advert?.title}</title>
       </Head>
 
-      <div className="relative h-32 bg-slate-800">
+      <div className="relative h-40 bg-slate-800 ">
         <img
           src="/images/pexels-photo-4007744.jpeg"
           alt=""
           className="object-cover object-center w-full h-full opacity-30"
         />
         <div className="absolute inset-0">
-          <div className="flex items-center justify-between px-40 py-10 text-white">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold">{advert.title}</h1>
-              <div className="flex gap-3 items-center text-sm">
-                <Link href="/">Accueil</Link> {">"}{" "}
-                <Link
-                  href={`/categories/${advert.subcategory.category.slug.current}`}
-                >
-                  {advert.subcategory.category.name}
-                </Link>
-                {">"}{" "}
-                <Link
-                  href={`/categories/${advert.subcategory.category.slug.current}/${advert.subcategory.slug.current}`}
-                  className=""
-                >
-                  {advert.subcategory.name}
-                </Link>
+          <div className="h-full flex flex-col justify-center px-40 text-white">
+            <div className="flex items-center justify-between h-full">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold">{advert.title}</h1>
+                <div className="flex gap-3 items-center text-sm">
+                  <Link href="/">Accueil</Link> {">"}{" "}
+                  <Link
+                    href={`/categories/${advert.subcategory.category.slug.current}`}
+                  >
+                    {advert.subcategory.category.name}
+                  </Link>
+                  {">"}{" "}
+                  <Link
+                    href={`/categories/${advert.subcategory.category.slug.current}/${advert.subcategory.slug.current}`}
+                    className=""
+                  >
+                    {advert.subcategory.name}
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              stroke="currentColor"
-              className="w-8 h-8 "
-              viewBox="0 0 24 24"
-            >
-              <path d="M13.895 15.875l-.895-.447v-11c6.65 2.217 9 2.363 9 5.162v9.41h-7v-1.336c0-.758-.428-1.45-1.105-1.789zm-4.895-15.875h-4v4.292l4-1.292v-3zm10 0h-4v3l4 1.292v-4.292zm-10 17.664c0-.757.428-1.45 1.105-1.789l.895-.447v-11c-6.523 2.175-9 2.307-9 5.162v9.41h7v-1.336zm6 6.336h7v-3h-7v3zm-13 0h7v-3h-7v3z" />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="currentColor"
+                className="w-8 h-8 "
+                viewBox="0 0 24 24"
+              >
+                <path d="M13.895 15.875l-.895-.447v-11c6.65 2.217 9 2.363 9 5.162v9.41h-7v-1.336c0-.758-.428-1.45-1.105-1.789zm-4.895-15.875h-4v4.292l4-1.292v-3zm10 0h-4v3l4 1.292v-4.292zm-10 17.664c0-.757.428-1.45 1.105-1.789l.895-.447v-11c-6.523 2.175-9 2.307-9 5.162v9.41h7v-1.336zm6 6.336h7v-3h-7v3zm-13 0h7v-3h-7v3z" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>

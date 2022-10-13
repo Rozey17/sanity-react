@@ -10,9 +10,10 @@ import { Header } from "./header";
 export const Hero = () => {
  
   return (
-    <section className="relative h-screen bg-cover bg-center bg-fixed bg-[url('/images/pexels-photo-4007744.jpeg')]">
-      <div className="absolute inset-0 bg-opacity-40 bg-gray-800">
-        <div className="relative space-y-40">
+    // <section className="relative h-screen bg-cover bg-center bg-fixed bg-[url('/images/pexels-photo-4007744.jpeg')]">
+    <section className="relative h-screen bg-cover bg-center bg-fixed bg-[url('https://images.pexels.com/photos/3762940/pexels-photo-3762940.jpeg')]">
+      <div className="absolute inset-0 bg-opacity-40 bg-black">
+        <div className="relative space-y-56">
           <Header />
           <div className="space-y-5 text-center text-white">
             <span className="text-4xl font-bold capitalize">

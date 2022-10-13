@@ -1205,7 +1205,11 @@ export type GetAdvertLazyQueryHookResult = ReturnType<typeof useGetAdvertLazyQue
 export type GetAdvertQueryResult = Apollo.QueryResult<GetAdvertQuery, GetAdvertQueryVariables>;
 export const ListAdvertsByCategoryDocument = gql`
     query ListAdvertsByCategory($slug: String!) {
-  allAdvert(where: {subcategory: {category: {slug: {current: {eq: $slug}}}}}) {
+  allAdvert(
+    where: {subcategory: {category: {slug: {current: {eq: $slug}}}}}
+    limit: 10
+    offset: 10
+  ) {
     _id
     title
     _createdAt
@@ -1272,7 +1276,11 @@ export type ListAdvertsByCategoryLazyQueryHookResult = ReturnType<typeof useList
 export type ListAdvertsByCategoryQueryResult = Apollo.QueryResult<ListAdvertsByCategoryQuery, ListAdvertsByCategoryQueryVariables>;
 export const ListAdvertsBySubCategoryDocument = gql`
     query ListAdvertsBySubCategory($slug: String!) {
-  allAdvert(where: {subcategory: {slug: {current: {eq: $slug}}}}) {
+  allAdvert(
+    where: {subcategory: {slug: {current: {eq: $slug}}}}
+    limit: 10
+    offset: 10
+  ) {
     _id
     title
     _createdAt
