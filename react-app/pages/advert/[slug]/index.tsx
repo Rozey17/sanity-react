@@ -32,7 +32,7 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
         <title>{advert?.title}</title>
       </Head>
 
-      <div className="relative h-40 bg-slate-800 ">
+      <div className="relative h-36 bg-slate-800 mt-10">
         <img
           src="/images/pexels-photo-4007744.jpeg"
           alt=""
@@ -41,24 +41,26 @@ export default function AdvertPage({ advert }: { advert: Advert }) {
         <div className="absolute inset-0">
           <div className="h-full flex flex-col justify-center px-40 text-white">
             <div className="flex items-center justify-between h-full">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">{advert.title}</h1>
-                <div className="flex gap-3 items-center text-sm">
-                  <Link href="/">Accueil</Link> {">"}{" "}
-                  <Link
-                    href={`/categories/${advert.subcategory.category.slug.current}`}
-                  >
-                    {advert.subcategory.category.name}
-                  </Link>
-                  {">"}{" "}
-                  <Link
-                    href={`/categories/${advert.subcategory.category.slug.current}/${advert.subcategory.slug.current}`}
-                    className=""
-                  >
-                    {advert.subcategory.name}
-                  </Link>
+              {advert && (
+                <div className="space-y-2">
+                  <h1 className="text-3xl font-bold">{advert?.title}</h1>
+                  <div className="flex gap-3 items-center text-sm">
+                    <Link href="/">Accueil</Link> {">"}{" "}
+                    <Link
+                      href={`/categories/${advert?.subcategory?.category?.slug?.current}`}
+                    >
+                      {advert?.subcategory?.category?.name}
+                    </Link>
+                    {">"}{" "}
+                    <Link
+                      href={`/categories/${advert?.subcategory?.category.slug.current}/${advert?.subcategory.slug.current}`}
+                      className=""
+                    >
+                      {advert?.subcategory.name}
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"

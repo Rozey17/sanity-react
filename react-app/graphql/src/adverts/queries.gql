@@ -85,11 +85,11 @@ user{
         }
 
 
-query ListAdvertsByCategory($slug:String!){allAdvert(where :{subcategory :{category :{slug: {current: {eq: $slug}} }}},limit: 10, offset: 10)
+query ListAdvertsByCategory($slug:String!){allAdvert(where :{subcategory :{category :{slug: {current: {eq: $slug}} }}})
 {_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current},category{_id,name,slug{current}}},contact,price,location{lat,lng,alt},image{asset{url}}}
 }
 
-query ListAdvertsBySubCategory($slug:String!){allAdvert(where :{subcategory :{slug:{current : {eq: $slug}}}},limit: 10, offset: 10)
+query ListAdvertsBySubCategory($slug:String!){allAdvert(where :{subcategory :{slug:{current : {eq: $slug}}}})
 {_id,title,_createdAt,slug{current},description,subcategory{_id,name,slug{current},category{_id,name,slug{current}}},contact,price,location{lat,lng,alt},image{asset{url}}}
 }
 

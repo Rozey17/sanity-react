@@ -6,7 +6,7 @@ import { Header2 } from "./header-2";
 export const Layout = ({ children }: { children: any }) => {
   return (
     <div className="">
-      <main className=" relative min-h-screen ">
+      <main className="relative min-h-screen ">
         <Header2 />
         <div className="py-10">{children}</div>
         <section className="px-40 py-8 bg-white ">

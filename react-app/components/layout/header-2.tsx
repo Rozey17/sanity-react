@@ -14,7 +14,7 @@ export const Header2 = () => {
   const router = useRouter();
   const { data: session } = useSession();
   return (
-    <header className="fixed top-0 w-full z-10">
+    <header className="fixed top-0 w-full z-10 ">
       <div className="flex justify-between items-center px-40 py-5 bg-white text-gray-600 ">
         <Link href="/">
           <a className="flex gap-2 items-center">
